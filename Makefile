@@ -17,5 +17,5 @@ devel:
 todo:
 	@ grep -i todo resources/markdown/*.md
 
-push:
+publish:
 	git push origin master:gh-pages
