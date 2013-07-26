@@ -1,6 +1,8 @@
 Melbourne Haskell Workshop 2013
 ===============================
 
+### [(PDF)](workshop.pdf) {.center}
+
 <hr>
 
 A 6-hour workshop intended to introduce and provide resources for working with Haskell.
