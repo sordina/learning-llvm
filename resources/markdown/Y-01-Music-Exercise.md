@@ -26,4 +26,5 @@ data Music
 Certainly not comprehensive enough to write Beethoven's 5th Symphony,
 but good enough for Baa Baa Black-Sheep.
 
-Your task is to write a melody using this language.
+Your task is to write a melody using this language. Try to write and compose
+functions, rather than declaring one big data-structure.

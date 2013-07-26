@@ -1,0 +1,125 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Melbourne Haskell Workshop 2013</title>
+		<link href="resources/css/styles.css" rel="stylesheet" type="text/css">
+		<link href="resources/css/solarized-light.css" rel="stylesheet" type="text/css">
+	</head>
+	<body>
+		<div id="content">
+<h1 id="melbourne-haskell-workshop-2013">Melbourne Haskell Workshop 2013</h1>
+<h3 id="pdf" class="center"><a href="workshop.pdf">(PDF)</a></h3>
+<hr>
+
+<p>A 6-hour workshop intended to introduce and provide resources for working with Haskell.</p>
+<!-- http://upload.wikimedia.org/wikipedia/commons/0/0c/Potter's_workshop_VA.jpg -->
+<div class="center"> 
+<img src="resources/images/workshop.png" />
+</div>
+
+<p>This workshop is based around a central concept of domain modeling with Haskell. It uses a narrative of a physicist attempting to understand how the world works.</p>
+<p>The workshop will cover the following topics:</p>
+<ul>
+<li><a href="#introduction">Introduction</a> - Motivation, Overview, and Approach</li>
+<li><a href="#adts">ADTs</a> - Modelling with data in Haskell</li>
+<li><a href="#functions">Functions</a> - Destructuring and evaluating data</li>
+<li><a href="#typeclasses">Typeclasses</a> - Code-Reuse and Laws</li>
+<li><a href="#ecosystem">Ecosystem</a> - Resources and Community</li>
+<li><a href="#monads">Monads</a> - General Purpose DSLs</li>
+</ul>
+<h3 id="note">Note:</h3>
+<p>If you are attending the workshop, please attempt to have the required items from the <a href="#resources">'Resources'</a> section available for your use.</p>
+<hr>
+
+<h1 id="required-resources">Required Resources</h1>
+<p>Before you begin you will require the following...</p>
+<h2 id="a-text-editor">A Text-Editor</h2>
+<p>We are assuming previous programming experience, however, if you would like a recommendation, have a look at <a href="http://notepad-plus-plus.org/">Notepad++</a>, <a href="http://www.sublimetext.com/">Sublime Text</a>, or the ever-popular <a href="http://www.gnu.org/software/emacs/">Emacs</a> and <a href="http://www.vim.org/">Vim</a>. Just make sure that you are fluent enough to embark on exercises as they appear in the workshop.</p>
+<h2 id="the-haskell-platform"><a href="http://www.haskell.org/platform/">The Haskell Platform</a></h2>
+<p>In order to run the programs written during this workshop you will need a Haskell installation. The easiest way to get up and running is to install the latest Haskell Platform. This is a &quot;batteries included&quot; installation of GHC and Cabal that includes many of the most useful packages available in the Hackage ecosystem.</p>
+<h1 id="useful-resources">Useful Resources</h1>
+<p>These resources are available to help you with any issues you face when learning Haskell:</p>
+<h2 id="haskell-on-freenode">#haskell on <a href="http://freenode.net/">Freenode</a></h2>
+<p>An IRC channel dedicated to discussion of Haskell. This is often the easiest place to fire off a one-off question that is simple enough not to warrant a permanent listing on the internet.</p>
+<h2 id="hackage"><a href="http://hackage.haskell.org/packages/hackage.html">Hackage</a></h2>
+<p>Hackage is the primary repository for Haskell packages. It is public, searchable, versioned, and uses Cabal package metadata for classification. Furthermore, this can be used to easily browse package contents, documentation and source-code.</p>
+<p>For example, browse the <a href="http://hackage.haskell.org/package/shake">Shake</a> package and look at some of the <a href="http://hackage.haskell.org/packages/archive/shake/0.10.6/doc/html/Development-Shake-Command.html">Modules</a>.</p>
+<h2 id="hoogle"><a href="http://www.haskell.org/hoogle/">Hoogle</a></h2>
+<p>Hoogle is a Haskell module and function search-engine. Hoogle allows you to take advantage of the granular type-system used by Haskell to search not just for function-names, but for function type-signatures.</p>
+<p>For example, have a look for the function with signature <a href="http://www.haskell.org/hoogle/?hoogle=Text+-%3E+ByteString">Text -&gt; ByteString</a>.</p>
+<h2 id="mfug"><a href="http://www.meetup.com/Melbourne-Functional-User-Group-MFUG/">MFUG</a></h2>
+<p>MFUG is the Melbourne Functional Programmer's User Group. This group discusses many topics, including Haskell.</p>
+<h2 id="rhaskell"><a href="www.reddit.com/r/haskell">/r/haskell</a></h2>
+<p>For Reddit users, /r/haskell is a very useful resource with a great deal of information regarding recent developments in the Haskell ecosystem and community. This is a good place to ask some more advanced questions or start a flame-war.</p>
+<h2 id="haskell-news"><a href="http://haskellnews.org/">Haskell News</a></h2>
+<p>Haskell News is a firehose-style haskell news aggregator taking information from sources as varied as academic-journals, and GitHub accounts.</p>
+<hr>
+
+<h1 id="introduction">Introduction</h1>
+<p>Welcome to the Melbourne Haskell Workshop 2013.</p>
+<p>This intent of this workshop is to provide a working introduction to Haskell for programmers in Melbourne who have not yet used the language in anger.</p>
+<p>The following exercises will be presented as part of the workshop:</p>
+<h1 id="todo-update-once-decided" class="todo">TODO: Update once decided</h1>
+<ul>
+<li>Classification</li>
+<li>Lists</li>
+<li>Org-Chart</li>
+<li>Musical Program</li>
+<li>Image Program</li>
+<li>Web App</li>
+<li>Web Scraper</li>
+<li>Schema Language</li>
+</ul>
+<hr>
+
+<h1 id="setup">Setup</h1>
+<h3 id="and-sanity-checking">... and Sanity Checking</h3>
+<p>Ensure that you have the following programs installed and functioning correctly:</p>
+<ul>
+<li>GHC(i)</li>
+</ul>
+<p>At a command prompt, enter the following command:</p>
+<pre class="shell"><code>ghci</code></pre>
+<p>This should launch the GHC Haskell REPL.</p>
+<p>Type the following to ensure that you have a functioning REPL:</p>
+<pre data-language="haskell"><code>1 + 1</code></pre>
+<p>This should yield the result:</p>
+<pre class="text"><code>2</code></pre>
+<p>Create the following source file (program.hs):</p>
+<pre data-language="haskell"><code>main = print &quot;hello world&quot;</code></pre>
+<p>Compile the program as follows:</p>
+<pre class="shell"><code>ghc --make program.hs</code></pre>
+<p>Run the program with the following command:</p>
+<pre class="shell"><code>./program</code></pre>
+<p>The output should look as follows:</p>
+<pre class="text"><code>&quot;hello world&quot;</code></pre>
+<hr>
+
+<h1 id="exercise---music">Exercise - Music</h1>
+<p>Once you have a model that reaches a sufficient level of complexity you will find that your data-types become recursive.</p>
+<!-- http://i824.photobucket.com/albums/zz163/Boysie8/Telecaster%20build/f-hole.jpg -->
+<div class="center">
+<img src="resources/images/f-hole.jpg" />
+</div>
+
+<p>Here is a small musical target-language:</p>
+<pre data-language="haskell"><code>data Music
+  = A_ -- Underscore Represents a Flat
+  | A
+  | A&#39; -- Prime represents a Sharp
+       -- ... B, C, D, E, F, G ...
+  | Sequence [Music]
+  | Sharp (Music)
+  | Longer Integer (Music a)</code></pre>
+<p>Certainly not comprehensive enough to write Beethoven's 5th Symphony, but good enough for Baa Baa Black-Sheep.</p>
+<p>Your task is to write a melody using this language. Try to write and compose functions, rather than declaring one big data-structure.</p>
+<hr>
+
+<h1 id="appendix">Appendix</h1>
+<p><a href="http://stackoverflow.com/questions/17870864/where-is-huttons-razor-first-defined">Hutton's Razor</a></p>
+			<hr>
+			<p class="center footer"> Produced with <a href="http://johnmacfarlane.net/pandoc/">Pandoc</a> </p>
+		</div>
+		<script type="text/javascript" src="resources/javascript/rainbow-custom.min.js"></script>
+	</body>
+</html>
