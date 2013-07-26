@@ -1,5 +1,5 @@
-Melbourne Haskell Workshop
-==========================
+Melbourne Haskell Workshop 2013
+===============================
 
 <hr>
 
