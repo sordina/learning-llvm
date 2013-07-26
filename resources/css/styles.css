@@ -1,4 +1,7 @@
-#content {max-width: 600px; margin: auto;}
+#content {
+	max-width: 600px;
+	margin: auto;
+}
 
 h1 {text-align: center;}
 

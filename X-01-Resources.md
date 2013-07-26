@@ -30,18 +30,46 @@ Useful Resources
 
 These resources are available to help you with any issues you face when learning Haskell:
 
+
 ## \#haskell on [Freenode](http://freenode.net/)
 
 An IRC channel dedicated to discussion of Haskell. This is often the easiest place to fire off
 a one-off question that is simple enough not to warrant a permanent listing on the internet.
 
+
 ## [Hackage](http://hackage.haskell.org/packages/hackage.html)
+
+Hackage is the primary repository for Haskell packages. It is public,
+searchable, versioned, and uses Cabal package metadata for classification.
+Furthermore, this can be used to easily browse package contents, documentation
+and source-code.
+
+For example, browse the [Shake](http://hackage.haskell.org/package/shake) package and look
+at some of the [Modules](http://hackage.haskell.org/packages/archive/shake/0.10.6/doc/html/Development-Shake-Command.html).
+
 
 ## [Hoogle](http://www.haskell.org/hoogle/)
 
-## [Hayoo](http://holumbus.fh-wedel.de/hayoo/hayoo.html)
+Hoogle is a Haskell module and function search-engine. Hoogle allows you to
+take advantage of the granular type-system used by Haskell to search not just
+for function-names, but for function type-signatures.
+
+For example, have a look for the function with signature [Text -> ByteString](http://www.haskell.org/hoogle/?hoogle=Text+-%3E+ByteString).
+
 
 ## [MFUG](http://www.meetup.com/Melbourne-Functional-User-Group-MFUG/)
 
+MFUG is the Melbourne Functional Programmer's User Group. This group discusses
+many topics, including Haskell.
+
 ## [/r/haskell](www.reddit.com/r/haskell)
+
+For Reddit users, /r/haskell is a very useful resource with a great deal of
+information regarding recent developments in the Haskell ecosystem and community.
+This is a good place to ask some more advanced questions or start a flame-war.
+
+## [Haskell News](http://haskellnews.org/)
+
+Haskell News is a firehose-style haskell news aggregator taking information from
+sources as varied as academic-journals, and GitHub accounts.
 
