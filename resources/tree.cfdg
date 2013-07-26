@@ -1,0 +1,27 @@
+# JBP
+
+startshape bar
+
+shape bar {
+	foo [sat 1 h 100 b 0.1]
+}
+
+shape foo {
+	SQUARE []
+	foo [y 1 s 0.4 h 14 b 0.31]
+	foo [x 1 s 0.5 h 44 b 0.13]
+	foo [x -1 s 0.3 h 123 b 0.1]
+}
+
+shape foo {
+	foo [s 1.1 r 6]
+}
+
+shape foo {
+	foo [x -0.2 s 0.8 r -5]
+	foo [x 0.3 s 0.8 r -4]
+}
+
+shape foo {
+	foo []
+}
