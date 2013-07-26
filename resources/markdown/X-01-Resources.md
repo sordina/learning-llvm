@@ -73,3 +73,9 @@ This is a good place to ask some more advanced questions or start a flame-war.
 Haskell News is a firehose-style haskell news aggregator taking information from
 sources as varied as academic-journals, and GitHub accounts.
 
+
+## [HLint](http://hackage.haskell.org/package/hlint)
+
+HLint is a [linting tool](http://en.wikipedia.org/wiki/Lint_(software))
+for Haskell source - It can often provide some
+useful hints about refactoring avenues for your code.

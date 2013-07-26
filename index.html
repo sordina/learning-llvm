@@ -8,7 +8,14 @@
 	<body>
 		<div id="content">
 <h1 id="melbourne-haskell-workshop-2013">Melbourne Haskell Workshop 2013</h1>
-<h3 id="pdf" class="center"><a href="workshop.pdf">(PDF)</a></h3>
+<!-- Trickery to conditionally display the alternate format link -->
+
+<h3 id="html-link" class="center"><a href="http://sordina.github.io/haskell_workshop/">(HTML)</a></h3>
+<script type="text/javascript">
+    document.getElementById('html-link').remove()
+    document.write("<h3 class='center'><a href='workshop.pdf'>(PDF)</a></h3>")
+</script>
+
 <hr>
 
 <p>A 6-hour workshop intended to introduce and provide resources for working with Haskell.</p>
@@ -53,6 +60,8 @@
 <p>For Reddit users, /r/haskell is a very useful resource with a great deal of information regarding recent developments in the Haskell ecosystem and community. This is a good place to ask some more advanced questions or start a flame-war.</p>
 <h2 id="haskell-news"><a href="http://haskellnews.org/">Haskell News</a></h2>
 <p>Haskell News is a firehose-style haskell news aggregator taking information from sources as varied as academic-journals, and GitHub accounts.</p>
+<h2 id="hlint"><a href="http://hackage.haskell.org/package/hlint">HLint</a></h2>
+<p>HLint is a <a href="http://en.wikipedia.org/wiki/Lint_(software)">linting tool</a> for Haskell source - It can often provide some useful hints about refactoring avenues for your code.</p>
 <hr>
 
 <h1 id="introduction">Introduction</h1>

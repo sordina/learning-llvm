@@ -1,7 +1,14 @@
 Melbourne Haskell Workshop 2013
 ===============================
 
-### [(PDF)](workshop.pdf) {.center}
+<!-- Trickery to conditionally display the alternate format link -->
+
+### [(HTML)](http://sordina.github.io/haskell_workshop/) {.center #html-link}
+
+<script type="text/javascript">
+	document.getElementById('html-link').remove()
+	document.write("<h3 class='center'><a href='workshop.pdf'>(PDF)</a></h3>")
+</script>
 
 <hr>
 
