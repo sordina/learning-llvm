@@ -22,7 +22,7 @@ This should launch the GHC Haskell REPL.
 
 Type the following to ensure that you have a functioning REPL:
 
-~~~ {data-language="haskell"}
+~~~{data-language="haskell"}
 1 + 1
 ~~~
 
@@ -30,4 +30,28 @@ This should yield the result:
 
 ```text
 2
+```
+
+Create the following source file (program.hs):
+
+~~~{data-language="haskell"}
+main = print "hello world"
+~~~
+
+Compile the program as follows:
+
+```shell
+ghc --make program.hs
+```
+
+Run the program with the following command:
+
+```shell
+./program
+```
+
+The output should look as follows:
+
+```text
+"hello world"
 ```

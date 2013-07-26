@@ -1,0 +1,29 @@
+#content {max-width: 600px; margin: auto;}
+
+h1 {text-align: center;}
+
+hr {margin: 3em;}
+
+body {
+	background: url(../images/footer2.png) center bottom no-repeat;
+	padding-bottom: 900px;
+}
+
+.todo { color: red; font-weight: bold; background: black;}
+
+pre {
+	padding: 1em;
+	margin-left: 1em;
+	border-left: 3px solid #888;
+	background: #cecece;
+}
+
+pre[data-language] {
+	border-left: 3px solid #87f;
+}
+
+.center { text-align: center; }
+
+.footer { font-family: monospace; }
+
+a { text-decoration: none; font-weight: bold; }

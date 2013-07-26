@@ -13,8 +13,11 @@ The following exercises will be presented as part of the workshop:
 
 # TODO: Update once decided {.todo}
 
+* Classification
 * Lists
 * Org-Chart
 * Musical Program
 * Image Program
 * Web App
+* Web Scraper
+* Schema Language
