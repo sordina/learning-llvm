@@ -12,7 +12,10 @@ display: html todo
 	@ chromereload index.html
 
 devel:
-	commando -c echo -j | grep --line-buffered 'md\|resources' | uniqhash | conscript make display
+	commando -c echo -j \
+	| grep --line-buffered 'md\|resources' \
+	| uniqhash \
+	| conscript make display
 
 todo:
 	@ grep -i todo resources/markdown/*.md
