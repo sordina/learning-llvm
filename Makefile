@@ -18,7 +18,7 @@ devel:
 	| conscript make display
 
 todo:
-	@ grep -i todo resources/markdown/*.md
+	@ grep -ni todo resources/markdown/*.md
 
 publish:
 	git push origin master:gh-pages

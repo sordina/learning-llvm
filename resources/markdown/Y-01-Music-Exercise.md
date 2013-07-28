@@ -36,10 +36,9 @@ baa_baa = Sequence [ Longer 2  intro
                    , Higher 12 run
                    , Longer 4  G
                    , Longer 2  middle
-                   ,           run2
+                   , run2
                    , Longer 4  C ]
 ~~~
-
 
 In order to listen to this music, create a file with the following code:
 
@@ -47,7 +46,7 @@ In order to listen to this music, create a file with the following code:
 import Midi
 import qualified Data.ByteString as BS
 
-main = BS.writeFile "baa_baa.mid" $ make_music 4 4 $ Longer 4 baa_baa
+main = BS.writeFile "baa_baa.mid" (make_music 4 4 (Longer 4 baa_baa))
 ~~~
 
 Your task is to write a melody using this language. Try to write and compose
