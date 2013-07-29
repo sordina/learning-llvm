@@ -1,6 +1,6 @@
 all: html pdf
 
-html:
+html: dotty
 	@ cat  resources/html/head.html    > index.html
 	pandoc resources/markdown/*.md    >> index.html
 	@ cat  resources/html/footer.html >> index.html
@@ -12,9 +12,10 @@ display: html todo
 	@ chromereload index.html
 
 devel:
-	commando -c echo -j \
-	| grep --line-buffered 'md\|resources' \
-	| uniqhash \
+	commando -c echo -j                       \
+	| grep --line-buffered    'md\|resources' \
+	| grep --line-buffered -v 'dot/'          \
+	| uniqhash                                \
 	| conscript make display
 
 todo:
@@ -22,3 +23,6 @@ todo:
 
 publish:
 	git push origin master:gh-pages
+
+dotty:
+	for i in resources/markdown/*.md; do pandoctor < "$$i" ; done

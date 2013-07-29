@@ -1,5 +1,5 @@
 #content {
-	max-width: 600px;
+	max-width: 640px;
 	margin: auto;
 }
 
@@ -25,8 +25,25 @@ pre[data-language] {
 	border-left: 3px solid #87f;
 }
 
+pre[data-language=dot] {
+	display:none;
+}
+
 .center { text-align: center; }
 
 .footer { font-family: monospace; }
 
 a { text-decoration: none; font-weight: bold; }
+
+table {
+	border: 1px solid black;
+	margin: 40px auto;
+}
+
+table td {
+	padding: 6px;
+}
+
+img {
+	max-width: 100%;
+}

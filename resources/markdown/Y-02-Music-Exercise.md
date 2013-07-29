@@ -40,6 +40,7 @@ baa_baa = Sequence [ Longer 2  intro
                    , Longer 4  C ]
 ~~~
 
+
 In order to listen to this music, create a file with the following code:
 
 ~~~{data-language="haskell"}
