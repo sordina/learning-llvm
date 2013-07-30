@@ -1,4 +1,4 @@
-all: html pdf
+all: dependencies html pdf
 
 html: dotty
 	@ cat  resources/html/head.html    > index.html
