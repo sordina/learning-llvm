@@ -9,7 +9,7 @@ pdf:
 	pandoc -V geometry:margin=1.5in resources/markdown/*.md -o workshop.pdf
 
 display: html todo
-	@ chromereload index.html
+	@ ./resources/scripts/chromereload index.html
 
 devel:
 	commando -c echo -j                       \
@@ -26,3 +26,16 @@ publish:
 
 dotty:
 	sed 's/^\\startmode.*//;s/^\\stopmode.*//' resources/markdown/*.md | pandoctor
+
+dependencies:
+	mkdir -p dependencies
+	cabal update
+	cabal install commando
+	cabal install conscript
+	git clone git@github.com:sordina/pandoctor.git dependencies/pandoctor
+	git clone git@github.com:sordina/uniqhash.git  dependencies/uniqhash
+	cd dependencies/pandoctor && cabal install
+	cd dependencies/uniqhash  && cabal install
+
+clean:
+	rm -rf dependencies

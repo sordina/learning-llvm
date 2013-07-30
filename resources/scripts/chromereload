@@ -1,0 +1,12 @@
+#!/usr/bin/osascript
+
+on run argv
+	set str to (item 1 of argv)
+
+	tell application "Google Chrome"
+		set u to get URL of active tab of window 1
+		if (u contains str) then
+			reload active tab of window 1
+		end if
+	end tell
+end run
