@@ -1,5 +1,7 @@
 
-<hr>
+----
+
+\pagebreak
 
 Required Resources
 ==================

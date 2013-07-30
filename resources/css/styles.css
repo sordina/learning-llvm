@@ -40,7 +40,7 @@ table {
 	margin: 40px auto;
 }
 
-table td {
+td, th {
 	padding: 6px;
 }
 

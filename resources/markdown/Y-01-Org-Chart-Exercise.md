@@ -1,5 +1,7 @@
 
-<hr>
+----
+
+\pagebreak
 
 Exercise - Org Chart
 ====================
@@ -22,29 +24,20 @@ digraph IBM {
 
 	b1 [label="IBM - Board of Directors"];
 
-	b1 -> CTO [label=tech];
-	b1 -> CFO [label=money];
-	b1 -> CEO [label=power];
+	b1 -> CTO [label=Tech];
+	b1 -> CFO [label=Money];
+	b1 -> CEO [label=Power];
 	CEO -> BurgerFlipping;
 	BurgerFlipping -> Fries;
 	Fries -> CurlyDepartment;
 	Fries -> Regulations;
 	BurgerFlipping -> FrontDesk;
-	CTO -> Operations;
 	CTO -> Engineering;
 	CFO -> HR;
 	CFO -> SpyStuff;
 	Engineering -> Products;
-	Operations -> Africa;
-	Operations -> Brazil;
-	HR -> Piniatas;
-	SpyStuff -> Piniatas;
-
-	Africa -> x1 [arrowhead=odot];
-	x1 [shape=rectangle label="Employees: 13\n Manager: Damien"];
-
-	Brazil -> x2 [arrowhead=odot];
-	x2 [shape=rectangle label="Employees: 19\n Manager: Dave"];
+	HR -> Piñatas;
+	SpyStuff -> Piñatas;
 
 	Products -> x3 [arrowhead=odot];
 	x3 [shape=rectangle label="Employees: 11\n Manager: Dennis"];
@@ -58,8 +51,27 @@ digraph IBM {
 	FrontDesk -> x6 [arrowhead=odot];
 	x6 [shape=rectangle label="Employees: 23\n Manager: Devin"];
 
-	Piniatas -> x7 [arrowhead=odot];
+	Piñatas -> x7 [arrowhead=odot];
 	x7 [shape=rectangle label="Employees: 22\n Manager: Dorris"];
 }
 ~~~
 \stopmode
+
+Construct a function that builds up your datastructure from the following
+plain-text input format: 
+
+## Employees
+
+------  -------  --------  ---------
+ Name    Title    Salary    Manager
+------  -------  --------  ---------
+ Dave    Serf     $33K      Dorris
+
+ Tony    Baker    $44K      Devin
+------  -------  --------  ---------
+
+Your function should have the following signature:
+
+~~~{ data-language=haskell }
+process :: String -> OrgChart
+~~~

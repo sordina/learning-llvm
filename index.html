@@ -1,12 +1,14 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8">
 		<title>Melbourne Haskell Workshop 2013</title>
 		<link href="resources/css/styles.css" rel="stylesheet" type="text/css">
 		<link href="resources/css/solarized-light.css" rel="stylesheet" type="text/css">
 	</head>
 	<body>
 		<div id="content">
+
 <h1 id="melbourne-haskell-workshop-2013">Melbourne Haskell Workshop 2013</h1>
 <!-- Trickery to conditionally display the alternate format link -->
 
@@ -58,8 +60,8 @@
 <h3 id="note">Note:</h3>
 <p>If you are attending the workshop, please attempt to have the required items from the <a href="#resources">'Resources'</a> section available for your use.</p>
 <h1 id="todo-decide-on-some-followup-plans" class="todo">TODO: Decide on some followup plans</h1>
-<hr>
-
+<hr />
+<p></p>
 <h1 id="required-resources">Required Resources</h1>
 <p>Before you begin you will require the following...</p>
 <h2 id="a-text-editor">A Text-Editor</h2>
@@ -84,8 +86,8 @@
 <p>Haskell News is a firehose-style haskell news aggregator taking information from sources as varied as academic-journals, and GitHub accounts.</p>
 <h2 id="hlint"><a href="http://hackage.haskell.org/package/hlint">HLint</a></h2>
 <p>HLint is a <a href="http://en.wikipedia.org/wiki/Lint_(software)">linting tool</a> for Haskell source - It can often provide some useful hints about refactoring avenues for your code.</p>
-<hr>
-
+<hr />
+<p></p>
 <h1 id="introduction">Introduction</h1>
 <p>Welcome to the Melbourne Haskell Workshop 2013.</p>
 <p>This intent of this workshop is to provide a working introduction to Haskell for programmers in Melbourne who have not yet used the language in anger.</p>
@@ -101,8 +103,8 @@
 <li>Web Scraper</li>
 <li>Schema Language</li>
 </ul>
-<hr>
-
+<hr />
+<p></p>
 <h1 id="setup">Setup</h1>
 <h3 id="and-sanity-checking">... and Sanity Checking</h3>
 <p>Ensure that you have the following programs installed and functioning correctly:</p>
@@ -124,8 +126,8 @@
 <pre class="shell"><code>./program</code></pre>
 <p>The output should look as follows:</p>
 <pre class="text"><code>&quot;hello world&quot;</code></pre>
-<hr>
-
+<hr />
+<p></p>
 <h1 id="exercise---org-chart">Exercise - Org Chart</h1>
 <p>You are an employee of International Banking Machines.</p>
 <p>The CEO has asked you to model the org-chart with a computer program in order to perform some analysis on the effectiveness of middle-managers.</p>
@@ -135,8 +137,40 @@
 </div>
 
 
-<hr>
-
+<p>Construct a function that builds up your datastructure from the following plain-text input format:</p>
+<h2 id="employees">Employees</h2>
+<table>
+<col width="11%" />
+<col width="12%" />
+<col width="13%" />
+<col width="13%" />
+<thead>
+<tr class="header">
+<th align="center">Name</th>
+<th align="center">Title</th>
+<th align="center">Salary</th>
+<th align="center">Manager</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">Dave</td>
+<td align="center">Serf</td>
+<td align="center">$33K</td>
+<td align="center">Dorris</td>
+</tr>
+<tr class="even">
+<td align="center">Tony</td>
+<td align="center">Baker</td>
+<td align="center">$44K</td>
+<td align="center">Devin</td>
+</tr>
+</tbody>
+</table>
+<p>Your function should have the following signature:</p>
+<pre data-language="haskell"><code>process :: String -&gt; OrgChart</code></pre>
+<hr />
+<p></p>
 <h1 id="exercise---music">Exercise - Music</h1>
 <p>Once you have a model that reaches a sufficient level of complexity you will find that your data-types become recursive.</p>
 <!-- http://i824.photobucket.com/albums/zz163/Boysie8/Telecaster%20build/f-hole.jpg -->
@@ -171,13 +205,34 @@ import qualified Data.ByteString as BS
 
 main = BS.writeFile &quot;baa_baa.mid&quot; (make_music 4 4 (Longer 4 baa_baa))</code></pre>
 <p>Your task is to write a melody using this language. Try to write and compose functions, rather than declaring one big data-structure.</p>
-<hr>
+<hr />
+<p></p>
+<h1 id="exercise---symbolic-differentiation">Exercise - Symbolic Differentiation</h1>
+<p>Your Highschool math teacher has decided to introduce differentiation of single-variable polynomials...</p>
+<p>This is in super easy once you grasped the concept:</p>
+<p>Polynomial term differentiation:</p>
+<div class="center"> 
+<br /><img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=%20a%20.%20x%5En%20.%20%5Cfrac%7Bd%7D%7Bdx%7D%20%3D%20n.a.x%5E%7Bn-1%7D%20" alt=" a . x^n . \frac{d}{dx} = n.a.x^{n-1} " title=" a . x^n . \frac{d}{dx} = n.a.x^{n-1} " /><br />
+</div>
 
+<p>Linearity of differentiation:</p>
+<div class="center"> 
+<br /><img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=%20%28a%20%2B%20b%29%20%5Cfrac%7Bd%7D%7Bdx%7D%20%3D%20a%20%5Cfrac%7Bd%7D%7Bdx%7D%20%2B%20b%20%5Cfrac%7Bd%7D%7Bdx%7D%20" alt=" (a + b) \frac{d}{dx} = a \frac{d}{dx} + b \frac{d}{dx} " title=" (a + b) \frac{d}{dx} = a \frac{d}{dx} + b \frac{d}{dx} " /><br />
+</div>
+
+<p>But you don't wish to perform the undoubtedly large number of rote-examples required after your moment of epiphany.</p>
+<p>In this exercise you should develop a data-type to represent a single-variable polynomial expression.</p>
+<p>After you feel confident that you can represent any such expression, write a function using the two rules listed to provide the following function:</p>
+<pre data-language="haskell"><code>differentiate :: Polynomial -&gt; Polynomial
+differentiate = ...</code></pre>
+<hr />
+<p></p>
 <h1 id="appendix">Appendix</h1>
 <p><a href="http://stackoverflow.com/questions/17870864/where-is-huttons-razor-first-defined">Hutton's Razor</a></p>
 			<hr>
 			<p class="center footer"> Produced with <a href="http://johnmacfarlane.net/pandoc/">Pandoc</a> </p>
 		</div>
 		<script type="text/javascript" src="resources/javascript/rainbow-custom.min.js"></script>
+		<!-- <script src="dependencies/mathjax-MathJax-727332c/MathJax.js" type="text/javascript" charset="utf-8"> </script> -->
 	</body>
 </html>
