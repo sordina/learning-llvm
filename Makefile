@@ -29,11 +29,12 @@ dotty:
 
 dependencies:
 	mkdir -p dependencies
-	cabal update
-	cabal install commando
-	cabal install conscript
+	git clone git@github.com:sordina/Commando.git  dependencies/commando
+	git clone git@github.com:sordina/Conscript.git dependencies/conscript
 	git clone git@github.com:sordina/pandoctor.git dependencies/pandoctor
 	git clone git@github.com:sordina/uniqhash.git  dependencies/uniqhash
+	cd dependencies/commando  && cabal install
+	cd dependencies/conscript && cabal install
 	cd dependencies/pandoctor && cabal install
 	cd dependencies/uniqhash  && cabal install
 
