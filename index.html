@@ -127,57 +127,14 @@
 <hr>
 
 <h1 id="exercise---org-chart">Exercise - Org Chart</h1>
-<p>Janice is an employee of International Banking Machines.</p>
+<p>You are an employee of International Banking Machines.</p>
 <p>The CEO has asked you to model the org-chart with a computer program in order to perform some analysis on the effectiveness of middle-managers.</p>
-<p>Before you are able to perform your calculation, you will have to decide how you will model your data. Construct a Haskell data-type to represent the various types of employees and departments shown in the following diagram.</p>
+<p>Before you are able to perform your calculations, you will have to decide how you will model your data. Construct a Haskell data-type to represent the various types of employees and departments shown in the following diagram:</p>
 <div class="center">
 <img src="resources/images/dot/01.png" alt="Org Chart" />
 </div>
 
-<pre data-language="dot" data-output="resources/images/dot/01.png" data-filter="./resources/scripts/graph.sh"><code>digraph IBM {
-    graph [ dpi = 100 ];
 
-    b1 [label=&quot;IBM - Board of Directors&quot;];
-
-    b1 -&gt; CTO [label=tech];
-    b1 -&gt; CFO [label=money];
-    b1 -&gt; CEO [label=power];
-    CEO -&gt; BurgerFlipping;
-    BurgerFlipping -&gt; Fries;
-    Fries -&gt; CurlyDepartment;
-    Fries -&gt; Regulations;
-    BurgerFlipping -&gt; FrontDesk;
-    CTO -&gt; Operations;
-    CTO -&gt; Engineering;
-    CFO -&gt; HR;
-    CFO -&gt; SpyStuff;
-    Engineering -&gt; Products;
-    Operations -&gt; Africa;
-    Operations -&gt; Brazil;
-    HR -&gt; Piniatas;
-    SpyStuff -&gt; Piniatas;
-
-    Africa -&gt; x1 [arrowhead=odot];
-    x1 [shape=rectangle label=&quot;Employees: 13\n Manager: Damien&quot;];
-
-    Brazil -&gt; x2 [arrowhead=odot];
-    x2 [shape=rectangle label=&quot;Employees: 19\n Manager: Dave&quot;];
-
-    Products -&gt; x3 [arrowhead=odot];
-    x3 [shape=rectangle label=&quot;Employees: 11\n Manager: Dennis&quot;];
-
-    CurlyDepartment -&gt; x4 [arrowhead=odot];
-    x4 [shape=rectangle label=&quot;Employees: 13\n Manager: Darren&quot;];
-
-    Regulations -&gt; x5 [arrowhead=odot];
-    x5 [shape=rectangle label=&quot;Employees: 13\n Manager: Dylan&quot;];
-
-    FrontDesk -&gt; x6 [arrowhead=odot];
-    x6 [shape=rectangle label=&quot;Employees: 13\n Manager: Devin&quot;];
-
-    Piniatas -&gt; x7 [arrowhead=odot];
-    x7 [shape=rectangle label=&quot;Employees: 13\n Manager: Dorris&quot;];
-}</code></pre>
 <hr>
 
 <h1 id="exercise---music">Exercise - Music</h1>

@@ -6,7 +6,7 @@ html: dotty
 	@ cat  resources/html/footer.html >> index.html
 
 pdf:
-	pandoc resources/markdown/*.md -o workshop.pdf
+	pandoc -V geometry:margin=1.5in resources/markdown/*.md -o workshop.pdf
 
 display: html todo
 	@ chromereload index.html
@@ -25,4 +25,4 @@ publish:
 	git push origin master:gh-pages
 
 dotty:
-	for i in resources/markdown/*.md; do pandoctor < "$$i" ; done
+	sed 's/^\\startmode.*//;s/^\\stopmode.*//' resources/markdown/*.md | pandoctor
