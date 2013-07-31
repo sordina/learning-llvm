@@ -147,10 +147,17 @@ Ex. 1.9 - Define a function to get the first element of a list.
 
 Note: In `Prelude` this function is called `head`.
 
+~~~{.answer data-language=haskell}
+myHead (x:xs) = x -- This is a partial function, Beware!
+~~~
+
 ```instruction
 Ex. 1.10 - Define a variable containing the first element of your list.
 ```
 
+~~~{.answer data-language=haskell}
+myFirstElement = myHead myList
+~~~
 
 ### Define Length
 

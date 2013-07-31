@@ -1,20 +1,23 @@
 var answers = document.getElementsByClassName('answer');
 
 for(var i = 0; i < answers.length; i++) {
-	var a = answers[i];
-	var parent = a.parentNode;
+	var a        = answers[i];
+	var parent   = a.parentNode;
 	var expander = document.createElement("a");
+	var para     = document.createElement("p");
+
+	para.appendChild(expander)
 
 	expander.href = "#";
 	expander.innerHTML = "Show Answer...";
 
-	parent.insertBefore(expander,a);
+	parent.insertBefore(para,a);
 	
-	(function(ex,el) {
+	(function(p,ex,el) {
 		ex.onclick = function() {
 			el.style.display = 'block';
-			ex.parentNode.removeChild(ex)
+			p.parentNode.removeChild(p)
 			return false;
 		}
-	})(expander,a);
+	})(para,expander,a);
 }

@@ -211,7 +211,9 @@ list3 = &quot;hello&quot; : &quot;world&quot; : []</code></pre>
 <pre data-language="haskell"><code>f (x:xs) = ...</code></pre>
 <pre class="instruction"><code>Ex. 1.9 - Define a function to get the first element of a list.</code></pre>
 <p>Note: In <code>Prelude</code> this function is called <code>head</code>.</p>
+<pre class="answer" data-language="haskell"><code>myHead (x:xs) = x -- This is a partial function, Beware!</code></pre>
 <pre class="instruction"><code>Ex. 1.10 - Define a variable containing the first element of your list.</code></pre>
+<pre class="answer" data-language="haskell"><code>myFirstElement = myHead myList</code></pre>
 <h3 id="define-length">Define Length</h3>
 <p>Define a function that takes a list and returns the length. In Haskell type-signature syntax, this is written as:</p>
 <pre data-language="haskell"><code>mylength :: [a] -&gt; Int</code></pre>
