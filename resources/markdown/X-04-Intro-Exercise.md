@@ -9,7 +9,7 @@
 
 In Haskell you can define a variable with the `=` sign.
 
-These can be used in a top-level definition (no-indentation):
+Variables can be defined at the top-level (no-indentation):
 
 ~~~{data-language=haskell}
 my_variable = 1

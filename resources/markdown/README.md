@@ -4,7 +4,7 @@ Melbourne Haskell Workshop 2013
 # DRAFT COPY
 
 * 6 Hours (Plus Lunch)
-* Maximum attendance - 30 people (Including Volunteers)
+* Maximum attendance - 30 people (Excluding Volunteers)
 
 <!-- Trickery to conditionally display the alternate format link -->
 
