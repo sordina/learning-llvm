@@ -10,6 +10,10 @@
 		<div id="content">
 
 <h1 id="melbourne-haskell-workshop-2013">Melbourne Haskell Workshop 2013</h1>
+<ul>
+<li>6 Hours (Plus Lunch)</li>
+<li>Maximum attendance - 30 people (Including Volunteers)</li>
+</ul>
 <!-- Trickery to conditionally display the alternate format link -->
 
 <h3 id="html-link" class="center"><a href="http://sordina.github.io/haskell_workshop/">(HTML)</a></h3>
@@ -31,6 +35,7 @@
 <h3 id="note">Note:</h3>
 <p>If you are attending the workshop, please attempt to have the required items from the <a href="#resources">'Resources'</a> section available for your use.</p>
 <h1 id="todo-decide-on-some-followup-plans" class="todo">TODO: Decide on some followup plans</h1>
+<h1 id="todo-dont-use-underscores-in-pattern-matching-early-on" class="todo">TODO: Don't use underscores in pattern matching early on</h1>
 <hr />
 <p></p>
 <h1 id="table-of-contents">Table of Contents</h1>
@@ -41,28 +46,32 @@
 <td align="left">Read this First</td>
 </tr>
 <tr class="even">
+<td align="left"><a href="#resources">Resources</a></td>
+<td align="left">Resources Available</td>
+</tr>
+<tr class="odd">
 <td align="left"><a href="#introduction">Introduction</a></td>
 <td align="left">Motivation, Overview, and Approach</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left"><a href="#adts">ADTs</a></td>
 <td align="left">Modelling with data in Haskell</td>
-</tr>
-<tr class="even">
-<td align="left"><a href="#functions">Functions</a></td>
-<td align="left">Destructuring and evaluating data</td>
 </tr>
 <tr class="odd">
 <td align="left"><a href="#typeclasses">Typeclasses</a></td>
 <td align="left">Code-Reuse and Laws</td>
 </tr>
 <tr class="even">
-<td align="left"><a href="#ecosystem">Ecosystem</a></td>
-<td align="left">Resources and Community</td>
+<td align="left"><a href="#wildcard">Wildcard</a></td>
+<td align="left">Music</td>
 </tr>
 <tr class="odd">
 <td align="left"><a href="#monads">Monads</a></td>
-<td align="left">General Purpose DSLs</td>
+<td align="left">DSLs, IO, Do-Notation</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="#ecosystem">Ecosystem</a></td>
+<td align="left">Resources and Community</td>
 </tr>
 </tbody>
 </table>
@@ -132,6 +141,75 @@
 <p>This should output something similar to:</p>
 <pre class="text"><code>cabal-install version 1.16.0.2
 using version 1.16.0 of the Cabal library</code></pre>
+<hr />
+<p></p>
+<h1 id="introductory-exercise">Introductory Exercise</h1>
+<h2 id="variables">Variables</h2>
+<p>In Haskell you can define a variable with the <code>=</code> sign.</p>
+<p>These can be used in a top-level definition (no-indentation):</p>
+<pre data-language="haskell"><code>my_variable = 1</code></pre>
+<h2 id="type-signatures">Type Signatures</h2>
+<p>You can annotate a definition with a type-signature:</p>
+<pre data-language="haskell"><code>my_variable :: Int
+my_variable = 1</code></pre>
+<h2 id="string-literals">String Literals</h2>
+<p>String literals look familiar:</p>
+<pre data-language="haskell"><code>my_string :: String
+my_string = &quot;hello world&quot;</code></pre>
+<h2 id="tuples">Tuples</h2>
+<p>Tuples look like this:</p>
+<pre data-language="haskell"><code>my_tuple_pair :: (Int, String)
+my_tuple_pair = (1,&quot;hello&quot;)
+
+my_tuple_trio :: (Int, String, Int)
+my_tuple_trio = (1,&quot;hello&quot;,3)</code></pre>
+<p>They can be used to group multiple, differently-typed (heterogeneous) values.</p>
+<h2 id="function">Function</h2>
+<p>Functions are a core part of Haskell. Function definitions look like this:</p>
+<pre data-language="haskell"><code>my_function :: ... -&gt; ...
+my_function x y ... = ...</code></pre>
+<p>If a function <code>f</code> takes something of type <code>a</code> and returns something of type <code>b</code> we write the type signature as:</p>
+<pre data-language="haskell"><code>f :: a -&gt; b</code></pre>
+<p>For example:</p>
+<pre data-language="haskell"><code>my_add :: Int -&gt; Int -&gt; Int
+my_add x y = x + y</code></pre>
+<p><code>my_add</code> takes two numbers and returns the result of the addition of those two numbers.</p>
+<h2 id="lists">Lists</h2>
+<p>List are a commonly used data-structure in Haskell. Everything in a list has the same type (they are homogeneous).</p>
+<p>Lists are built using the infix data-constructor <code>(:)</code> (pronounced &quot;cons&quot;). They also have a compact notation using <code>[...]</code>.</p>
+<p>List literals look like:</p>
+<pre data-language="haskell"><code>list1 :: [Int]
+list2 :: [Int]
+list3 :: [String]
+
+list1 = [1,2,3]
+list2 = 1 : 2 : []
+list3 = &quot;hello&quot; : &quot;world&quot; : []</code></pre>
+<p>You can deconstruct a list by pattern matching the head and tail like so:</p>
+<pre data-language="haskell"><code>f (x:xs) = ...</code></pre>
+<h3 id="define-length">Define Length</h3>
+<p>Define a function that takes a list and returns the length. In Haskell type-signature syntax, this is written as:</p>
+<pre data-language="haskell"><code>mylength :: [a] -&gt; Int</code></pre>
+<p>Your solution should have the form of:</p>
+<pre data-language="haskell"><code>mylength []     = ...
+mylength (x:xs) = ...</code></pre>
+<p>Things to consider:</p>
+<ul>
+<li>What is the length of an empty list? (the base case)</li>
+<li>What is the length of xs?</li>
+</ul>
+<pre class="answer" data-language="haskell"><code>mylength []     = 0
+mylength (x:xs) = 1 + mylength xs</code></pre>
+<h3 id="define-map">Define Map</h3>
+<pre class="answer" data-language="haskell"><code>mymap f [] = []
+mymap f (x:xs) = f x : mymap f xs</code></pre>
+<p>For your reading pleasure, here are some definintions of common functions:</p>
+<pre data-language="haskell"><code>myfilter f []     = []
+myfilter f (x:xs) = if f x then x : myfilter f xs
+                           else     myfilter f xs</code></pre>
+<pre data-language="haskell"><code>myfold f z []     = z
+myfold f z (x:xs) = f x (myfold f z xs)</code></pre>
+<h1 id="todo-hide-.answers" class="todo">TODO: Hide .answers</h1>
 <hr />
 <p></p>
 <h1 id="exercise---org-chart">Exercise - Org Chart</h1>

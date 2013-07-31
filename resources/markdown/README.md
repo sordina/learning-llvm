@@ -1,6 +1,9 @@
 Melbourne Haskell Workshop 2013
 ===============================
 
+* 6 Hours (Plus Lunch)
+* Maximum attendance - 30 people (Including Volunteers)
+
 <!-- Trickery to conditionally display the alternate format link -->
 
 ### [(HTML)](http://sordina.github.io/haskell_workshop/) {.center #html-link}
@@ -29,3 +32,5 @@ from the ['Resources'](#resources) section available for your use.
 
 
 # TODO: Decide on some followup plans {.todo}
+
+# TODO: Don't use underscores in pattern matching early on {.todo}
