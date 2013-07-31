@@ -214,11 +214,18 @@ For your reading pleasure, here are some definintions of common functions:
 myfilter f []     = []
 myfilter f (x:xs) = if f x then x : myfilter f xs
                            else     myfilter f xs
+
+myFold f z []     = z
+myFold f z (x:xs) = f x (myFold f z xs)
+
+myReverse []     = []
+myReverse (x:xs) = myReverse xs ++ [x]
+
+myElem e []     = False
+myElem e (x:xs) = if e == x then True
+                            else myElem e xs
 ~~~
 
-~~~{data-language=haskell}
-myfold f z []     = z
-myfold f z (x:xs) = f x (myfold f z xs)
-~~~
+See if you can find the signatures for these functions.
 
 # TODO: Hide .answers in PDF {.todo}

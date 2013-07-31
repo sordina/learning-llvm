@@ -246,9 +246,18 @@ myMap f (x:xs) = f x : myMap f xs</code></pre>
 <p>For your reading pleasure, here are some definintions of common functions:</p>
 <pre data-language="haskell"><code>myfilter f []     = []
 myfilter f (x:xs) = if f x then x : myfilter f xs
-                           else     myfilter f xs</code></pre>
-<pre data-language="haskell"><code>myfold f z []     = z
-myfold f z (x:xs) = f x (myfold f z xs)</code></pre>
+                           else     myfilter f xs
+
+myFold f z []     = z
+myFold f z (x:xs) = f x (myFold f z xs)
+
+myReverse []     = []
+myReverse (x:xs) = myReverse xs ++ [x]
+
+myElem e []     = False
+myElem e (x:xs) = if e == x then True
+                            else myElem e xs</code></pre>
+<p>See if you can find the signatures for these functions.</p>
 <h1 id="todo-hide-.answers-in-pdf" class="todo">TODO: Hide .answers in PDF</h1>
 <hr />
 <p></p>
