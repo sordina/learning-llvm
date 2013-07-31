@@ -20,17 +20,6 @@ A 6-hour workshop intended to introduce and provide resources for working with H
 This workshop is based around a central concept of domain modeling with Haskell.
 It uses a narrative of a physicist attempting to understand how the world works.
 
-The workshop will cover the following topics:
-
------------------------------   ----------------------------------
-[Introduction](#introduction)   Motivation, Overview, and Approach
-[ADTs](#adts)                   Modelling with data in Haskell
-[Functions](#functions)         Destructuring and evaluating data
-[Typeclasses](#typeclasses)     Code-Reuse and Laws
-[Ecosystem](#ecosystem)         Resources and Community
-[Monads](#monads)               General Purpose DSLs
------------------------------   ----------------------------------
-
 # TODO: double check these items {.todo}
 
 ### Note:

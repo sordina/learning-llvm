@@ -25,6 +25,18 @@ installation. The easiest way to get up and running is to install the latest
 Haskell Platform. This is a "batteries included" installation of GHC and Cabal
 that includes many of the most useful packages available in the Hackage ecosystem.
 
+## [A Copy of the Workshop Scaffold Project](https://github.com/sordina/haskell_workshop)
+
+<https://github.com/sordina/haskell_workshop>
+
+Either clone with git:
+
+```shell
+git clone https://github.com/sordina/haskell_workshop.git
+```
+
+... or [download the zip](https://github.com/sordina/haskell_workshop/archive/master.zip) from GitHub.
+
 
 
 Useful Resources

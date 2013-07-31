@@ -27,39 +27,45 @@
 </div>
 
 <p>This workshop is based around a central concept of domain modeling with Haskell. It uses a narrative of a physicist attempting to understand how the world works.</p>
-<p>The workshop will cover the following topics:</p>
+<h1 id="todo-double-check-these-items" class="todo">TODO: double check these items</h1>
+<h3 id="note">Note:</h3>
+<p>If you are attending the workshop, please attempt to have the required items from the <a href="#resources">'Resources'</a> section available for your use.</p>
+<h1 id="todo-decide-on-some-followup-plans" class="todo">TODO: Decide on some followup plans</h1>
+<hr />
+<p></p>
+<h1 id="table-of-contents">Table of Contents</h1>
 <table>
 <tbody>
 <tr class="odd">
+<td align="left"><a href="#melbourne-haskell-workshop-2013">Readme</a></td>
+<td align="left">Read this First</td>
+</tr>
+<tr class="even">
 <td align="left"><a href="#introduction">Introduction</a></td>
 <td align="left">Motivation, Overview, and Approach</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left"><a href="#adts">ADTs</a></td>
 <td align="left">Modelling with data in Haskell</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left"><a href="#functions">Functions</a></td>
 <td align="left">Destructuring and evaluating data</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left"><a href="#typeclasses">Typeclasses</a></td>
 <td align="left">Code-Reuse and Laws</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left"><a href="#ecosystem">Ecosystem</a></td>
 <td align="left">Resources and Community</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left"><a href="#monads">Monads</a></td>
 <td align="left">General Purpose DSLs</td>
 </tr>
 </tbody>
 </table>
-<h1 id="todo-double-check-these-items" class="todo">TODO: double check these items</h1>
-<h3 id="note">Note:</h3>
-<p>If you are attending the workshop, please attempt to have the required items from the <a href="#resources">'Resources'</a> section available for your use.</p>
-<h1 id="todo-decide-on-some-followup-plans" class="todo">TODO: Decide on some followup plans</h1>
 <hr />
 <p></p>
 <h1 id="required-resources">Required Resources</h1>
@@ -68,6 +74,11 @@
 <p>We are assuming previous programming experience, however, if you would like a recommendation, have a look at <a href="http://notepad-plus-plus.org/">Notepad++</a>, <a href="http://www.sublimetext.com/">Sublime Text</a>, or the ever-popular <a href="http://www.gnu.org/software/emacs/">Emacs</a> and <a href="http://www.vim.org/">Vim</a>. Just make sure that you are fluent enough to embark on exercises as they appear in the workshop.</p>
 <h2 id="the-haskell-platform"><a href="http://www.haskell.org/platform/">The Haskell Platform</a></h2>
 <p>In order to run the programs written during this workshop you will need a Haskell installation. The easiest way to get up and running is to install the latest Haskell Platform. This is a &quot;batteries included&quot; installation of GHC and Cabal that includes many of the most useful packages available in the Hackage ecosystem.</p>
+<h2 id="a-copy-of-the-workshop-scaffold-project"><a href="https://github.com/sordina/haskell_workshop">A Copy of the Workshop Scaffold Project</a></h2>
+<p><a href="https://github.com/sordina/haskell_workshop">https://github.com/sordina/haskell_workshop</a></p>
+<p>Either clone with git:</p>
+<pre class="shell"><code>git clone https://github.com/sordina/haskell_workshop.git</code></pre>
+<p>... or <a href="https://github.com/sordina/haskell_workshop/archive/master.zip">download the zip</a> from GitHub.</p>
 <h1 id="useful-resources">Useful Resources</h1>
 <p>These resources are available to help you with any issues you face when learning Haskell:</p>
 <h2 id="haskell-on-freenode">#haskell on <a href="http://freenode.net/">Freenode</a></h2>
@@ -91,18 +102,6 @@
 <h1 id="introduction">Introduction</h1>
 <p>Welcome to the Melbourne Haskell Workshop 2013.</p>
 <p>This intent of this workshop is to provide a working introduction to Haskell for programmers in Melbourne who have not yet used the language in anger.</p>
-<p>The following exercises will be presented as part of the workshop:</p>
-<h1 id="todo-update-once-decided" class="todo">TODO: Update once decided</h1>
-<ul>
-<li>Classification</li>
-<li>Lists</li>
-<li>Org-Chart</li>
-<li>Musical Program</li>
-<li>Image Program</li>
-<li>Web App</li>
-<li>Web Scraper</li>
-<li>Schema Language</li>
-</ul>
 <hr />
 <p></p>
 <h1 id="setup">Setup</h1>
@@ -126,6 +125,13 @@
 <pre class="shell"><code>./program</code></pre>
 <p>The output should look as follows:</p>
 <pre class="text"><code>&quot;hello world&quot;</code></pre>
+<h2 id="cabal">Cabal</h2>
+<p>You should have access to a Cabal installation if you have installed the Haskell Platform.</p>
+<p>Check that you have cabal by running:</p>
+<pre class="shell"><code>cabal --version</code></pre>
+<p>This should output something similar to:</p>
+<pre class="text"><code>cabal-install version 1.16.0.2
+using version 1.16.0 of the Cabal library</code></pre>
 <hr />
 <p></p>
 <h1 id="exercise---org-chart">Exercise - Org Chart</h1>
