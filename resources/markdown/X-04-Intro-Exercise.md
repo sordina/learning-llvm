@@ -214,4 +214,4 @@ myfold f z []     = z
 myfold f z (x:xs) = f x (myfold f z xs)
 ~~~
 
-# TODO: Hide .answers {.todo}
+# TODO: Hide .answers in PDF {.todo}
