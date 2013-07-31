@@ -29,6 +29,18 @@ pre.hidden {
 	display:none;
 }
 
+pre.instruction {
+	background: #fff;
+	border: 1px solid black;
+	color: black;
+}
+
+pre.answer {
+	display: none;
+	background: #efe;
+	border-left: 3px solid green;
+}
+
 .center { text-align: center; }
 
 .footer { font-family: monospace; }
@@ -46,4 +58,10 @@ td, th {
 
 img {
 	max-width: 100%;
+}
+
+p code {
+	background: #fdf6e3;
+	padding-left: 5px;
+	padding-right: 5px;
 }

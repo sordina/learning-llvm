@@ -3,7 +3,7 @@
 
 \pagebreak
 
-# Introductory Exercise
+# Opening Exercises
 
 ## Variables
 
@@ -15,14 +15,26 @@ These can be used in a top-level definition (no-indentation):
 my_variable = 1
 ~~~
 
+Variable names should start with a lowercase letter and contain no spaces, or special characters, besides underscores, numbers, and `'`.
+
+```instruction
+Ex. 1.1 - Define your own variable.
+```
+
 ## Type Signatures
 
-You can annotate a definition with a type-signature:
+You can annotate a definition with a valid type-signature:
+
+# TODO: Decide if we should introduce how to define items in GHCi {.todo}
 
 ~~~{data-language=haskell}
 my_variable :: Int
 my_variable = 1
 ~~~
+
+```instruction
+Ex. 1.2 - Give your variable a type-signature.
+```
 
 ## String Literals
 
@@ -33,10 +45,13 @@ my_string :: String
 my_string = "hello world"
 ~~~
 
+```instruction
+Ex. 1.3 - Define a variable containing a string.
+```
+
 ## Tuples
 
 Tuples look like this:
-
 
 ~~~{data-language=haskell}
 my_tuple_pair :: (Int, String)
@@ -48,8 +63,11 @@ my_tuple_trio = (1,"hello",3)
 
 They can be used to group multiple, differently-typed (heterogeneous) values.
 
+```instruction
+Ex. 1.4 - Define a variable containing a tuple.
+```
 
-## Function
+## Functions
 
 Functions are a core part of Haskell. Function definitions look like this:
 
@@ -74,6 +92,23 @@ my_add x y = x + y
 
 `my_add` takes two numbers and returns the result of the addition of those two numbers.
 
+
+```instruction
+Ex. 1.5 - Define a function `my_multiply` that multiplies 3 numbers.
+```
+
+```instruction
+Ex. 1.6 - Give your function a type-signature
+```
+
+~~~{data-language=haskell .answer}
+my_multiply :: Int -> Int -> Int -> Int
+my_multiply x y z = x * y * z
+~~~
+
+# TODO: Decide if variables should include underscores {.todo}
+
+
 ## Lists
 
 List are a commonly used data-structure in Haskell. Everything in a list has the same type (they are homogeneous).
@@ -92,11 +127,30 @@ list2 = 1 : 2 : []
 list3 = "hello" : "world" : []
 ~~~
 
+```instruction
+Ex. 1.7 - Define a variable containing a list.
+```
+
+```instruction
+Ex. 1.8 - Give your variable a type-signature.
+```
+
 You can deconstruct a list by pattern matching the head and tail like so:
 
 ~~~{data-language=haskell}
 f (x:xs) = ...
 ~~~
+
+```instruction
+Ex. 1.9 - Define a function to get the first element of a list.
+```
+
+Note: In `Prelude` this function is called `head`.
+
+```instruction
+Ex. 1.10 - Define a variable containing the first element of your list.
+```
+
 
 ### Define Length
 
@@ -123,12 +177,29 @@ mylength []     = 0
 mylength (x:xs) = 1 + mylength xs
 ~~~
 
-### Define Map
+### Define `myMap`
+
+```instruction
+Ex. 1.11 -
+
+Define a function that takes a function from a to b "a -> b",
+and a list of as "[a]",
+and returns a list of bs "[b]".
+```
+
+Things to consider:
+
+* What is the type-signature of myMap?
+* What is the base-case of myMap?
 
 ~~~{.answer data-language=haskell}
-mymap f [] = []
-mymap f (x:xs) = f x : mymap f xs
+myMap :: (a -> b) -> [a] -> [b]
+myMap f [] = []
+myMap f [] = []
+myMap f (x:xs) = f x : myMap f xs
 ~~~
+
+## Fun Functions
 
 For your reading pleasure, here are some definintions of common functions:
 

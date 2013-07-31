@@ -76,7 +76,7 @@ For example, have a look for the function with signature [Text -> ByteString](ht
 MFUG is the Melbourne Functional Programmer's User Group. This group discusses
 many topics, including Haskell.
 
-## [/r/haskell](www.reddit.com/r/haskell)
+## [/r/haskell](http://www.reddit.com/r/haskell)
 
 For Reddit users, /r/haskell is a very useful resource with a great deal of
 information regarding recent developments in the Haskell ecosystem and community.
