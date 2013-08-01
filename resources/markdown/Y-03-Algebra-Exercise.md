@@ -24,7 +24,7 @@ In this exercise you should develop a data-type to represent a single-variable p
 After you feel confident that you can represent any such expression, write
 a function using the two rules listed to provide the following function:
 
-~~~{data-language=haskell}
+~~~{data-language=haskell data-filter=./resources/scripts/check.sh}
 differentiate :: Polynomial -> Polynomial
 differentiate = ...
 ~~~

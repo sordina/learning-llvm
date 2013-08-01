@@ -1,6 +1,6 @@
-all: dependencies html pdf
+all: dependencies html pdf todo examples
 
-html: dotty
+html: doctor
 	@ cat  resources/html/head.html          > index.html
 	pandoc --webtex resources/markdown/*.md >> index.html
 	@ cat  resources/html/footer.html       >> index.html
@@ -24,8 +24,8 @@ todo:
 publish:
 	git push origin master:gh-pages
 
-dotty:
-	sed 's/^\\startmode.*//;s/^\\stopmode.*//' resources/markdown/*.md | pandoctor > /dev/null
+doctor:
+	sed 's/^\\startmode.*//;s/^\\stopmode.*//' resources/markdown/*.md | pandoctor
 
 dependencies:
 	mkdir -p dependencies
@@ -40,3 +40,6 @@ dependencies:
 
 clean:
 	rm -rf dependencies
+
+examples:
+	grep -n 'data-language=haskell' resources/markdown/*.md | grep -v check | cat

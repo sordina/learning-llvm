@@ -11,7 +11,7 @@ In Haskell you can define a variable with the `=` sign.
 
 Variables can be defined at the top-level (no-indentation):
 
-~~~{data-language=haskell}
+~~~{data-language=haskell data-filter=./resources/scripts/check.sh}
 my_variable = 1
 ~~~
 
@@ -27,7 +27,7 @@ You can annotate a definition with a valid type-signature:
 
 # TODO: Decide if we should introduce how to define items in GHCi {.todo}
 
-~~~{data-language=haskell}
+~~~{data-language=haskell data-filter=./resources/scripts/check.sh}
 my_variable :: Int
 my_variable = 1
 ~~~
@@ -40,7 +40,7 @@ Ex. 1.2 - Give your variable a type-signature.
 
 String literals look familiar:
 
-~~~{data-language=haskell}
+~~~{data-language=haskell data-filter=./resources/scripts/check.sh}
 my_string :: String
 my_string = "hello world"
 ~~~
@@ -53,7 +53,7 @@ Ex. 1.3 - Define a variable containing a string.
 
 Tuples look like this:
 
-~~~{data-language=haskell}
+~~~{data-language=haskell data-filter=./resources/scripts/check.sh}
 my_tuple_pair :: (Int, String)
 my_tuple_pair = (1,"hello")
 
@@ -72,20 +72,20 @@ Ex. 1.4 - Define a variable containing a tuple.
 Functions are a core part of Haskell. Function definitions look like this:
 
 
-~~~{data-language=haskell}
+~~~{data-language=haskell data-filter=./resources/scripts/check.sh}
 my_function :: ... -> ...
 my_function x y ... = ...
 ~~~
 
 If a function `f` takes something of type `a` and returns something of type `b` we write the type signature as:
 
-~~~{data-language=haskell}
+~~~{data-language=haskell data-filter=./resources/scripts/check.sh}
 f :: a -> b
 ~~~
 
 For example:
 
-~~~{data-language=haskell}
+~~~{data-language=haskell data-filter=./resources/scripts/check.sh}
 my_add :: Int -> Int -> Int
 my_add x y = x + y
 ~~~
@@ -101,7 +101,7 @@ Ex. 1.5 - Define a function `my_multiply` that multiplies 3 numbers.
 Ex. 1.6 - Give your function a type-signature
 ```
 
-~~~{data-language=haskell .answer}
+~~~{data-language=haskell .answer data-filter=./resources/scripts/check.sh}
 my_multiply :: Int -> Int -> Int -> Int
 my_multiply x y z = x * y * z
 ~~~
@@ -117,7 +117,7 @@ Lists are built using the infix data-constructor `(:)` (pronounced "cons"). They
 
 List literals look like:
 
-~~~{data-language=haskell}
+~~~{data-language=haskell data-filter=./resources/scripts/check.sh}
 list1 :: [Int]
 list2 :: [Int]
 list3 :: [String]
@@ -137,7 +137,7 @@ Ex. 1.8 - Give your variable a type-signature.
 
 You can deconstruct a list by pattern matching the head and tail like so:
 
-~~~{data-language=haskell}
+~~~{data-language=haskell data-filter=./resources/scripts/check.sh}
 f (x:xs) = ...
 ~~~
 
@@ -147,7 +147,7 @@ Ex. 1.9 - Define a function to get the first element of a list.
 
 Note: In `Prelude` this function is called `head`.
 
-~~~{.answer data-language=haskell}
+~~~{.answer data-language=haskell data-filter=./resources/scripts/check.sh}
 myHead (x:xs) = x -- This is a partial function, Beware!
 ~~~
 
@@ -155,7 +155,7 @@ myHead (x:xs) = x -- This is a partial function, Beware!
 Ex. 1.10 - Define a variable containing the first element of your list.
 ```
 
-~~~{.answer data-language=haskell}
+~~~{.answer data-language=haskell data-filter=./resources/scripts/check.sh}
 myFirstElement = myHead myList
 ~~~
 
@@ -163,13 +163,13 @@ myFirstElement = myHead myList
 
 Define a function that takes a list and returns the length. In Haskell type-signature syntax, this is written as:
 
-~~~{data-language=haskell}
+~~~{data-language=haskell data-filter=./resources/scripts/check.sh}
 mylength :: [a] -> Int
 ~~~
 
 Your solution should have the form of:
 
-~~~{data-language=haskell}
+~~~{data-language=haskell data-filter=./resources/scripts/check.sh}
 mylength []     = ...
 mylength (x:xs) = ...
 ~~~
@@ -179,7 +179,7 @@ Things to consider:
 * What is the length of an empty list? (the base case)
 * What is the length of xs?
 
-~~~{.answer data-language=haskell}
+~~~{.answer data-language=haskell data-filter=./resources/scripts/check.sh}
 mylength []     = 0
 mylength (x:xs) = 1 + mylength xs
 ~~~
@@ -199,7 +199,7 @@ Things to consider:
 * What is the type-signature of myMap?
 * What is the base-case of myMap?
 
-~~~{.answer data-language=haskell}
+~~~{.answer data-language=haskell data-filter=./resources/scripts/check.sh}
 myMap :: (a -> b) -> [a] -> [b]
 myMap f [] = []
 myMap f [] = []
@@ -210,7 +210,7 @@ myMap f (x:xs) = f x : myMap f xs
 
 For your reading pleasure, here are some definintions of common functions:
 
-~~~{data-language=haskell}
+~~~{data-language=haskell data-filter=./resources/scripts/check.sh}
 myfilter f []     = []
 myfilter f (x:xs) = if f x then x : myfilter f xs
                            else     myfilter f xs
