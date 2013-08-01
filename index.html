@@ -181,10 +181,10 @@ my_tuple_trio = (1,&quot;hello&quot;,3)</code></pre>
 <pre class="instruction"><code>Ex. 1.4 - Define a variable containing a tuple.</code></pre>
 <h2 id="functions">Functions</h2>
 <p>Functions are a core part of Haskell. Function definitions look like this:</p>
-<pre data-language="haskell" data-filter="./resources/scripts/check.sh"><code>my_function :: ... -&gt; ...
+<pre class="nocheck" data-language="haskell"><code>my_function :: ... -&gt; ...
 my_function x y ... = ...</code></pre>
 <p>If a function <code>f</code> takes something of type <code>a</code> and returns something of type <code>b</code> we write the type signature as:</p>
-<pre data-language="haskell" data-filter="./resources/scripts/check.sh"><code>f :: a -&gt; b</code></pre>
+<pre class="nocheck" data-language="haskell"><code>f :: a -&gt; b</code></pre>
 <p>For example:</p>
 <pre data-language="haskell" data-filter="./resources/scripts/check.sh"><code>my_add :: Int -&gt; Int -&gt; Int
 my_add x y = x + y</code></pre>
@@ -208,18 +208,19 @@ list3 = &quot;hello&quot; : &quot;world&quot; : []</code></pre>
 <pre class="instruction"><code>Ex. 1.7 - Define a variable containing a list.</code></pre>
 <pre class="instruction"><code>Ex. 1.8 - Give your variable a type-signature.</code></pre>
 <p>You can deconstruct a list by pattern matching the head and tail like so:</p>
-<pre data-language="haskell" data-filter="./resources/scripts/check.sh"><code>f (x:xs) = ...</code></pre>
+<pre class="nocheck" data-language="haskell"><code>f (x:xs) = ...</code></pre>
 <pre class="instruction"><code>Ex. 1.9 - Define a function to get the first element of a list.</code></pre>
 <p>Note: In <code>Prelude</code> this function is called <code>head</code>.</p>
 <pre class="answer" data-language="haskell" data-filter="./resources/scripts/check.sh"><code>myHead (x:xs) = x -- This is a partial function, Beware!</code></pre>
 <pre class="instruction"><code>Ex. 1.10 - Define a variable containing the first element of your list.</code></pre>
-<pre class="answer" data-language="haskell" data-filter="./resources/scripts/check.sh"><code>myFirstElement = myHead myList</code></pre>
+<pre class="answer nocheck" data-language="haskell"><code>myFirstElement = myHead myList</code></pre>
 <h3 id="define-length">Define Length</h3>
 <p>Define a function that takes a list and returns the length. In Haskell type-signature syntax, this is written as:</p>
-<pre data-language="haskell" data-filter="./resources/scripts/check.sh"><code>mylength :: [a] -&gt; Int</code></pre>
+<pre data-language="haskell" data-filter="./resources/scripts/check.sh"><code>myLength :: [a] -&gt; Int
+myLength = undefined</code></pre>
 <p>Your solution should have the form of:</p>
-<pre data-language="haskell" data-filter="./resources/scripts/check.sh"><code>mylength []     = ...
-mylength (x:xs) = ...</code></pre>
+<pre class="nocheck" data-language="haskell"><code>myLength []     = ...
+myLength (x:xs) = ...</code></pre>
 <p>Things to consider:</p>
 <ul>
 <li>What is the length of an empty list? (the base case)</li>
@@ -239,7 +240,6 @@ and returns a list of bs &quot;[b]&quot;.</code></pre>
 <li>What is the base-case of myMap?</li>
 </ul>
 <pre class="answer" data-language="haskell" data-filter="./resources/scripts/check.sh"><code>myMap :: (a -&gt; b) -&gt; [a] -&gt; [b]
-myMap f [] = []
 myMap f [] = []
 myMap f (x:xs) = f x : myMap f xs</code></pre>
 <h2 id="fun-functions">Fun Functions</h2>
@@ -301,7 +301,7 @@ myElem e (x:xs) = if e == x then True
 </tbody>
 </table>
 <p>Your function should have the following signature:</p>
-<pre data-language="haskell"><code>process :: String -&gt; OrgChart</code></pre>
+<pre class="nocheck" data-language="haskell"><code>process :: String -&gt; OrgChart</code></pre>
 <hr />
 <p></p>
 <h1 id="exercise---music">Exercise - Music</h1>
@@ -356,7 +356,7 @@ main = BS.writeFile &quot;baa_baa.mid&quot; (make_music 4 4 (Longer 4 baa_baa))<
 <p>But you don't wish to perform the undoubtedly large number of rote-examples required after your moment of epiphany.</p>
 <p>In this exercise you should develop a data-type to represent a single-variable polynomial expression.</p>
 <p>After you feel confident that you can represent any such expression, write a function using the two rules listed to provide the following function:</p>
-<pre data-language="haskell" data-filter="./resources/scripts/check.sh"><code>differentiate :: Polynomial -&gt; Polynomial
+<pre class="nocheck" data-language="haskell"><code>differentiate :: Polynomial -&gt; Polynomial
 differentiate = ...</code></pre>
 <hr />
 <p></p>

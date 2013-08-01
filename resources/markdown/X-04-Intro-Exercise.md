@@ -72,14 +72,14 @@ Ex. 1.4 - Define a variable containing a tuple.
 Functions are a core part of Haskell. Function definitions look like this:
 
 
-~~~{data-language=haskell data-filter=./resources/scripts/check.sh}
+~~~{data-language=haskell .nocheck} 
 my_function :: ... -> ...
 my_function x y ... = ...
 ~~~
 
 If a function `f` takes something of type `a` and returns something of type `b` we write the type signature as:
 
-~~~{data-language=haskell data-filter=./resources/scripts/check.sh}
+~~~{data-language=haskell .nocheck}
 f :: a -> b
 ~~~
 
@@ -137,7 +137,7 @@ Ex. 1.8 - Give your variable a type-signature.
 
 You can deconstruct a list by pattern matching the head and tail like so:
 
-~~~{data-language=haskell data-filter=./resources/scripts/check.sh}
+~~~{data-language=haskell .nocheck}
 f (x:xs) = ...
 ~~~
 
@@ -155,7 +155,7 @@ myHead (x:xs) = x -- This is a partial function, Beware!
 Ex. 1.10 - Define a variable containing the first element of your list.
 ```
 
-~~~{.answer data-language=haskell data-filter=./resources/scripts/check.sh}
+~~~{.answer data-language=haskell .nocheck} 
 myFirstElement = myHead myList
 ~~~
 
@@ -164,14 +164,15 @@ myFirstElement = myHead myList
 Define a function that takes a list and returns the length. In Haskell type-signature syntax, this is written as:
 
 ~~~{data-language=haskell data-filter=./resources/scripts/check.sh}
-mylength :: [a] -> Int
+myLength :: [a] -> Int
+myLength = undefined
 ~~~
 
 Your solution should have the form of:
 
-~~~{data-language=haskell data-filter=./resources/scripts/check.sh}
-mylength []     = ...
-mylength (x:xs) = ...
+~~~{data-language=haskell .nocheck}
+myLength []     = ...
+myLength (x:xs) = ...
 ~~~
 
 Things to consider:
@@ -201,7 +202,6 @@ Things to consider:
 
 ~~~{.answer data-language=haskell data-filter=./resources/scripts/check.sh}
 myMap :: (a -> b) -> [a] -> [b]
-myMap f [] = []
 myMap f [] = []
 myMap f (x:xs) = f x : myMap f xs
 ~~~

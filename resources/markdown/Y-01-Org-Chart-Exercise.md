@@ -72,6 +72,6 @@ plain-text input format:
 
 Your function should have the following signature:
 
-~~~{ data-language=haskell }
+~~~{ data-language=haskell .nocheck }
 process :: String -> OrgChart
 ~~~
