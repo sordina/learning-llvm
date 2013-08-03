@@ -65,3 +65,10 @@ p code {
 	padding-left: 5px;
 	padding-right: 5px;
 }
+
+.note {
+	border: 1px solid black;
+	padding: 1em 2em 2em 2em;
+	margin: 2em;
+	background: #efefef;
+}

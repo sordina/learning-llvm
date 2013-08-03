@@ -3,75 +3,126 @@
 
 \pagebreak
 
-
 ADTs (Algebraic Data Types)
 ===========================
 
-### ... and Sanity Checking
+<div class="center">
+[Haskell Wiki Link](http://www.haskell.org/haskellwiki/Algebraic_data_type)
+</div>
 
+Algebraic Data Types are THE bread and butter of Haskell programs.
 
-Ensure that you have the following programs installed and functioning correctly:
+* Functions evaluate data by pattern-matching against ADTs
+* Domains are modeled using ADTs
+* Laziness is linked to ADTs
+* Types can be derived from ADT definitions
 
-* GHC(i)
+But how does that help me?
 
-At a command prompt, enter the following command:
+<div class="note">
+Note:
 
+If you wish to learn about why ADTs are "Algebraic", then have a look at
 
-```shell
-ghci
-```
+* [The Algebra of Algebraic Data Types, Part 1](http://chris-taylor.github.io/blog/2013/02/10/the-algebra-of-algebraic-data-types/)
+* [The Algebra of Algebraic Data Types, Part 2](http://chris-taylor.github.io/blog/2013/02/11/the-algebra-of-algebraic-data-types-part-ii/)
+* [The Algebra of Algebraic Data Types, Part 3](http://chris-taylor.github.io/blog/2013/02/13/the-algebra-of-algebraic-data-types-part-iii/)
+</div>
 
-This should launch the GHC Haskell REPL.
+Some examples of ADTs in Haskell:
 
-Type the following to ensure that you have a functioning REPL:
+~~~{data-language=haskell data-filter=./resources/scripts/check.sh}
+data MyBool = MyTrue | MyFalse
 
-~~~{data-language="haskell"}
-1 + 1
+should_I_eat_something_bigger_than_my_own_head :: MyBool
+should_I_eat_something_bigger_than_my_own_head = MyFalse
 ~~~
 
-This should yield the result:
+You can also add parameters to the data constructors:
 
-```text
-2
-```
+~~~{data-language=haskell data-filter=./resources/scripts/check.sh}
+data MyNullString = Nada | MyString String
 
-Create the following source file (program.hs):
+stringy :: MyNullString
+stringy = MyString "Whatever, It's just a string"
 
-~~~{data-language="haskell"}
-main = print "hello world"
+blanky :: MyNullString
+blanky = Nada
 ~~~
 
-Compile the program as follows:
+Constructors can take multiple parameters:
 
-```shell
-ghc --make program.hs
+~~~{data-language=haskell data-filter=./resources/scripts/check.sh}
+data SomeJunk = Rubbish String | TrashPile String Int Bool
+
+discards :: SomeJunk
+discards = TrashPile "Junk Yard" 42 True
+~~~
+
+Furthermore, ADTs can be recursive:
+
+~~~{data-language=haskell data-filter=./resources/scripts/check.sh}
+data MyNumberList = Nada | SomeNumbers Int MyNumberList
+
+numbers :: MyNumberList
+numbers =  SomeNumbers 1 (SomeNumbers 2 Nada)
+~~~
+
+Finally, ADTs can be parametrised by other types:
+
+~~~{data-language=haskell data-filter=./resources/scripts/check.sh}
+data MyContainer x = Jar x
+
+contained :: MyContainer Int
+contained = Jar 1
+
+pun :: MyContainer (MyContainer String)
+pun = Jar (Jar "Binks")
+~~~
+
+In general, the syntax of an ADT looks similar to the following:
+
+```bnf
+ADT          := data <TypeName> <Variables> = <Constructors>
+TypeName     := [A-Z] + [a-z'_]*
+Parameters   := <ConcreteType> + (" " + <ConcreteType>)*
+Constructors := <Constructor> + (" | " + <Constructor>)*
+Constructor  := <TypeName> + <Parameters>
+Variables    := <Variable> + (" " + <Variable>)*
+Variable     := [a-z] + [a-z'_]*
 ```
 
-Run the program with the following command:
+ConcreteType can't be defined syntactically, but it means that your type is
+"Fully Applied" (in Haskell terms, has a kind of `*`). An example of some concrete types
+are:
 
-```shell
-./program
+* `String`
+* `Int`
+* Maybe String
+* [Int]
+
+Examples of some non-concrete types are:
+
+
+With all of this power at your disposal, it's time to define a list ADT yourself.
+
+```instruction
+Ex. 3a.1 - Define your own list ADT.
 ```
 
-The output should look as follows:
+Things to consider:
 
-```text
-"hello world"
-```
+* Should this ADT be parametrised?
+* Should this ADT be recursive?
+* Should this ADT have multiple constructors?
+* Should the constructors be parametrised?
 
-## Cabal
+~~~{data-language=haskell .answer data-filter=./resources/scripts/check.sh}
+data MyList a = Empty | Items a (MyList a)
+~~~
 
-You should have access to a Cabal installation if you have installed the Haskell Platform.
+```instruction
+An open-ended question:
 
-Check that you have cabal by running:
-
-```shell
-cabal --version
-```
-
-This should output something similar to:
-
-```text
-cabal-install version 1.16.0.2
-using version 1.16.0 of the Cabal library
+What would the ADT for a LISP-like language look like?
 ```

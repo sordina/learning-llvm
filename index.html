@@ -13,7 +13,7 @@
 <h1 id="draft-copy">DRAFT COPY</h1>
 <ul>
 <li>6 Hours (Plus Lunch)</li>
-<li>Maximum attendance - 30 people (Excluding Volunteers)</li>
+<li>Expected attendance - 50 people</li>
 </ul>
 <!-- Trickery to conditionally display the alternate format link -->
 
@@ -35,8 +35,8 @@
 <h1 id="todo-double-check-these-items" class="todo">TODO: double check these items</h1>
 <h3 id="note">Note:</h3>
 <p>If you are attending the workshop, please attempt to have the required items from the <a href="#resources">'Resources'</a> section available for your use.</p>
-<h1 id="todo-decide-on-some-followup-plans" class="todo">TODO: Decide on some followup plans</h1>
 <h1 id="todo-dont-use-underscores-in-pattern-matching-early-on" class="todo">TODO: Don't use underscores in pattern matching early on</h1>
+<h1 id="todo-progressive-enhancement" class="todo">TODO: Progressive Enhancement</h1>
 <hr />
 <p></p>
 <h1 id="table-of-contents">Table of Contents</h1>
@@ -63,7 +63,7 @@
 <td align="left">Introductory Exercises</td>
 </tr>
 <tr class="even">
-<td align="left"><a href="#adts">ADTs</a></td>
+<td align="left"><a href="#adts-algebraic-data-types">ADTs</a></td>
 <td align="left">Modelling with data in Haskell</td>
 </tr>
 <tr class="odd">
@@ -150,6 +150,91 @@
 <p>This should output something similar to:</p>
 <pre class="text"><code>cabal-install version 1.16.0.2
 using version 1.16.0 of the Cabal library</code></pre>
+<hr />
+<p></p>
+<h1 id="adts-algebraic-data-types">ADTs (Algebraic Data Types)</h1>
+<div class="center">
+<a href="http://www.haskell.org/haskellwiki/Algebraic_data_type">Haskell Wiki Link</a>
+</div>
+
+<p>Algebraic Data Types are THE bread and butter of Haskell programs.</p>
+<ul>
+<li>Functions evaluate data by pattern-matching against ADTs</li>
+<li>Domains are modeled using ADTs</li>
+<li>Laziness is linked to ADTs</li>
+<li>Types can be derived from ADT definitions</li>
+</ul>
+<p>But how does that help me?</p>
+<div class="note">
+<p>Note:</p>
+<p>If you wish to learn about why ADTs are &quot;Algebraic&quot;, then have a look at</p>
+<ul>
+<li><a href="http://chris-taylor.github.io/blog/2013/02/10/the-algebra-of-algebraic-data-types/">The Algebra of Algebraic Data Types, Part 1</a></li>
+<li><a href="http://chris-taylor.github.io/blog/2013/02/11/the-algebra-of-algebraic-data-types-part-ii/">The Algebra of Algebraic Data Types, Part 2</a></li>
+<li><a href="http://chris-taylor.github.io/blog/2013/02/13/the-algebra-of-algebraic-data-types-part-iii/">The Algebra of Algebraic Data Types, Part 3</a>
+</div>
+</li>
+</ul>
+<p>Some examples of ADTs in Haskell:</p>
+<pre data-language="haskell" data-filter="./resources/scripts/check.sh"><code>data MyBool = MyTrue | MyFalse
+
+should_I_eat_something_bigger_than_my_own_head :: MyBool
+should_I_eat_something_bigger_than_my_own_head = MyFalse</code></pre>
+<p>You can also add parameters to the data constructors:</p>
+<pre data-language="haskell" data-filter="./resources/scripts/check.sh"><code>data MyNullString = Nada | MyString String
+
+stringy :: MyNullString
+stringy = MyString &quot;Whatever, It&#39;s just a string&quot;
+
+blanky :: MyNullString
+blanky = Nada</code></pre>
+<p>Constructors can take multiple parameters:</p>
+<pre data-language="haskell" data-filter="./resources/scripts/check.sh"><code>data SomeJunk = Rubbish String | TrashPile String Int Bool
+
+discards :: SomeJunk
+discards = TrashPile &quot;Junk Yard&quot; 42 True</code></pre>
+<p>Furthermore, ADTs can be recursive:</p>
+<pre data-language="haskell" data-filter="./resources/scripts/check.sh"><code>data MyNumberList = Nada | SomeNumbers Int MyNumberList
+
+numbers :: MyNumberList
+numbers =  SomeNumbers 1 (SomeNumbers 2 Nada)</code></pre>
+<p>Finally, ADTs can be parametrised by other types:</p>
+<pre data-language="haskell" data-filter="./resources/scripts/check.sh"><code>data MyContainer x = Jar x
+
+contained :: MyContainer Int
+contained = Jar 1
+
+pun :: MyContainer (MyContainer String)
+pun = Jar (Jar &quot;Binks&quot;)</code></pre>
+<p>In general, the syntax of an ADT looks similar to the following:</p>
+<pre class="bnf"><code>ADT          := data &lt;TypeName&gt; &lt;Variables&gt; = &lt;Constructors&gt;
+TypeName     := [A-Z] + [a-z&#39;_]*
+Parameters   := &lt;ConcreteType&gt; + (&quot; &quot; + &lt;ConcreteType&gt;)*
+Constructors := &lt;Constructor&gt; + (&quot; | &quot; + &lt;Constructor&gt;)*
+Constructor  := &lt;TypeName&gt; + &lt;Parameters&gt;
+Variables    := &lt;Variable&gt; + (&quot; &quot; + &lt;Variable&gt;)*
+Variable     := [a-z] + [a-z&#39;_]*</code></pre>
+<p>ConcreteType can't be defined syntactically, but it means that your type is &quot;Fully Applied&quot; (in Haskell terms, has a kind of <code>*</code>). An example of some concrete types are:</p>
+<ul>
+<li><code>String</code></li>
+<li><code>Int</code></li>
+<li>Maybe String</li>
+<li>[Int]</li>
+</ul>
+<p>Examples of some non-concrete types are:</p>
+<p>With all of this power at your disposal, it's time to define a list ADT yourself.</p>
+<pre class="instruction"><code>Ex. 3a.1 - Define your own list ADT.</code></pre>
+<p>Things to consider:</p>
+<ul>
+<li>Should this ADT be parametrised?</li>
+<li>Should this ADT be recursive?</li>
+<li>Should this ADT have multiple constructors?</li>
+<li>Should the constructors be parametrised?</li>
+</ul>
+<pre class="answer" data-language="haskell" data-filter="./resources/scripts/check.sh"><code>data MyList a = Empty | Items a (MyList a)</code></pre>
+<pre class="instruction"><code>An open-ended question:
+
+What would the ADT for a LISP-like language look like?</code></pre>
 <hr />
 <p></p>
 <h1 id="opening-exercises">Opening Exercises</h1>
