@@ -1,12 +1,14 @@
-all: dependencies html pdf todo examples
+CHAPTERS := README.md resources/markdown/*.md
+
+all: dependencies html pdf todo unchecked_examples
 
 html: doctor
-	@ cat  resources/html/head.html                    > index.html
-	pandoc --webtex README.md resources/markdown/*.md >> index.html
-	@ cat  resources/html/footer.html                 >> index.html
+	@ cat  resources/html/head.html    > index.html
+	pandoc --webtex $(CHAPTERS)       >> index.html
+	@ cat  resources/html/footer.html >> index.html
 
 pdf:
-	pandoc -V geometry:margin=1.5in README.md resources/markdown/*.md -o workshop.pdf
+	pandoc -V geometry:margin=1.5in $(CHAPTERS) -o workshop.pdf
 
 display: html todo
 	@ ./resources/scripts/chromereload index.html
@@ -19,13 +21,13 @@ devel:
 	| conscript make display
 
 todo:
-	@ grep -ni todo README.md resources/markdown/*.md
+	@ grep -ni todo $(CHAPTERS) | cat
 
 publish:
 	git push origin master:gh-pages
 
 doctor:
-	sed 's/^\\startmode.*//;s/^\\stopmode.*//' README.md resources/markdown/*.md | pandoctor
+	sed 's/^\\startmode.*//;s/^\\stopmode.*//' $(CHAPTERS) | pandoctor
 
 dependencies:
 	mkdir -p dependencies
@@ -41,5 +43,5 @@ dependencies:
 clean:
 	rm -rf dependencies
 
-examples:
-	grep -n 'data-language=haskell' README.md resources/markdown/*.md | grep -v check | cat
+unchecked_examples:
+	grep -n 'data-language=haskell' $(CHAPTERS) | grep -v check | cat

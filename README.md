@@ -4,7 +4,7 @@ Melbourne Haskell Workshop 2013
 # DRAFT COPY
 
 * 6 Hours (Plus Lunch)
-* Maximum attendance - 30 people (Excluding Volunteers)
+* Expected attendance - 50 people
 
 <!-- Trickery to conditionally display the alternate format link -->
 
@@ -32,7 +32,5 @@ It uses a narrative of a physicist attempting to understand how the world works.
 If you are attending the workshop, please attempt to have the required items
 from the ['Resources'](#resources) section available for your use.
 
-
-# TODO: Decide on some followup plans {.todo}
-
 # TODO: Don't use underscores in pattern matching early on {.todo}
+# TODO: Progressive Enhancement {.todo}
