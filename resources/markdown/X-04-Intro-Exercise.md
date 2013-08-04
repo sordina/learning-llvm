@@ -12,7 +12,7 @@ In Haskell you can define a variable with the `=` sign.
 Variables can be defined at the top-level (no-indentation):
 
 ~~~{data-language=haskell data-filter=./resources/scripts/check.sh}
-my_variable = 2
+myVariable = 2
 ~~~
 
 Variable names should start with a lowercase letter and contain no spaces, or special characters, besides underscores, numbers, and `'`.
@@ -25,11 +25,9 @@ Ex. 1.1 - Define your own variable.
 
 You can annotate a definition with a valid type-signature:
 
-# TODO: Decide if we should introduce how to define items in GHCi {.todo}
-
 ~~~{data-language=haskell data-filter=./resources/scripts/check.sh}
-my_variable :: Int
-my_variable = 1
+myVariable2 :: Int
+myVariable2 = 1
 ~~~
 
 ```instruction
@@ -41,8 +39,8 @@ Ex. 1.2 - Give your variable a type-signature.
 String literals look familiar:
 
 ~~~{data-language=haskell data-filter=./resources/scripts/check.sh}
-my_string :: String
-my_string = "hello world"
+myString :: String
+myString = "hello world"
 ~~~
 
 ```instruction
@@ -54,11 +52,11 @@ Ex. 1.3 - Define a variable containing a string.
 Tuples look like this:
 
 ~~~{data-language=haskell data-filter=./resources/scripts/check.sh}
-my_tuple_pair :: (Int, String)
-my_tuple_pair = (1,"hello")
+myTuplePair :: (Int, String)
+myTuplePair = (1,"hello")
 
-my_tuple_trio :: (Int, String, Int)
-my_tuple_trio = (1,"hello",3)
+myTupleTrio :: (Int, String, Int)
+myTupleTrio = (1,"hello",3)
 ~~~
 
 They can be used to group multiple, differently-typed (heterogeneous) values.
@@ -73,8 +71,8 @@ Functions are a core part of Haskell. Function definitions look like this:
 
 
 ~~~{data-language=haskell .nocheck} 
-my_function :: ... -> ...
-my_function x y ... = ...
+myFunction :: ... -> ...
+myFunction x y ... = ...
 ~~~
 
 If a function `f` takes something of type `a` and returns something of type `b` we write the type signature as:
@@ -86,15 +84,15 @@ f :: a -> b
 For example:
 
 ~~~{data-language=haskell data-filter=./resources/scripts/check.sh}
-my_add :: Int -> Int -> Int
-my_add x y = x + y
+myAdd :: Int -> Int -> Int
+myAdd x y = x + y
 ~~~
 
-`my_add` takes two numbers and returns the result of the addition of those two numbers.
+`myAdd` takes two numbers and returns the result of the addition of those two numbers.
 
 
 ```instruction
-Ex. 1.5 - Define a function `my_multiply` that multiplies 3 numbers.
+Ex. 1.5 - Define a function `myMultiply` that multiplies 3 numbers.
 ```
 
 ```instruction
@@ -102,12 +100,9 @@ Ex. 1.6 - Give your function a type-signature
 ```
 
 ~~~{data-language=haskell .answer data-filter=./resources/scripts/check.sh}
-my_multiply :: Int -> Int -> Int -> Int
-my_multiply x y z = x * y * z
+myMultiply :: Int -> Int -> Int -> Int
+myMultiply x y z = x * y * z
 ~~~
-
-# TODO: Decide if variables should include underscores {.todo}
-
 
 ## Lists
 
@@ -211,9 +206,9 @@ myMap f (x:xs) = f x : myMap f xs
 For your reading pleasure, here are some definintions of common functions:
 
 ~~~{data-language=haskell data-filter=./resources/scripts/check.sh}
-myfilter f []     = []
-myfilter f (x:xs) = if f x then x : myfilter f xs
-                           else     myfilter f xs
+myFilter f []     = []
+myFilter f (x:xs) = if f x then x : myFilter f xs
+                           else     myFilter f xs
 
 myFold f z []     = z
 myFold f z (x:xs) = f x (myFold f z xs)
@@ -227,5 +222,3 @@ myElem e (x:xs) = if e == x then True
 ~~~
 
 See if you can find the signatures for these functions.
-
-# TODO: Hide .answers in PDF {.todo}

@@ -156,44 +156,42 @@ using version 1.16.0 of the Cabal library</code></pre>
 <h2 id="variables">Variables</h2>
 <p>In Haskell you can define a variable with the <code>=</code> sign.</p>
 <p>Variables can be defined at the top-level (no-indentation):</p>
-<pre data-language="haskell" data-filter="./resources/scripts/check.sh"><code>my_variable = 2</code></pre>
+<pre data-language="haskell" data-filter="./resources/scripts/check.sh"><code>myVariable = 2</code></pre>
 <p>Variable names should start with a lowercase letter and contain no spaces, or special characters, besides underscores, numbers, and <code>'</code>.</p>
 <pre class="instruction"><code>Ex. 1.1 - Define your own variable.</code></pre>
 <h2 id="type-signatures">Type Signatures</h2>
 <p>You can annotate a definition with a valid type-signature:</p>
-<h1 id="todo-decide-if-we-should-introduce-how-to-define-items-in-ghci" class="todo">TODO: Decide if we should introduce how to define items in GHCi</h1>
-<pre data-language="haskell" data-filter="./resources/scripts/check.sh"><code>my_variable :: Int
-my_variable = 1</code></pre>
+<pre data-language="haskell" data-filter="./resources/scripts/check.sh"><code>myVariable2 :: Int
+myVariable2 = 1</code></pre>
 <pre class="instruction"><code>Ex. 1.2 - Give your variable a type-signature.</code></pre>
 <h2 id="string-literals">String Literals</h2>
 <p>String literals look familiar:</p>
-<pre data-language="haskell" data-filter="./resources/scripts/check.sh"><code>my_string :: String
-my_string = &quot;hello world&quot;</code></pre>
+<pre data-language="haskell" data-filter="./resources/scripts/check.sh"><code>myString :: String
+myString = &quot;hello world&quot;</code></pre>
 <pre class="instruction"><code>Ex. 1.3 - Define a variable containing a string.</code></pre>
 <h2 id="tuples">Tuples</h2>
 <p>Tuples look like this:</p>
-<pre data-language="haskell" data-filter="./resources/scripts/check.sh"><code>my_tuple_pair :: (Int, String)
-my_tuple_pair = (1,&quot;hello&quot;)
+<pre data-language="haskell" data-filter="./resources/scripts/check.sh"><code>myTuplePair :: (Int, String)
+myTuplePair = (1,&quot;hello&quot;)
 
-my_tuple_trio :: (Int, String, Int)
-my_tuple_trio = (1,&quot;hello&quot;,3)</code></pre>
+myTupleTrio :: (Int, String, Int)
+myTupleTrio = (1,&quot;hello&quot;,3)</code></pre>
 <p>They can be used to group multiple, differently-typed (heterogeneous) values.</p>
 <pre class="instruction"><code>Ex. 1.4 - Define a variable containing a tuple.</code></pre>
 <h2 id="functions">Functions</h2>
 <p>Functions are a core part of Haskell. Function definitions look like this:</p>
-<pre class="nocheck" data-language="haskell"><code>my_function :: ... -&gt; ...
-my_function x y ... = ...</code></pre>
+<pre class="nocheck" data-language="haskell"><code>myFunction :: ... -&gt; ...
+myFunction x y ... = ...</code></pre>
 <p>If a function <code>f</code> takes something of type <code>a</code> and returns something of type <code>b</code> we write the type signature as:</p>
 <pre class="nocheck" data-language="haskell"><code>f :: a -&gt; b</code></pre>
 <p>For example:</p>
-<pre data-language="haskell" data-filter="./resources/scripts/check.sh"><code>my_add :: Int -&gt; Int -&gt; Int
-my_add x y = x + y</code></pre>
-<p><code>my_add</code> takes two numbers and returns the result of the addition of those two numbers.</p>
-<pre class="instruction"><code>Ex. 1.5 - Define a function `my_multiply` that multiplies 3 numbers.</code></pre>
+<pre data-language="haskell" data-filter="./resources/scripts/check.sh"><code>myAdd :: Int -&gt; Int -&gt; Int
+myAdd x y = x + y</code></pre>
+<p><code>myAdd</code> takes two numbers and returns the result of the addition of those two numbers.</p>
+<pre class="instruction"><code>Ex. 1.5 - Define a function `myMultiply` that multiplies 3 numbers.</code></pre>
 <pre class="instruction"><code>Ex. 1.6 - Give your function a type-signature</code></pre>
-<pre class="answer" data-language="haskell" data-filter="./resources/scripts/check.sh"><code>my_multiply :: Int -&gt; Int -&gt; Int -&gt; Int
-my_multiply x y z = x * y * z</code></pre>
-<h1 id="todo-decide-if-variables-should-include-underscores" class="todo">TODO: Decide if variables should include underscores</h1>
+<pre class="answer" data-language="haskell" data-filter="./resources/scripts/check.sh"><code>myMultiply :: Int -&gt; Int -&gt; Int -&gt; Int
+myMultiply x y z = x * y * z</code></pre>
 <h2 id="lists">Lists</h2>
 <p>List are a commonly used data-structure in Haskell. Everything in a list has the same type (they are homogeneous).</p>
 <p>Lists are built using the infix data-constructor <code>(:)</code> (pronounced &quot;cons&quot;). They also have a compact notation using <code>[...]</code>.</p>
@@ -244,9 +242,9 @@ myMap f [] = []
 myMap f (x:xs) = f x : myMap f xs</code></pre>
 <h2 id="fun-functions">Fun Functions</h2>
 <p>For your reading pleasure, here are some definintions of common functions:</p>
-<pre data-language="haskell" data-filter="./resources/scripts/check.sh"><code>myfilter f []     = []
-myfilter f (x:xs) = if f x then x : myfilter f xs
-                           else     myfilter f xs
+<pre data-language="haskell" data-filter="./resources/scripts/check.sh"><code>myFilter f []     = []
+myFilter f (x:xs) = if f x then x : myFilter f xs
+                           else     myFilter f xs
 
 myFold f z []     = z
 myFold f z (x:xs) = f x (myFold f z xs)
@@ -258,7 +256,6 @@ myElem e []     = False
 myElem e (x:xs) = if e == x then True
                             else myElem e xs</code></pre>
 <p>See if you can find the signatures for these functions.</p>
-<h1 id="todo-hide-.answers-in-pdf" class="todo">TODO: Hide .answers in PDF</h1>
 <hr />
 <p></p>
 <h1 id="adts-algebraic-data-types">ADTs (Algebraic Data Types)</h1>
@@ -407,21 +404,21 @@ What would the ADT for a LISP-like language look like?</code></pre>
   | Longer Integer Music
   | Higher Integer Music</code></pre>
 <p>Certainly not comprehensive enough to write Beethoven's 5th Symphony, but good enough for Baa Baa Black-Sheep.</p>
-<pre data-language="haskell"><code>intro   = Sequence [ C, C, G, G ]
-run     = Sequence [ A, B, C, A ]
-middle  = Sequence [ F, F, E, E ]
-run2    = Sequence [ D, C, D, E ]
-baa_baa = Sequence [ Longer 2  intro
-                   , Higher 12 run
-                   , Longer 4  G
-                   , Longer 2  middle
-                   , run2
-                   , Longer 4  C ]</code></pre>
+<pre data-language="haskell"><code>intro  = Sequence [ C, C, G, G ]
+run    = Sequence [ A, B, C, A ]
+middle = Sequence [ F, F, E, E ]
+run2   = Sequence [ D, C, D, E ]
+baaBaa = Sequence [ Longer 2  intro
+                  , Higher 12 run
+                  , Longer 4  G
+                  , Longer 2  middle
+                  , run2
+                  , Longer 4  C ]</code></pre>
 <p>In order to listen to this music, create a file with the following code:</p>
 <pre data-language="haskell"><code>import Midi
 import qualified Data.ByteString as BS
 
-main = BS.writeFile &quot;baa_baa.mid&quot; (make_music 4 4 (Longer 4 baa_baa))</code></pre>
+main = BS.writeFile &quot;baaBaa.mid&quot; (make_music 4 4 (Longer 4 baaBaa))</code></pre>
 <p>Your task is to write a melody using this language. Try to write and compose functions, rather than declaring one big data-structure.</p>
 <hr />
 <p></p>
