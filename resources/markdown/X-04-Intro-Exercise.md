@@ -12,7 +12,7 @@ In Haskell you can define a variable with the `=` sign.
 Variables can be defined at the top-level (no-indentation):
 
 ~~~{data-language=haskell data-filter=./resources/scripts/check.sh}
-my_variable = 1
+my_variable = 2
 ~~~
 
 Variable names should start with a lowercase letter and contain no spaces, or special characters, besides underscores, numbers, and `'`.

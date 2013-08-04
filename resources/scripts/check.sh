@@ -8,11 +8,11 @@ previous=`cat /tmp/haskell_workshop_md5_$PANDOCTOR_COUNT`
 
 if [[ "$checksum" = "$previous" ]]
 then
-	echo "Skipping $PANDOCTOR_COUNT"
+	echo "Skipping Example $PANDOCTOR_COUNT"
 	exit 0
 fi
 
-echo "Processing $PANDOCTOR_COUNT"
+echo "Processing Example $PANDOCTOR_COUNT"
 
 echo $checksum > /tmp/haskell_workshop_md5_$PANDOCTOR_COUNT
 
