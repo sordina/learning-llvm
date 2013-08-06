@@ -29,8 +29,11 @@ It uses a narrative of a physicist attempting to understand how the world works.
 
 ### Note:
 
-If you are attending the workshop, please attempt to have the required items
-from the ['Resources'](#resources) section available for your use.
+If you are attending the workshop, make sure that you RSVP via [Meetup](http://www.meetup.com/Melbourne-Functional-User-Group-MFUG/events/132307572/). Please also attempt to have the required items
+from the ['Resources'](#resources) section available for your use during the workshop.
+
+If you would like to volunteer, please subscribe to the [mhw2013](www.reddit.com/r/mhw2013/)
+sub-reddit and list yourself on the wiki.
 
 # TODO: Don't use underscores in pattern matching early on {.todo}
 # TODO: Progressive Enhancement {.todo}

@@ -1,3 +1,5 @@
+#!/bin/sh
+
 cat > /tmp/haskell_workshop_check.hs
 
 touch /tmp/haskell_workshop_md5_$PANDOCTOR_COUNT
@@ -7,7 +9,6 @@ previous=`cat /tmp/haskell_workshop_md5_$PANDOCTOR_COUNT`
 
 if [[ "$checksum" = "$previous" ]]
 then
-	echo "Skipping Example $PANDOCTOR_COUNT"
 	exit 0
 fi
 
