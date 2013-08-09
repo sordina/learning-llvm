@@ -201,7 +201,7 @@ myMap f [] = []
 myMap f (x:xs) = f x : myMap f xs
 ~~~
 
-## Fun Functions
+## Fun List Functions
 
 For your reading pleasure, here are some definintions of common functions:
 
@@ -221,4 +221,4 @@ myElem e (x:xs) = if e == x then True
                             else myElem e xs
 ~~~
 
-See if you can find the signatures for these functions.
+See if you can determine the type-signatures for these functions.

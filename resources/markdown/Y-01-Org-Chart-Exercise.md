@@ -62,13 +62,19 @@ plain-text input format:
 
 ## Employees
 
-------  -------  --------  ---------
- Name    Title    Salary    Manager
-------  -------  --------  ---------
- Dave    Serf     $33K      Dorris
+------  -------  ------  ----------------  -------------------  ------------
+Name    Title    Salary  Department        Managing Department  Subordinates
+------  -------  ------  ----------------  -------------------  ------------
+Dennis  Manager  $33K    Products          Products             11
 
- Tony    Baker    $44K      Devin
-------  -------  --------  ---------
+Dorris  Manager  $42K    Piñatas           HR                   22
+
+Darren  Manager  $34K    Curly Department  Fries                13
+
+Dylan   Manager  $54K    Regulations       Fries                18
+
+Devin   Manager  $64K    Front Desk        BurgerFlipping       23
+------  -------  ------  ----------------  -------------------  ------------
 
 Your function should have the following signature:
 

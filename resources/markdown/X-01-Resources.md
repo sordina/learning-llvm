@@ -93,3 +93,13 @@ sources as varied as academic-journals, and GitHub accounts.
 HLint is a [linting tool](http://en.wikipedia.org/wiki/Lint_(software))
 for Haskell source - It can often provide some
 useful hints about refactoring avenues for your code.
+
+## [Learn You a Haskell (For Great Good)](http://learnyouahaskell.com/)
+
+Learn You a Haskell (For Great Good) is a wonderful introductory text on Haskell.
+
+## [Real World Haskell](http://book.realworldhaskell.org/)
+
+Real World Haskell aims to focus on solving real problems with Haskell. Several
+chapters of the book are somewhat dated in terms of the libraries used, but
+it still serves as a useful example of getting real work done with Haskell.

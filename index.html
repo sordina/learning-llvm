@@ -83,6 +83,10 @@
 <td align="left"><a href="#ecosystem">Ecosystem</a></td>
 <td align="left">Resources and Community</td>
 </tr>
+<tr class="odd">
+<td align="left"><a href="#appendix">Appendix</a></td>
+<td align="left">Appendix</td>
+</tr>
 </tbody>
 </table>
 <hr />
@@ -116,6 +120,10 @@
 <p>Haskell News is a firehose-style haskell news aggregator taking information from sources as varied as academic-journals, and GitHub accounts.</p>
 <h2 id="hlint"><a href="http://hackage.haskell.org/package/hlint">HLint</a></h2>
 <p>HLint is a <a href="http://en.wikipedia.org/wiki/Lint_(software)">linting tool</a> for Haskell source - It can often provide some useful hints about refactoring avenues for your code.</p>
+<h2 id="learn-you-a-haskell-for-great-good"><a href="http://learnyouahaskell.com/">Learn You a Haskell (For Great Good)</a></h2>
+<p>Learn You a Haskell (For Great Good) is a wonderful introductory text on Haskell.</p>
+<h2 id="real-world-haskell"><a href="http://book.realworldhaskell.org/">Real World Haskell</a></h2>
+<p>Real World Haskell aims to focus on solving real problems with Haskell. Several chapters of the book are somewhat dated in terms of the libraries used, but it still serves as a useful example of getting real work done with Haskell.</p>
 <hr />
 <p></p>
 <h1 id="introduction">Introduction</h1>
@@ -241,7 +249,7 @@ and returns a list of bs &quot;[b]&quot;.</code></pre>
 <pre class="answer" data-language="haskell" data-filter="./resources/scripts/check.sh"><code>myMap :: (a -&gt; b) -&gt; [a] -&gt; [b]
 myMap f [] = []
 myMap f (x:xs) = f x : myMap f xs</code></pre>
-<h2 id="fun-functions">Fun Functions</h2>
+<h2 id="fun-list-functions">Fun List Functions</h2>
 <p>For your reading pleasure, here are some definintions of common functions:</p>
 <pre data-language="haskell" data-filter="./resources/scripts/check.sh"><code>myFilter f []     = []
 myFilter f (x:xs) = if f x then x : myFilter f xs
@@ -256,7 +264,7 @@ myReverse (x:xs) = myReverse xs ++ [x]
 myElem e []     = False
 myElem e (x:xs) = if e == x then True
                             else myElem e xs</code></pre>
-<p>See if you can find the signatures for these functions.</p>
+<p>See if you can determine the type-signatures for these functions.</p>
 <hr />
 <p></p>
 <h1 id="adts-algebraic-data-types">ADTs (Algebraic Data Types)</h1>
@@ -273,8 +281,7 @@ myElem e (x:xs) = if e == x then True
 </ul>
 <p>But how does that help me?</p>
 <div class="note">
-<p>Note:</p>
-<p>If you wish to learn about why ADTs are &quot;Algebraic&quot;, then have a look at</p>
+<p>If you wish to learn about why ADTs are &quot;Algebraic&quot;, then have a look at:</p>
 <ul>
 <li><a href="http://chris-taylor.github.io/blog/2013/02/10/the-algebra-of-algebraic-data-types/">The Algebra of Algebraic Data Types, Part 1</a></li>
 <li><a href="http://chris-taylor.github.io/blog/2013/02/11/the-algebra-of-algebraic-data-types-part-ii/">The Algebra of Algebraic Data Types, Part 2</a></li>
@@ -282,12 +289,12 @@ myElem e (x:xs) = if e == x then True
 </div>
 </li>
 </ul>
-<p>Some examples of ADTs in Haskell:</p>
+<p>An example of an ADTs in Haskell:</p>
 <pre data-language="haskell" data-filter="./resources/scripts/check.sh"><code>data MyBool = MyTrue | MyFalse
 
 should_I_eat_something_bigger_than_my_own_head :: MyBool
 should_I_eat_something_bigger_than_my_own_head = MyFalse</code></pre>
-<p>You can also add parameters to the data constructors:</p>
+<p>You can add parameters to the data constructors:</p>
 <pre data-language="haskell" data-filter="./resources/scripts/check.sh"><code>data MyNullString = Nada | MyString String
 
 stringy :: MyNullString
@@ -325,8 +332,8 @@ Variable     := [a-z] + [a-z&#39;_]*</code></pre>
 <ul>
 <li><code>String</code></li>
 <li><code>Int</code></li>
-<li>Maybe String</li>
-<li>[Int]</li>
+<li><code>Maybe String</code></li>
+<li><code>[Int]</code></li>
 </ul>
 <p>Examples of some non-concrete types are:</p>
 <p>With all of this power at your disposal, it's time to define a list ADT yourself.</p>
@@ -356,30 +363,62 @@ What would the ADT for a LISP-like language look like?</code></pre>
 <p>Construct a function that builds up your datastructure from the following plain-text input format:</p>
 <h2 id="employees">Employees</h2>
 <table>
+<col width="10%" />
 <col width="11%" />
-<col width="12%" />
-<col width="13%" />
-<col width="13%" />
+<col width="10%" />
+<col width="23%" />
+<col width="27%" />
+<col width="15%" />
 <thead>
 <tr class="header">
-<th align="center">Name</th>
-<th align="center">Title</th>
-<th align="center">Salary</th>
-<th align="center">Manager</th>
+<th align="left">Name</th>
+<th align="left">Title</th>
+<th align="left">Salary</th>
+<th align="left">Department</th>
+<th align="left">Managing Department</th>
+<th align="left">Subordinates</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="center">Dave</td>
-<td align="center">Serf</td>
-<td align="center">$33K</td>
-<td align="center">Dorris</td>
+<td align="left">Dennis</td>
+<td align="left">Manager</td>
+<td align="left">$33K</td>
+<td align="left">Products</td>
+<td align="left">Products</td>
+<td align="left">11</td>
 </tr>
 <tr class="even">
-<td align="center">Tony</td>
-<td align="center">Baker</td>
-<td align="center">$44K</td>
-<td align="center">Devin</td>
+<td align="left">Dorris</td>
+<td align="left">Manager</td>
+<td align="left">$42K</td>
+<td align="left">Piñatas</td>
+<td align="left">HR</td>
+<td align="left">22</td>
+</tr>
+<tr class="odd">
+<td align="left">Darren</td>
+<td align="left">Manager</td>
+<td align="left">$34K</td>
+<td align="left">Curly Department</td>
+<td align="left">Fries</td>
+<td align="left">13</td>
+</tr>
+<tr class="even">
+<td align="left">Dylan</td>
+<td align="left">Manager</td>
+<td align="left">$54K</td>
+<td align="left">Regulations</td>
+<td align="left">Fries</td>
+<td align="left">18</td>
+</tr>
+<tr class="odd">
+<td align="left">Devin</td>
+<td align="left">Manager</td>
+<td align="left">$64K</td>
+<td align="left">Front Desk</td>
+<td align="left">BurgerFlipping</td>
+<td align="left">23</td>
 </tr>
 </tbody>
 </table>
@@ -444,7 +483,10 @@ differentiate = ...</code></pre>
 <hr />
 <p></p>
 <h1 id="appendix">Appendix</h1>
-<p><a href="http://stackoverflow.com/questions/17870864/where-is-huttons-razor-first-defined">Hutton's Razor</a></p>
+<ul>
+<li><a href="http://stackoverflow.com/questions/17870864/where-is-huttons-razor-first-defined">Hutton's Razor</a></li>
+<li><a href="http://research.microsoft.com/en-us/um/people/simonpj/papers/pj-lester-book/">Implementing Functional Languages: A Tutorial</a></li>
+</ul>
 			<hr>
 			<p class="center footer"> Produced with <a href="http://johnmacfarlane.net/pandoc/">Pandoc</a> </p>
 		</div>

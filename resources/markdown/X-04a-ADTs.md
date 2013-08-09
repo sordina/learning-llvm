@@ -20,16 +20,14 @@ Algebraic Data Types are THE bread and butter of Haskell programs.
 But how does that help me?
 
 <div class="note">
-Note:
-
-If you wish to learn about why ADTs are "Algebraic", then have a look at
+If you wish to learn about why ADTs are "Algebraic", then have a look at:
 
 * [The Algebra of Algebraic Data Types, Part 1](http://chris-taylor.github.io/blog/2013/02/10/the-algebra-of-algebraic-data-types/)
 * [The Algebra of Algebraic Data Types, Part 2](http://chris-taylor.github.io/blog/2013/02/11/the-algebra-of-algebraic-data-types-part-ii/)
 * [The Algebra of Algebraic Data Types, Part 3](http://chris-taylor.github.io/blog/2013/02/13/the-algebra-of-algebraic-data-types-part-iii/)
 </div>
 
-Some examples of ADTs in Haskell:
+An example of an ADT in Haskell:
 
 ~~~{data-language=haskell data-filter=./resources/scripts/check.sh}
 data MyBool = MyTrue | MyFalse
@@ -38,7 +36,7 @@ should_I_eat_something_bigger_than_my_own_head :: MyBool
 should_I_eat_something_bigger_than_my_own_head = MyFalse
 ~~~
 
-You can also add parameters to the data constructors:
+You can add parameters to the data constructors:
 
 ~~~{data-language=haskell data-filter=./resources/scripts/check.sh}
 data MyNullString = Nada | MyString String
@@ -98,8 +96,8 @@ are:
 
 * `String`
 * `Int`
-* Maybe String
-* [Int]
+* `Maybe String`
+* `[Int]`
 
 Examples of some non-concrete types are:
 

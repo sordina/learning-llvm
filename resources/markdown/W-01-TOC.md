@@ -15,4 +15,5 @@
 [Wildcard](#wildcard)                       Music
 [Monads](#monads)                           DSLs, IO, Do-Notation
 [Ecosystem](#ecosystem)                     Resources and Community
+[Appendix](#appendix)                       Appendix
 ------------------------------------------  ----------------------------------
