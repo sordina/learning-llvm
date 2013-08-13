@@ -5,6 +5,58 @@
 
 # Opening Exercises
 
+## Loading files in GHCi
+
+There are many ways to load and execute Haskell code. For the purposes of this workshop,
+if you do not already have a workflow you are comfortable with, then we suggest the
+following steps:
+
+* Write and edit your programs in files ending in the extension ".hs"
+* When you are ready to test your program, load it into GHCi
+* After making modifications to your program, reload the program in GHCi
+
+Say you had written the following program `test.hs` in your home directory:
+
+~~~{data-language=haskell data-filter=./resources/scripts/check.sh}
+main = print "hello world"
+~~~
+
+Load the file in GHCi to see it in action:
+
+```shell
+lyndon@endpin ~ ghci test.hs
+GHCi, version 7.6.2: http://www.haskell.org/ghc/  :? for help
+Loading package ghc-prim ... linking ... done.
+Loading package integer-gmp ... linking ... done.
+Loading package base ... linking ... done.
+[1 of 1] Compiling Main             ( test.hs, interpreted )
+Ok, modules loaded: Main.
+[*Main] > main
+"hello world"
+```
+
+Wow! Interactive IO in the first exercise!
+
+
+... Unfortunately there is a bug in the program, so in your editor you
+make the change required to print "hello, world" with the mandated comma:
+
+~~~{data-language=haskell data-filter=./resources/scripts/check.sh}
+main = print "hello, world"
+~~~
+
+Now, back in GHCi, you can reload the program without exiting the REPL:
+
+```shell
+[*Main] > :reload
+[1 of 1] Compiling Main             ( test.hs, interpreted )
+Ok, modules loaded: Main.
+[*Main] > main
+"hello, world"
+```
+
+Much better!
+
 ## Variables
 
 In Haskell you can define a variable with the `=` sign.

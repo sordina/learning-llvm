@@ -23,21 +23,24 @@
     document.write("<h3 class='center'><a href='workshop.pdf'>(PDF)</a></h3>")
 </script>
 
-<hr>
-
+<hr />
 <p>A 6-hour workshop intended to introduce and provide resources for working with Haskell.</p>
 <!-- http://upload.wikimedia.org/wikipedia/commons/0/0c/Potter's_workshop_VA.jpg -->
 <div class="center"> 
 <img src="resources/images/workshop.png" alt="Workshop" />
 </div>
 
-<p>This workshop is based around a central concept of domain modeling with Haskell. It uses a narrative of a physicist attempting to understand how the world works.</p>
-<h1 id="todo-double-check-these-items" class="todo">TODO: double check these items</h1>
-<h3 id="note">Note:</h3>
+<p>This workshop is based around a central concept of domain modeling with Haskell.</p>
+<p>Outcomes include...</p>
+<ul>
+<li>Creating, editing, running and interacting with Haskell programs</li>
+<li>Building the confidence to solve problems in the wild with Haskell</li>
+<li>Developing an understanding of the Haskell ecosystem</li>
+<li>Interacting with others in a collaborative environment</li>
+</ul>
+<h2 id="note">Note:</h2>
 <p>If you are attending the workshop, make sure that you RSVP via <a href="http://www.meetup.com/Melbourne-Functional-User-Group-MFUG/events/132307572/">Meetup</a>. Please also attempt to have the required items from the <a href="#resources">'Resources'</a> section available for your use during the workshop.</p>
 <p>If you would like to volunteer, please subscribe to the <a href="www.reddit.com/r/mhw2013/">mhw2013</a> sub-reddit and list yourself on the wiki.</p>
-<h1 id="todo-dont-use-underscores-in-pattern-matching-early-on" class="todo">TODO: Don't use underscores in pattern matching early on</h1>
-<h1 id="todo-progressive-enhancement" class="todo">TODO: Progressive Enhancement</h1>
 <hr />
 <p></p>
 <h1 id="table-of-contents">Table of Contents</h1>
@@ -129,6 +132,8 @@
 <h1 id="introduction">Introduction</h1>
 <p>Welcome to the Melbourne Haskell Workshop 2013.</p>
 <p>This intent of this workshop is to provide a working introduction to Haskell for programmers in Melbourne who have not yet used the language in anger.</p>
+<p>The workshop is split into &quot;Chapters&quot; - each lasting an hour. Chapters will start with a few trivial introductory exercises to get your fingers warmed up, then the meat - an exercise that should be able to be solved using the material introduced up to that point, but with help and hints available if needed.</p>
+<p>Each chapter will conclude with an open-question. This question should provide inspiration for further consideration of how harder problems could be solved using Haskell, and for more advanced atendees, can be attacked instead of twiddeling your thumbs after finishing the main exercise.</p>
 <hr />
 <p></p>
 <h1 id="setup">Setup</h1>
@@ -159,9 +164,55 @@
 <p>This should output something similar to:</p>
 <pre class="text"><code>cabal-install version 1.16.0.2
 using version 1.16.0 of the Cabal library</code></pre>
+<pre class="real"><code>You can use GHCi to perform calculations other than just &quot;1 + 1&quot;.
+
+Here is an example session:
+
+lyndon@endpin ~ ghci
+GHCi, version 7.6.2: http://www.haskell.org/ghc/  :? for help
+Loading package ghc-prim ... linking ... done.
+Loading package integer-gmp ... linking ... done.
+Loading package base ... linking ... done.
+[Prelude] &gt; 1 + 2 + 3
+6
+[Prelude] &gt; 100 / 2
+50.0
+[Prelude] &gt; 6 ^ 7
+279936
+[Prelude] &gt; ^D
+Leaving GHCi.</code></pre>
 <hr />
 <p></p>
 <h1 id="opening-exercises">Opening Exercises</h1>
+<h2 id="loading-files-in-ghci">Loading files in GHCi</h2>
+<p>There are many ways to load and execute Haskell code. For the purposes of this workshop, if you do not already have a workflow you are comfortable with, then we suggest the following steps:</p>
+<ul>
+<li>Write and edit your programs in files ending in the extension &quot;.hs&quot;</li>
+<li>When you are ready to test your program, load it into GHCi</li>
+<li>After making modifications to your program, reload the program in GHCi</li>
+</ul>
+<p>Say you had written the following program <code>test.hs</code> in your home directory:</p>
+<pre data-language="haskell" data-filter="./resources/scripts/check.sh"><code>main = print &quot;hello world&quot;</code></pre>
+<p>Load the file in GHCi to see it in action:</p>
+<pre class="shell"><code>lyndon@endpin ~ ghci test.hs
+GHCi, version 7.6.2: http://www.haskell.org/ghc/  :? for help
+Loading package ghc-prim ... linking ... done.
+Loading package integer-gmp ... linking ... done.
+Loading package base ... linking ... done.
+[1 of 1] Compiling Main             ( test.hs, interpreted )
+Ok, modules loaded: Main.
+[*Main] &gt; main
+&quot;hello world&quot;</code></pre>
+<p>Wow! Interactive IO in the first exercise!</p>
+<p>... Unfortunately there is a bug in the program, so in your editor you make the change required to print &quot;hello, world&quot; with the mandated comma:</p>
+<pre data-language="haskell" data-filter="./resources/scripts/check.sh"><code>main = print &quot;hello, world&quot;</code></pre>
+<p>Now, back in GHCi, you can reload the program without exiting the REPL:</p>
+<pre class="shell"><code>[*Main] &gt; :reload
+[1 of 1] Compiling Main             ( test.hs, interpreted )
+Ok, modules loaded: Main.
+[*Main] &gt; main
+&quot;hello, world&quot;</code></pre>
+<p>Much better!</p>
 <h2 id="variables">Variables</h2>
 <p>In Haskell you can define a variable with the <code>=</code> sign.</p>
 <p>Variables can be defined at the top-level (no-indentation):</p>
@@ -289,7 +340,7 @@ myElem e (x:xs) = if e == x then True
 </div>
 </li>
 </ul>
-<p>An example of an ADTs in Haskell:</p>
+<p>An example of an ADT in Haskell:</p>
 <pre data-language="haskell" data-filter="./resources/scripts/check.sh"><code>data MyBool = MyTrue | MyFalse
 
 should_I_eat_something_bigger_than_my_own_head :: MyBool

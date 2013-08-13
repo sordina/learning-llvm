@@ -15,7 +15,7 @@ Melbourne Haskell Workshop 2013
 	document.write("<h3 class='center'><a href='workshop.pdf'>(PDF)</a></h3>")
 </script>
 
-<hr>
+----
 
 A 6-hour workshop intended to introduce and provide resources for working with Haskell.
 
@@ -23,17 +23,20 @@ A 6-hour workshop intended to introduce and provide resources for working with H
 <div class="center"> ![Workshop](resources/images/workshop.png) </div>
 
 This workshop is based around a central concept of domain modeling with Haskell.
-It uses a narrative of a physicist attempting to understand how the world works.
 
-# TODO: double check these items {.todo}
+Outcomes include...
 
-### Note:
+* Creating, editing, running and interacting with Haskell programs
+* Building the confidence to solve problems in the wild with Haskell
+* Developing an understanding of the Haskell ecosystem
+* Interacting with others in a collaborative environment
 
-If you are attending the workshop, make sure that you RSVP via [Meetup](http://www.meetup.com/Melbourne-Functional-User-Group-MFUG/events/132307572/). Please also attempt to have the required items
+## Note:
+
+If you are attending the workshop, make sure that you RSVP via
+[Meetup](http://www.meetup.com/Melbourne-Functional-User-Group-MFUG/events/132307572/).
+Please also attempt to have the required items
 from the ['Resources'](#resources) section available for your use during the workshop.
 
 If you would like to volunteer, please subscribe to the [mhw2013](www.reddit.com/r/mhw2013/)
 sub-reddit and list yourself on the wiki.
-
-# TODO: Don't use underscores in pattern matching early on {.todo}
-# TODO: Progressive Enhancement {.todo}

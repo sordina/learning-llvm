@@ -72,3 +72,16 @@ p code {
 	margin: 2em;
 	background: #efefef;
 }
+
+.real:before {
+	content: "Getting Stuff Done!!!";
+	display: block;
+	font-size: 200%;
+	margin-bottom: 1em;
+	text-align: center;
+}
+
+.real {
+	border: 3px solid green;
+	background: #afa;
+}
