@@ -1,3 +1,5 @@
+
+
 Melbourne Haskell Workshop 2013
 ===============================
 
@@ -10,24 +12,29 @@ Melbourne Haskell Workshop 2013
 
 ### [(HTML)](http://sordina.github.io/haskell_workshop/) {.center #html-link}
 
+<div class="important">
+
 <script type="text/javascript">
 	document.getElementById('html-link').remove()
 	document.write("<h3 class='center'><a href='workshop.pdf'>(PDF)</a></h3>")
 </script>
 
 \startmode[html]
-~~~ {.note .collapse}
+~~~{.note .notitle}
 Press...
 
-"c" - To hide unimportant sections
 "x" - To show only the most important content
 "o" - To expand the content out again
 ~~~
 \stopmode
 
-----
+</div>
 
+-----
+
+<div class="center important">
 A 6-hour workshop intended to introduce and provide resources for working with Haskell.
+</div>
 
 <!-- http://upload.wikimedia.org/wikipedia/commons/0/0c/Potter's_workshop_VA.jpg -->
 <div class="center"> ![Workshop](resources/images/workshop.png) </div>
@@ -42,8 +49,7 @@ Outcomes include...
 * Interacting with others in a collaborative environment
 
 \startmode[html]
-## Note:
-
+<div class="important note">
 If you are attending the workshop, make sure that you RSVP via
 [Meetup](http://www.meetup.com/Melbourne-Functional-User-Group-MFUG/events/132307572/).
 Please also attempt to have the required items
@@ -51,4 +57,5 @@ from the ['Resources'](#resources) section available for your use during the wor
 
 If you would like to volunteer, please subscribe to the [mhw2013](www.reddit.com/r/mhw2013/)
 sub-reddit and list yourself on the wiki.
+</div>
 \stopmode

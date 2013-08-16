@@ -1,8 +1,6 @@
 
 ----
 
-\pagebreak
-
 # Exercise - Symbolic Differentiation
 
 Your Highschool math teacher has decided to introduce differentiation of single-variable polynomials...

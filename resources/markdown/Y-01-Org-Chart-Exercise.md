@@ -1,8 +1,6 @@
 
 ----
 
-\pagebreak
-
 Exercise - Org Chart
 ====================
 

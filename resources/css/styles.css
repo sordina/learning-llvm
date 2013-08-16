@@ -82,6 +82,10 @@ p code {
 	content: "Note:";
 }
 
+#content .notitle:before {
+	display: none;
+}
+
 .note:before, .real:before {
 	display: block;
 	font-size: 200%;
@@ -93,14 +97,10 @@ p code {
 	background: #afa;
 }
 
-body.small .collapse {
-	display: none;
-}
-
-body.compact #content > * {
-	display: none;
-}
-
-h1, .important {
-	display: block !important;
-}
+/* Collapsing Rules */
+body.small .collapse             { display: none;  }
+body.small #content > *          { display: none;  }
+body.small #content > h1         { display: block; }
+body.small #content > hr         { display: block; }
+body.small #content > .important { display: block; }
+body.small #content > .collapse  { display: none;  }

@@ -8,7 +8,7 @@ html:
 	@ cat  resources/html/footer.html                                    >> index.html
 
 pdf:
-	pandoc -V geometry:margin=1.5in $(CHAPTERS) -o workshop.pdf
+	sed 's/^----$$/\\pagebreak/' $(CHAPTERS) | pandoc -V geometry:margin=1.5in -o workshop.pdf
 
 display: html todo
 	@ ./resources/scripts/chromereload index.html

@@ -1,8 +1,8 @@
 ----
 
-\pagebreak
-
 # Table of Contents
+
+<div class="important">
 
 ------------------------------------------  ----------------------------------
 [Readme](#melbourne-haskell-workshop-2013)  Read this First
@@ -17,3 +17,5 @@
 [Ecosystem](#ecosystem)                     Resources and Community
 [Appendix](#appendix)                       Appendix
 ------------------------------------------  ----------------------------------
+
+</div>

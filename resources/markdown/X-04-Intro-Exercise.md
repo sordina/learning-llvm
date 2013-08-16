@@ -1,8 +1,6 @@
 
 ----
 
-\pagebreak
-
 # Opening Exercises
 
 ## Loading files in GHCi

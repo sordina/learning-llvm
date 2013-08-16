@@ -1,14 +1,12 @@
 
 ----
 
-\pagebreak
-
 Required Resources
 ==================
 
 Before you begin you will require the following...
 
-## A Text-Editor
+## A Text-Editor {.important}
 
 We are assuming previous programming experience, however, if you would like a
 recommendation, have a look at
@@ -18,14 +16,14 @@ recommendation, have a look at
 [Vim](http://www.vim.org/). Just make sure that you are fluent enough to embark
 on exercises as they appear in the workshop.
 
-## [The Haskell Platform](http://www.haskell.org/platform/)
+## [The Haskell Platform](http://www.haskell.org/platform/) {.important}
 
 In order to run the programs written during this workshop you will need a Haskell
 installation. The easiest way to get up and running is to install the latest
 Haskell Platform. This is a "batteries included" installation of GHC and Cabal
 that includes many of the most useful packages available in the Hackage ecosystem.
 
-## [A Copy of the Workshop Scaffold Project](https://github.com/sordina/haskell_workshop)
+## [A Copy of the Workshop Scaffold Project](https://github.com/sordina/haskell_workshop) {.important}
 
 <https://github.com/sordina/haskell_workshop>
 
@@ -39,7 +37,7 @@ git clone https://github.com/sordina/haskell_workshop.git
 
 
 
-Useful Resources
+Useful Resources {.collapse}
 ================
 
 These resources are available to help you with any issues you face when learning Haskell:

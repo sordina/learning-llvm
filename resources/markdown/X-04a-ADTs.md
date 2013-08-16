@@ -1,8 +1,6 @@
 
 ----
 
-\pagebreak
-
 ADTs (Algebraic Data Types)
 ===========================
 
