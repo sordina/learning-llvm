@@ -6,6 +6,7 @@ for(var i = 0; i < answers.length; i++) {
 	var expander = document.createElement("a");
 	var para     = document.createElement("p");
 
+	para.className = "reveal"
 	para.appendChild(expander)
 
 	expander.href = "#";

@@ -29,7 +29,11 @@ pre.hidden {
 	display:none;
 }
 
-pre.instruction {
+pre.instruction:before {
+	content: "Exercise - ";
+}
+
+pre.instruction, pre.open {
 	background: #fff;
 	border: 1px solid black;
 	color: black;
@@ -98,9 +102,12 @@ p code {
 }
 
 /* Collapsing Rules */
-body.small .collapse             { display: none;  }
-body.small #content > *          { display: none;  }
-body.small #content > h1         { display: block; }
-body.small #content > hr         { display: block; }
-body.small #content > .important { display: block; }
-body.small #content > .collapse  { display: none;  }
+body.small .collapse               { display: none;  }
+body.small #content > *            { display: none;  }
+body.small #content > h1           { display: block; }
+body.small #content > hr           { display: block; }
+body.small #content > .important   { display: block; }
+body.small #content > .instruction { display: block; }
+body.small #content > .open        { display: block; }
+body.small #content > .reveal      { display: block; }
+body.small #content > .collapse    { display: none;  }

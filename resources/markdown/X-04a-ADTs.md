@@ -115,7 +115,7 @@ With all of this power at your disposal, it's time to define a list ADT yourself
 </div>
 
 ```instruction
-Ex. 3a.1 - Define your own list ADT.
+Define your own list ADT.
 ```
 
 Things to consider:
@@ -129,7 +129,7 @@ Things to consider:
 data MyList a = Empty | Items a (MyList a)
 ~~~
 
-```instruction
+```open
 An open-ended question:
 
 What would the ADT for a LISP-like language look like?

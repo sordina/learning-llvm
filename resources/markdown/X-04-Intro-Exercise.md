@@ -3,57 +3,13 @@
 
 # Opening Exercises
 
-## Loading files in GHCi
+<div class="important">
 
-There are many ways to load and execute Haskell code. For the purposes of this workshop,
-if you do not already have a workflow you are comfortable with, then we suggest the
-following steps:
+The following exercises are intended to be used to warm up your fingers, rather than
+your brain. These should be run through quickly to get you used to using your
+development environment.
 
-* Write and edit your programs in files ending in the extension ".hs"
-* When you are ready to test your program, load it into GHCi
-* After making modifications to your program, reload the program in GHCi
-
-Say you had written the following program `test.hs` in your home directory:
-
-~~~{data-language=haskell data-filter=./resources/scripts/check.sh}
-main = print "hello world"
-~~~
-
-Load the file in GHCi to see it in action:
-
-```shell
-lyndon@endpin ~ ghci test.hs
-GHCi, version 7.6.2: http://www.haskell.org/ghc/  :? for help
-Loading package ghc-prim ... linking ... done.
-Loading package integer-gmp ... linking ... done.
-Loading package base ... linking ... done.
-[1 of 1] Compiling Main             ( test.hs, interpreted )
-Ok, modules loaded: Main.
-[*Main] > main
-"hello world"
-```
-
-Wow! Interactive IO in the first exercise!
-
-
-... Unfortunately there is a bug in the program, so in your editor you
-make the change required to print "hello, world" with the mandated comma:
-
-~~~{data-language=haskell data-filter=./resources/scripts/check.sh}
-main = print "hello, world"
-~~~
-
-Now, back in GHCi, you can reload the program without exiting the REPL:
-
-```shell
-[*Main] > :reload
-[1 of 1] Compiling Main             ( test.hs, interpreted )
-Ok, modules loaded: Main.
-[*Main] > main
-"hello, world"
-```
-
-Much better!
+</div>
 
 ## Variables
 
@@ -68,7 +24,7 @@ myVariable = 2
 Variable names should start with a lowercase letter and contain no spaces, or special characters, besides underscores, numbers, and `'`.
 
 ```instruction
-Ex. 1.1 - Define your own variable.
+Define your own variable.
 ```
 
 ## Type Signatures
@@ -81,7 +37,7 @@ myVariable2 = 1
 ~~~
 
 ```instruction
-Ex. 1.2 - Give your variable a type-signature.
+Give your variable a type-signature.
 ```
 
 ## String Literals
@@ -94,7 +50,7 @@ myString = "hello world"
 ~~~
 
 ```instruction
-Ex. 1.3 - Define a variable containing a string.
+Define a variable containing a string.
 ```
 
 ## Tuples
@@ -112,7 +68,7 @@ myTupleTrio = (1,"hello",3)
 They can be used to group multiple, differently-typed (heterogeneous) values.
 
 ```instruction
-Ex. 1.4 - Define a variable containing a tuple.
+Define a variable containing a tuple.
 ```
 
 ## Functions
@@ -142,11 +98,11 @@ myAdd x y = x + y
 
 
 ```instruction
-Ex. 1.5 - Define a function `myMultiply` that multiplies 3 numbers.
+Define a function `myMultiply` that multiplies 3 numbers.
 ```
 
 ```instruction
-Ex. 1.6 - Give your function a type-signature
+Give your function a type-signature
 ```
 
 ~~~{data-language=haskell .answer data-filter=./resources/scripts/check.sh}
@@ -173,11 +129,11 @@ list3 = "hello" : "world" : []
 ~~~
 
 ```instruction
-Ex. 1.7 - Define a variable containing a list.
+Define a variable containing a list.
 ```
 
 ```instruction
-Ex. 1.8 - Give your variable a type-signature.
+Give your variable a type-signature.
 ```
 
 You can deconstruct a list by pattern matching the head and tail like so:
@@ -187,7 +143,7 @@ f (x:xs) = ...
 ~~~
 
 ```instruction
-Ex. 1.9 - Define a function to get the first element of a list.
+Define a function to get the first element of a list.
 ```
 
 Note: In `Prelude` this function is called `head`.
@@ -197,7 +153,7 @@ myHead (x:xs) = x -- This is a partial function, Beware!
 ~~~
 
 ```instruction
-Ex. 1.10 - Define a variable containing the first element of your list.
+Define a variable containing the first element of your list.
 ```
 
 ~~~{.answer data-language=haskell .nocheck} 
@@ -206,9 +162,12 @@ myFirstElement = myHead myList
 
 ### Define Length
 
-Define a function that takes a list and returns the length. In Haskell type-signature syntax, this is written as:
+```instruction
+Define a function that takes a list and returns the length.
+```
 
 ~~~{data-language=haskell data-filter=./resources/scripts/check.sh}
+-- In Haskell type-signature syntax, this is written as:
 myLength :: [a] -> Int
 myLength = undefined
 ~~~
@@ -233,11 +192,10 @@ mylength (x:xs) = 1 + mylength xs
 ### Define `myMap`
 
 ```instruction
-Ex. 1.11 -
 
+  
 Define a function that takes a function from a to b "a -> b",
-and a list of as "[a]",
-and returns a list of bs "[b]".
+and a list of as "[a]", and returns a list of bs "[b]".
 ```
 
 Things to consider:
@@ -272,3 +230,10 @@ myElem e (x:xs) = if e == x then True
 ~~~
 
 See if you can determine the type-signatures for these functions.
+
+```open
+An open-ended question:
+
+What is a good balance between safety and expressiveness in a
+programming-language?
+```
