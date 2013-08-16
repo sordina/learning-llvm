@@ -15,6 +15,7 @@ Melbourne Haskell Workshop 2013
 	document.write("<h3 class='center'><a href='workshop.pdf'>(PDF)</a></h3>")
 </script>
 
+\startmode[html]
 ~~~ {.note .collapse}
 Press...
 
@@ -22,6 +23,7 @@ Press...
 "x" - To show only the most important content
 "o" - To expand the content out again
 ~~~
+\stopmode
 
 ----
 
@@ -39,6 +41,7 @@ Outcomes include...
 * Developing an understanding of the Haskell ecosystem
 * Interacting with others in a collaborative environment
 
+\startmode[html]
 ## Note:
 
 If you are attending the workshop, make sure that you RSVP via
@@ -48,3 +51,4 @@ from the ['Resources'](#resources) section available for your use during the wor
 
 If you would like to volunteer, please subscribe to the [mhw2013](www.reddit.com/r/mhw2013/)
 sub-reddit and list yourself on the wiki.
+\stopmode
