@@ -4,7 +4,7 @@ all: dependencies html pdf todo unchecked_examples
 
 html: doctor
 	@ cat  resources/html/head.html    > index.html
-	pandoc --webtex $(CHAPTERS)       >> index.html
+	@ pandoc --webtex $(CHAPTERS)       >> index.html
 	@ cat  resources/html/footer.html >> index.html
 
 pdf:
@@ -27,7 +27,7 @@ publish:
 	git push origin master:gh-pages
 
 doctor:
-	sed 's/^\\startmode.*//;s/^\\stopmode.*//' $(CHAPTERS) | pandoctor
+	@ sed 's/^\\startmode.*//;s/^\\stopmode.*//' $(CHAPTERS) | pandoctor
 
 dependencies:
 	mkdir -p dependencies

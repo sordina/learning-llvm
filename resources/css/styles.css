@@ -74,14 +74,25 @@ p code {
 }
 
 .real:before {
-	content: "Getting Stuff Done!!!";
+	content: "Getting Stuff Done!";
+	text-align: center;
+}
+
+.note:before {
+	content: "Note:";
+}
+
+.note:before, .real:before {
 	display: block;
 	font-size: 200%;
 	margin-bottom: 1em;
-	text-align: center;
 }
 
 .real {
 	border: 3px solid green;
 	background: #afa;
+}
+
+body.small .collapse {
+	display: none;
 }
