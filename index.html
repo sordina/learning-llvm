@@ -6,7 +6,7 @@
 		<link href="resources/css/styles.css" rel="stylesheet" type="text/css">
 		<link href="resources/css/solarized-light.css" rel="stylesheet" type="text/css">
 	</head>
-	<body class="">
+	<body class="small">
 		<div id="content">
 
 <h1 id="melbourne-haskell-workshop-2013">Melbourne Haskell Workshop 2013</h1>
@@ -98,14 +98,18 @@ If you would like to volunteer, please subscribe to the <a href="www.reddit.com/
 <td align="left">Testing with QuickCheck</td>
 </tr>
 <tr class="even">
+<td align="left"><a href="#exercise---org-chart">Org-Chart</a></td>
+<td align="left">Org-Chart Exercise</td>
+</tr>
+<tr class="odd">
 <td align="left"><a href="#exercise---symbolic-differentiation">Algebra</a></td>
 <td align="left">Symbolic Mathematics</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left"><a href="#ecosystem">Ecosystem</a></td>
 <td align="left">Resources and Community</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left"><a href="#appendix">Appendix</a></td>
 <td align="left">Appendix</td>
 </tr>
@@ -153,7 +157,7 @@ If you would like to volunteer, please subscribe to the <a href="www.reddit.com/
 
 <p>Welcome to the Melbourne Haskell Workshop 2013.</p>
 <p>This intent of this workshop is to provide a working introduction to Haskell for programmers in Melbourne who have not yet used the language in anger.</p>
-<p>The workshop is split into chapters - each lasting an hour. Chapters will start with a few trivial introductory exercises to get your fingers warmed up, then the meat - an exercise that should be able to be solved using the material introduced up to that point, but with help and hints available if needed.</p>
+<p>The workshop is split into chapters - each lasting an hour. Chapters will start with a few trivial introductory exercises to get your fingers warmed up, then the meat - an exercise that should be able to be solved using the material introduced up to that point (with help and hints available if needed).</p>
 <p>Each chapter will conclude with an open-question. This question should provide inspiration for further consideration of how harder problems could be solved using Haskell, and for more advanced attendees, can be attacked instead of twiddling your thumbs after finishing the main exercise.</p>
 </div>
 
@@ -207,7 +211,7 @@ If you would like to volunteer, please subscribe to the <a href="www.reddit.com/
 <div class="important">
 
 <p>For us, the organisers, running this workshop will be a great opportunity to see the Melbourne Haskell community in action. We're looking forward to working with you all, and expect that above all else we will have a lot of...</p>
-<h1 id="fun"><em>Fun!</em></h1>
+<h2 id="fun"><em>Fun!</em></h2>
 </div>
 
 <hr />
@@ -317,6 +321,9 @@ using version &lt;VERSION&gt; of the Cabal library</code></pre>
 Downloading the latest package list from hackage.haskell.org
 lyndon@endpin ~ cabal install quickcheck
 ...</code></pre>
+<pre class="open"><code>An open-ended question:
+
+Given that GHC is largely written in Haskell, how was GHC first compiled?</code></pre>
 <pre class="open"><code>An open-ended question:
 
 What are some of the current issues with the Haskell ecosystem?</code></pre>
@@ -552,6 +559,43 @@ What would the ADT for a LISP-like language look like?</code></pre>
 </li>
 </ul>
 <hr />
+<h1 id="exercise---music">Exercise - Music</h1>
+<p>Once you have a model that reaches a sufficient level of complexity you will find that your data-types become recursive.</p>
+<!-- http://i824.photobucket.com/albums/zz163/Boysie8/Telecaster%20build/f-hole.jpg -->
+<div class="center">
+<img src="resources/images/f-hole.jpg" />
+</div>
+
+<p>Here is a small musical target-language:</p>
+<pre data-language="haskell"><code>data Music
+  = A_ -- Underscore Represents a Flat
+  | A
+  | A&#39; -- Prime represents a Sharp
+       -- ... B, C, D, E, F, G ...
+  | Sequence [Music]
+  | Sharp Music
+  | Longer Integer Music
+  | Higher Integer Music</code></pre>
+<p>Certainly not comprehensive enough to write Beethoven's 5th Symphony, but good enough for Baa Baa Black-Sheep.</p>
+<pre data-language="haskell"><code>intro  = Sequence [ C, C, G, G ]
+run    = Sequence [ A, B, C, A ]
+middle = Sequence [ F, F, E, E ]
+run2   = Sequence [ D, C, D, E ]
+baaBaa = Sequence [ Longer 2  intro
+                  , Higher 12 run
+                  , Longer 4  G
+                  , Longer 2  middle
+                  , run2
+                  , Longer 4  C ]</code></pre>
+<p>In order to listen to this music, create a file with the following code:</p>
+<pre data-language="haskell"><code>import Midi
+import qualified Data.ByteString as BS
+
+main = BS.writeFile &quot;baaBaa.mid&quot; (make_music 4 4 (Longer 4 baaBaa))</code></pre>
+<p>Your task is to write a melody using this language. Try to write and compose functions, rather than declaring one big data-structure.</p>
+<hr />
+<h1 id="exercise---testing">Exercise - Testing</h1>
+<hr />
 <h1 id="exercise---org-chart">Exercise - Org Chart</h1>
 <p>You are an employee of International Banking Machines.</p>
 <p>The CEO has asked you to model the org-chart with a computer program in order to perform some analysis on the effectiveness of middle-managers.</p>
@@ -626,44 +670,6 @@ What would the ADT for a LISP-like language look like?</code></pre>
 </table>
 <p>Your function should have the following signature:</p>
 <pre class="nocheck" data-language="haskell"><code>process :: String -&gt; OrgChart</code></pre>
-<hr />
-<h1 id="exercise---music">Exercise - Music</h1>
-<p>Once you have a model that reaches a sufficient level of complexity you will find that your data-types become recursive.</p>
-<!-- http://i824.photobucket.com/albums/zz163/Boysie8/Telecaster%20build/f-hole.jpg -->
-<div class="center">
-<img src="resources/images/f-hole.jpg" />
-</div>
-
-<p>Here is a small musical target-language:</p>
-<pre data-language="haskell"><code>data Music
-  = A_ -- Underscore Represents a Flat
-  | A
-  | A&#39; -- Prime represents a Sharp
-       -- ... B, C, D, E, F, G ...
-  | Sequence [Music]
-  | Sharp Music
-  | Longer Integer Music
-  | Higher Integer Music</code></pre>
-<p>Certainly not comprehensive enough to write Beethoven's 5th Symphony, but good enough for Baa Baa Black-Sheep.</p>
-<pre data-language="haskell"><code>intro  = Sequence [ C, C, G, G ]
-run    = Sequence [ A, B, C, A ]
-middle = Sequence [ F, F, E, E ]
-run2   = Sequence [ D, C, D, E ]
-baaBaa = Sequence [ Longer 2  intro
-                  , Higher 12 run
-                  , Longer 4  G
-                  , Longer 2  middle
-                  , run2
-                  , Longer 4  C ]</code></pre>
-<p>In order to listen to this music, create a file with the following code:</p>
-<pre data-language="haskell"><code>import Midi
-import qualified Data.ByteString as BS
-
-main = BS.writeFile &quot;baaBaa.mid&quot; (make_music 4 4 (Longer 4 baaBaa))</code></pre>
-<p>Your task is to write a melody using this language. Try to write and compose functions, rather than declaring one big data-structure.</p>
-<hr />
-<h1 id="exercise---testing">Exercise - Testing</h1>
-<h1 id="todo-do-this-chapter" class="todo">TODO: Do this chapter</h1>
 <hr />
 <h1 id="exercise---symbolic-differentiation">Exercise - Symbolic Differentiation</h1>
 <p>Your Highschool math teacher has decided to introduce differentiation of single-variable polynomials...</p>

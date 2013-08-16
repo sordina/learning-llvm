@@ -199,5 +199,11 @@ lyndon@endpin ~ cabal install quickcheck
 ```open
 An open-ended question:
 
+Given that GHC is largely written in Haskell, how was GHC first compiled?
+```
+
+```open
+An open-ended question:
+
 What are some of the current issues with the Haskell ecosystem?
 ```

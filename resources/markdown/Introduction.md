@@ -14,7 +14,7 @@ for programmers in Melbourne who have not yet used the language in anger.
 The workshop is split into chapters - each lasting an hour. Chapters will start
 with a few trivial introductory exercises to get your fingers warmed up,
 then the meat - an exercise that should be able to be solved using the material
-introduced up to that point, but with help and hints available if needed.
+introduced up to that point (with help and hints available if needed).
 
 Each chapter will conclude with an open-question. This question should provide
 inspiration for further consideration of how harder problems could
@@ -140,6 +140,6 @@ be a great opportunity to see the Melbourne Haskell community in
 action. We're looking forward to working with you all, and expect that
 above all else we will have a lot of...
 
-# _Fun!_
+## _Fun!_
 
 </div>
