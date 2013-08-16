@@ -27,4 +27,3 @@ differentiate :: Polynomial -> Polynomial
 differentiate = ...
 ~~~
 
-
