@@ -96,3 +96,11 @@ p code {
 body.small .collapse {
 	display: none;
 }
+
+body.compact #content > * {
+	display: none;
+}
+
+h1, .important {
+	display: block !important;
+}

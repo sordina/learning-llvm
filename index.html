@@ -9,7 +9,332 @@
 	<body>
 		<div id="content">
 
-<p>----</p>
+<h1 id="melbourne-haskell-workshop-2013">Melbourne Haskell Workshop 2013</h1>
+<h1 id="draft-copy">DRAFT COPY</h1>
+<ul>
+<li>6 Hours (Plus Lunch)</li>
+<li>Expected attendance - 50 people</li>
+</ul>
+<!-- Trickery to conditionally display the alternate format link -->
+
+<h3 id="html-link" class="center"><a href="http://sordina.github.io/haskell_workshop/">(HTML)</a></h3>
+<script type="text/javascript">
+	document.getElementById('html-link').remove()
+	document.write("<h3 class='center'><a href='workshop.pdf'>(PDF)</a></h3>")
+</script>
+
+<pre class="note collapse"><code>Press...
+
+&quot;c&quot; - To hide unimportant sections
+&quot;x&quot; - To show only the most important content
+&quot;o&quot; - To expand the content out again</code></pre>
+<hr />
+<p>A 6-hour workshop intended to introduce and provide resources for working with Haskell.</p>
+<!-- http://upload.wikimedia.org/wikipedia/commons/0/0c/Potter's_workshop_VA.jpg -->
+<div class="center"> 
+<img src="resources/images/workshop.png" alt="Workshop" />
+</div>
+
+<p>This workshop is based around a central concept of domain modeling with Haskell.</p>
+<p>Outcomes include...</p>
+<ul>
+<li>Creating, editing, running and interacting with Haskell programs</li>
+<li>Building the confidence to solve problems in the wild with Haskell</li>
+<li>Developing an understanding of the Haskell ecosystem</li>
+<li>Interacting with others in a collaborative environment</li>
+</ul>
+<h2 id="note">Note:</h2>
+<p>If you are attending the workshop, make sure that you RSVP via <a href="http://www.meetup.com/Melbourne-Functional-User-Group-MFUG/events/132307572/">Meetup</a>. Please also attempt to have the required items from the <a href="#resources">'Resources'</a> section available for your use during the workshop.</p>
+<p>If you would like to volunteer, please subscribe to the <a href="www.reddit.com/r/mhw2013/">mhw2013</a> sub-reddit and list yourself on the wiki. ----</p>
+<p></p>
+<h1 id="table-of-contents">Table of Contents</h1>
+<table>
+<tbody>
+<tr class="odd">
+<td align="left"><a href="#melbourne-haskell-workshop-2013">Readme</a></td>
+<td align="left">Read this First</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="#required-resources">Resources</a></td>
+<td align="left">Resources Available</td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="#introduction">Introduction</a></td>
+<td align="left">Motivation, Overview, and Approach</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="#setup">Setup</a></td>
+<td align="left">Setting up your Haskell environment</td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="#opening-exercises">Opening Exercises</a></td>
+<td align="left">Introductory Exercises</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="#adts-algebraic-data-types">ADTs</a></td>
+<td align="left">Modelling with data in Haskell</td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="#typeclasses">Typeclasses</a></td>
+<td align="left">Code-Reuse and Laws</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="#wildcard">Wildcard</a></td>
+<td align="left">Music</td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="#monads">Monads</a></td>
+<td align="left">DSLs, IO, Do-Notation</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="#ecosystem">Ecosystem</a></td>
+<td align="left">Resources and Community</td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="#appendix">Appendix</a></td>
+<td align="left">Appendix</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p></p>
+<h1 id="required-resources">Required Resources</h1>
+<p>Before you begin you will require the following...</p>
+<h2 id="a-text-editor">A Text-Editor</h2>
+<p>We are assuming previous programming experience, however, if you would like a recommendation, have a look at <a href="http://notepad-plus-plus.org/">Notepad++</a>, <a href="http://www.sublimetext.com/">Sublime Text</a>, or the ever-popular <a href="http://www.gnu.org/software/emacs/">Emacs</a> and <a href="http://www.vim.org/">Vim</a>. Just make sure that you are fluent enough to embark on exercises as they appear in the workshop.</p>
+<h2 id="the-haskell-platform"><a href="http://www.haskell.org/platform/">The Haskell Platform</a></h2>
+<p>In order to run the programs written during this workshop you will need a Haskell installation. The easiest way to get up and running is to install the latest Haskell Platform. This is a &quot;batteries included&quot; installation of GHC and Cabal that includes many of the most useful packages available in the Hackage ecosystem.</p>
+<h2 id="a-copy-of-the-workshop-scaffold-project"><a href="https://github.com/sordina/haskell_workshop">A Copy of the Workshop Scaffold Project</a></h2>
+<p><a href="https://github.com/sordina/haskell_workshop">https://github.com/sordina/haskell_workshop</a></p>
+<p>Either clone with git:</p>
+<pre class="shell"><code>git clone https://github.com/sordina/haskell_workshop.git</code></pre>
+<p>... or <a href="https://github.com/sordina/haskell_workshop/archive/master.zip">download the zip</a> from GitHub.</p>
+<h1 id="useful-resources">Useful Resources</h1>
+<p>These resources are available to help you with any issues you face when learning Haskell:</p>
+<h2 id="haskell-on-freenode">#haskell on <a href="http://freenode.net/">Freenode</a></h2>
+<p>An IRC channel dedicated to discussion of Haskell. This is often the easiest place to fire off a one-off question that is simple enough not to warrant a permanent listing on the internet.</p>
+<h2 id="hackage"><a href="http://hackage.haskell.org/packages/hackage.html">Hackage</a></h2>
+<p>Hackage is the primary repository for Haskell packages. It is public, searchable, versioned, and uses Cabal package metadata for classification. Furthermore, this can be used to easily browse package contents, documentation and source-code.</p>
+<p>For example, browse the <a href="http://hackage.haskell.org/package/shake">Shake</a> package and look at some of the <a href="http://hackage.haskell.org/packages/archive/shake/0.10.6/doc/html/Development-Shake-Command.html">Modules</a>.</p>
+<h2 id="hoogle"><a href="http://www.haskell.org/hoogle/">Hoogle</a></h2>
+<p>Hoogle is a Haskell module and function search-engine. Hoogle allows you to take advantage of the granular type-system used by Haskell to search not just for function-names, but for function type-signatures.</p>
+<p>For example, have a look for the function with signature <a href="http://www.haskell.org/hoogle/?hoogle=Text+-%3E+ByteString">Text -&gt; ByteString</a>.</p>
+<h2 id="mfug"><a href="http://www.meetup.com/Melbourne-Functional-User-Group-MFUG/">MFUG</a></h2>
+<p>MFUG is the Melbourne Functional Programmer's User Group. This group discusses many topics, including Haskell.</p>
+<h2 id="rhaskell"><a href="http://www.reddit.com/r/haskell">/r/haskell</a></h2>
+<p>For Reddit users, /r/haskell is a very useful resource with a great deal of information regarding recent developments in the Haskell ecosystem and community. This is a good place to ask some more advanced questions or start a flame-war.</p>
+<h2 id="haskell-news"><a href="http://haskellnews.org/">Haskell News</a></h2>
+<p>Haskell News is a firehose-style haskell news aggregator taking information from sources as varied as academic-journals, and GitHub accounts.</p>
+<h2 id="hlint"><a href="http://hackage.haskell.org/package/hlint">HLint</a></h2>
+<p>HLint is a <a href="http://en.wikipedia.org/wiki/Lint_(software)">linting tool</a> for Haskell source - It can often provide some useful hints about refactoring avenues for your code.</p>
+<h2 id="learn-you-a-haskell-for-great-good"><a href="http://learnyouahaskell.com/">Learn You a Haskell (For Great Good)</a></h2>
+<p>Learn You a Haskell (For Great Good) is a wonderful introductory text on Haskell.</p>
+<h2 id="real-world-haskell"><a href="http://book.realworldhaskell.org/">Real World Haskell</a></h2>
+<p>Real World Haskell aims to focus on solving real problems with Haskell. Several chapters of the book are somewhat dated in terms of the libraries used, but it still serves as a useful example of getting real work done with Haskell.</p>
+<hr />
+<p></p>
+<h1 id="introduction">Introduction</h1>
+<p>Welcome to the Melbourne Haskell Workshop 2013.</p>
+<p>This intent of this workshop is to provide a working introduction to Haskell for programmers in Melbourne who have not yet used the language in anger.</p>
+<p>The workshop is split into &quot;Chapters&quot; - each lasting an hour. Chapters will start with a few trivial introductory exercises to get your fingers warmed up, then the meat - an exercise that should be able to be solved using the material introduced up to that point, but with help and hints available if needed.</p>
+<p>Each chapter will conclude with an open-question. This question should provide inspiration for further consideration of how harder problems could be solved using Haskell, and for more advanced atendees, can be attacked instead of twiddeling your thumbs after finishing the main exercise.</p>
+<hr />
+<p></p>
+<h1 id="setup">Setup</h1>
+<h3 id="and-sanity-checking">... and Sanity Checking</h3>
+<p>Ensure that you have the following programs installed and functioning correctly:</p>
+<ul>
+<li>GHC(i)</li>
+</ul>
+<p>At a command prompt, enter the following command:</p>
+<pre class="shell"><code>ghci</code></pre>
+<p>This should launch the GHC Haskell REPL.</p>
+<p>Type the following to ensure that you have a functioning REPL:</p>
+<pre data-language="haskell"><code>1 + 1</code></pre>
+<p>This should yield the result:</p>
+<pre class="text"><code>2</code></pre>
+<p>Create the following source file (program.hs):</p>
+<pre data-language="haskell"><code>main = print &quot;hello world&quot;</code></pre>
+<p>Compile the program as follows:</p>
+<pre class="shell"><code>ghc --make program.hs</code></pre>
+<p>Run the program with the following command:</p>
+<pre class="shell"><code>./program</code></pre>
+<p>The output should look as follows:</p>
+<pre class="text"><code>&quot;hello world&quot;</code></pre>
+<h2 id="cabal">Cabal</h2>
+<p>You should have access to a Cabal installation if you have installed the Haskell Platform.</p>
+<p>Check that you have cabal by running:</p>
+<pre class="shell"><code>cabal --version</code></pre>
+<p>This should output something similar to:</p>
+<pre class="text"><code>cabal-install version 1.16.0.2
+using version 1.16.0 of the Cabal library</code></pre>
+<pre class="real"><code>You can use GHCi to perform calculations other than just &quot;1 + 1&quot;.
+
+Here is an example session:
+
+lyndon@endpin ~ ghci
+GHCi, version 7.6.2: http://www.haskell.org/ghc/  :? for help
+Loading package ghc-prim ... linking ... done.
+Loading package integer-gmp ... linking ... done.
+Loading package base ... linking ... done.
+[Prelude] &gt; 1 + 2 + 3
+6
+[Prelude] &gt; 100 / 2
+50.0
+[Prelude] &gt; 6 ^ 7
+279936
+[Prelude] &gt; ^D
+Leaving GHCi.</code></pre>
+<hr />
+<p></p>
+<h1 id="opening-exercises">Opening Exercises</h1>
+<h2 id="loading-files-in-ghci">Loading files in GHCi</h2>
+<p>There are many ways to load and execute Haskell code. For the purposes of this workshop, if you do not already have a workflow you are comfortable with, then we suggest the following steps:</p>
+<ul>
+<li>Write and edit your programs in files ending in the extension &quot;.hs&quot;</li>
+<li>When you are ready to test your program, load it into GHCi</li>
+<li>After making modifications to your program, reload the program in GHCi</li>
+</ul>
+<p>Say you had written the following program <code>test.hs</code> in your home directory:</p>
+<pre data-language="haskell" data-filter="./resources/scripts/check.sh"><code>main = print &quot;hello world&quot;
+</code></pre>
+<p>Load the file in GHCi to see it in action:</p>
+<pre class="shell"><code>lyndon@endpin ~ ghci test.hs
+GHCi, version 7.6.2: http://www.haskell.org/ghc/  :? for help
+Loading package ghc-prim ... linking ... done.
+Loading package integer-gmp ... linking ... done.
+Loading package base ... linking ... done.
+[1 of 1] Compiling Main             ( test.hs, interpreted )
+Ok, modules loaded: Main.
+[*Main] &gt; main
+&quot;hello world&quot;</code></pre>
+<p>Wow! Interactive IO in the first exercise!</p>
+<p>... Unfortunately there is a bug in the program, so in your editor you make the change required to print &quot;hello, world&quot; with the mandated comma:</p>
+<pre data-language="haskell" data-filter="./resources/scripts/check.sh"><code>main = print &quot;hello, world&quot;
+</code></pre>
+<p>Now, back in GHCi, you can reload the program without exiting the REPL:</p>
+<pre class="shell"><code>[*Main] &gt; :reload
+[1 of 1] Compiling Main             ( test.hs, interpreted )
+Ok, modules loaded: Main.
+[*Main] &gt; main
+&quot;hello, world&quot;</code></pre>
+<p>Much better!</p>
+<h2 id="variables">Variables</h2>
+<p>In Haskell you can define a variable with the <code>=</code> sign.</p>
+<p>Variables can be defined at the top-level (no-indentation):</p>
+<pre data-language="haskell" data-filter="./resources/scripts/check.sh"><code>myVariable = 2
+</code></pre>
+<p>Variable names should start with a lowercase letter and contain no spaces, or special characters, besides underscores, numbers, and <code>'</code>.</p>
+<pre class="instruction"><code>Ex. 1.1 - Define your own variable.</code></pre>
+<h2 id="type-signatures">Type Signatures</h2>
+<p>You can annotate a definition with a valid type-signature:</p>
+<pre data-language="haskell" data-filter="./resources/scripts/check.sh"><code>myVariable2 :: Int
+myVariable2 = 1
+</code></pre>
+<pre class="instruction"><code>Ex. 1.2 - Give your variable a type-signature.</code></pre>
+<h2 id="string-literals">String Literals</h2>
+<p>String literals look familiar:</p>
+<pre data-language="haskell" data-filter="./resources/scripts/check.sh"><code>myString :: String
+myString = &quot;hello world&quot;
+</code></pre>
+<pre class="instruction"><code>Ex. 1.3 - Define a variable containing a string.</code></pre>
+<h2 id="tuples">Tuples</h2>
+<p>Tuples look like this:</p>
+<pre data-language="haskell" data-filter="./resources/scripts/check.sh"><code>myTuplePair :: (Int, String)
+myTuplePair = (1,&quot;hello&quot;)
+
+myTupleTrio :: (Int, String, Int)
+myTupleTrio = (1,&quot;hello&quot;,3)
+</code></pre>
+<p>They can be used to group multiple, differently-typed (heterogeneous) values.</p>
+<pre class="instruction"><code>Ex. 1.4 - Define a variable containing a tuple.</code></pre>
+<h2 id="functions">Functions</h2>
+<p>Functions are a core part of Haskell. Function definitions look like this:</p>
+<pre class="nocheck" data-language="haskell"><code>myFunction :: ... -&gt; ...
+myFunction x y ... = ...</code></pre>
+<p>If a function <code>f</code> takes something of type <code>a</code> and returns something of type <code>b</code> we write the type signature as:</p>
+<pre class="nocheck" data-language="haskell"><code>f :: a -&gt; b</code></pre>
+<p>For example:</p>
+<pre data-language="haskell" data-filter="./resources/scripts/check.sh"><code>myAdd :: Int -&gt; Int -&gt; Int
+myAdd x y = x + y
+</code></pre>
+<p><code>myAdd</code> takes two numbers and returns the result of the addition of those two numbers.</p>
+<pre class="instruction"><code>Ex. 1.5 - Define a function `myMultiply` that multiplies 3 numbers.</code></pre>
+<pre class="instruction"><code>Ex. 1.6 - Give your function a type-signature</code></pre>
+<pre class="answer" data-language="haskell" data-filter="./resources/scripts/check.sh"><code>myMultiply :: Int -&gt; Int -&gt; Int -&gt; Int
+myMultiply x y z = x * y * z
+</code></pre>
+<h2 id="lists">Lists</h2>
+<p>List are a commonly used data-structure in Haskell. Everything in a list has the same type (they are homogeneous).</p>
+<p>Lists are built using the infix data-constructor <code>(:)</code> (pronounced &quot;cons&quot;). They also have a compact notation using <code>[...]</code>.</p>
+<p>List literals look like:</p>
+<pre data-language="haskell" data-filter="./resources/scripts/check.sh"><code>list1 :: [Int]
+list2 :: [Int]
+list3 :: [String]
+
+list1 = [1,2,3]
+list2 = 1 : 2 : []
+list3 = &quot;hello&quot; : &quot;world&quot; : []
+</code></pre>
+<pre class="instruction"><code>Ex. 1.7 - Define a variable containing a list.</code></pre>
+<pre class="instruction"><code>Ex. 1.8 - Give your variable a type-signature.</code></pre>
+<p>You can deconstruct a list by pattern matching the head and tail like so:</p>
+<pre class="nocheck" data-language="haskell"><code>f (x:xs) = ...</code></pre>
+<pre class="instruction"><code>Ex. 1.9 - Define a function to get the first element of a list.</code></pre>
+<p>Note: In <code>Prelude</code> this function is called <code>head</code>.</p>
+<pre class="answer" data-language="haskell" data-filter="./resources/scripts/check.sh"><code>myHead (x:xs) = x -- This is a partial function, Beware!
+</code></pre>
+<pre class="instruction"><code>Ex. 1.10 - Define a variable containing the first element of your list.</code></pre>
+<pre class="answer nocheck" data-language="haskell"><code>myFirstElement = myHead myList</code></pre>
+<h3 id="define-length">Define Length</h3>
+<p>Define a function that takes a list and returns the length. In Haskell type-signature syntax, this is written as:</p>
+<pre data-language="haskell" data-filter="./resources/scripts/check.sh"><code>myLength :: [a] -&gt; Int
+myLength = undefined
+</code></pre>
+<p>Your solution should have the form of:</p>
+<pre class="nocheck" data-language="haskell"><code>myLength []     = ...
+myLength (x:xs) = ...</code></pre>
+<p>Things to consider:</p>
+<ul>
+<li>What is the length of an empty list? (the base case)</li>
+<li>What is the length of xs?</li>
+</ul>
+<pre class="answer" data-language="haskell" data-filter="./resources/scripts/check.sh"><code>mylength []     = 0
+mylength (x:xs) = 1 + mylength xs
+</code></pre>
+<h3 id="define-mymap">Define <code>myMap</code></h3>
+<pre class="instruction"><code>Ex. 1.11 -
+
+Define a function that takes a function from a to b &quot;a -&gt; b&quot;,
+and a list of as &quot;[a]&quot;,
+and returns a list of bs &quot;[b]&quot;.</code></pre>
+<p>Things to consider:</p>
+<ul>
+<li>What is the type-signature of myMap?</li>
+<li>What is the base-case of myMap?</li>
+</ul>
+<pre class="answer" data-language="haskell" data-filter="./resources/scripts/check.sh"><code>myMap :: (a -&gt; b) -&gt; [a] -&gt; [b]
+myMap f [] = []
+myMap f (x:xs) = f x : myMap f xs
+</code></pre>
+<h2 id="fun-list-functions">Fun List Functions</h2>
+<p>For your reading pleasure, here are some definintions of common functions:</p>
+<pre data-language="haskell" data-filter="./resources/scripts/check.sh"><code>myFilter f []     = []
+myFilter f (x:xs) = if f x then x : myFilter f xs
+                           else     myFilter f xs
+
+myFold f z []     = z
+myFold f z (x:xs) = f x (myFold f z xs)
+
+myReverse []     = []
+myReverse (x:xs) = myReverse xs ++ [x]
+
+myElem e []     = False
+myElem e (x:xs) = if e == x then True
+                            else myElem e xs
+</code></pre>
+<p>See if you can determine the type-signatures for these functions.</p>
+<hr />
 <p></p>
 <h1 id="adts-algebraic-data-types">ADTs (Algebraic Data Types)</h1>
 <div class="center">
@@ -30,7 +355,8 @@
 <pre data-language="haskell" data-filter="./resources/scripts/check.sh"><code>data MyBool = MyTrue | MyFalse | MyNotSure
 
 should_I_eat_something_bigger_than_my_own_head :: MyBool
-should_I_eat_something_bigger_than_my_own_head = MyFalse</code></pre>
+should_I_eat_something_bigger_than_my_own_head = MyFalse
+</code></pre>
 <pre class="real"><code>With this functionality, you are able to introduce your own &quot;Enum&quot;
 values.
 
@@ -50,17 +376,20 @@ stringy :: MyNullString
 stringy = MyString &quot;Whatever, It&#39;s just a string&quot;
 
 blanky :: MyNullString
-blanky = Nada</code></pre>
+blanky = Nada
+</code></pre>
 <p>Constructors can take multiple parameters:</p>
 <pre data-language="haskell" data-filter="./resources/scripts/check.sh"><code>data SomeJunk = Rubbish String | TrashPile String Int Bool
 
 discards :: SomeJunk
-discards = TrashPile &quot;Junk Yard&quot; 42 True</code></pre>
+discards = TrashPile &quot;Junk Yard&quot; 42 True
+</code></pre>
 <p>Furthermore, ADTs can be recursive:</p>
 <pre data-language="haskell" data-filter="./resources/scripts/check.sh"><code>data MyNumberList = Nada | SomeNumbers Int MyNumberList
 
 numbers :: MyNumberList
-numbers =  SomeNumbers 1 (SomeNumbers 2 Nada)</code></pre>
+numbers =  SomeNumbers 1 (SomeNumbers 2 Nada)
+</code></pre>
 <p>Finally, ADTs can be parametrised by other types:</p>
 <pre data-language="haskell" data-filter="./resources/scripts/check.sh"><code>data MyContainer x = Jar x
 
@@ -68,7 +397,8 @@ contained :: MyContainer Int
 contained = Jar 1
 
 pun :: MyContainer (MyContainer String)
-pun = Jar (Jar &quot;Binks&quot;)</code></pre>
+pun = Jar (Jar &quot;Binks&quot;)
+</code></pre>
 <p>In general, the syntax of an ADT looks similar to the following:</p>
 <pre class="bnf"><code>ADT          := data &lt;TypeName&gt; &lt;Variables&gt; = &lt;Constructors&gt;
 TypeName     := [A-Z] + [a-z&#39;_]*
@@ -96,7 +426,8 @@ Variable     := [a-z] + [a-z&#39;_]*</code></pre>
 <li>Should this ADT have multiple constructors?</li>
 <li>Should the constructors be parametrised?</li>
 </ul>
-<pre class="answer" data-language="haskell" data-filter="./resources/scripts/check.sh"><code>data MyList a = Empty | Items a (MyList a)</code></pre>
+<pre class="answer" data-language="haskell" data-filter="./resources/scripts/check.sh"><code>data MyList a = Empty | Items a (MyList a)
+</code></pre>
 <pre class="instruction"><code>An open-ended question:
 
 What would the ADT for a LISP-like language look like?</code></pre>
@@ -107,8 +438,146 @@ What would the ADT for a LISP-like language look like?</code></pre>
 <li><a href="http://chris-taylor.github.io/blog/2013/02/11/the-algebra-of-algebraic-data-types-part-ii/">The Algebra of Algebraic Data Types, Part 2</a></li>
 <li><a href="http://chris-taylor.github.io/blog/2013/02/13/the-algebra-of-algebraic-data-types-part-iii/">The Algebra of Algebraic Data Types, Part 3</a>
 </div>
-
 </li>
+</ul>
+<hr />
+<p></p>
+<h1 id="exercise---org-chart">Exercise - Org Chart</h1>
+<p>You are an employee of International Banking Machines.</p>
+<p>The CEO has asked you to model the org-chart with a computer program in order to perform some analysis on the effectiveness of middle-managers.</p>
+<p>Before you are able to perform your calculations, you will have to decide how you will model your data. Construct a Haskell data-type to represent the various types of employees and departments shown in the following diagram:</p>
+<div class="center">
+<img src="resources/images/dot/01.png" alt="Org Chart" />
+</div>
+
+
+<pre class="hidden" data-language="dot" data-output="resources/images/dot/01.png" data-filter="./resources/scripts/graph.sh"><code></code></pre>
+<p>Construct a function that builds up your datastructure from the following plain-text input format:</p>
+<h2 id="employees">Employees</h2>
+<table>
+<col width="10%" />
+<col width="11%" />
+<col width="10%" />
+<col width="22%" />
+<col width="26%" />
+<col width="15%" />
+<thead>
+<tr class="header">
+<th align="left">Name</th>
+<th align="left">Title</th>
+<th align="left">Salary</th>
+<th align="left">Department</th>
+<th align="left">Managing Department</th>
+<th align="left">Subordinates</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Dennis</td>
+<td align="left">Manager</td>
+<td align="left">$33K</td>
+<td align="left">Products</td>
+<td align="left">Products</td>
+<td align="left">11</td>
+</tr>
+<tr class="even">
+<td align="left">Dorris</td>
+<td align="left">Manager</td>
+<td align="left">$42K</td>
+<td align="left">Piñatas</td>
+<td align="left">HR</td>
+<td align="left">22</td>
+</tr>
+<tr class="odd">
+<td align="left">Darren</td>
+<td align="left">Manager</td>
+<td align="left">$34K</td>
+<td align="left">Curly Department</td>
+<td align="left">Fries</td>
+<td align="left">13</td>
+</tr>
+<tr class="even">
+<td align="left">Dylan</td>
+<td align="left">Manager</td>
+<td align="left">$54K</td>
+<td align="left">Regulations</td>
+<td align="left">Fries</td>
+<td align="left">18</td>
+</tr>
+<tr class="odd">
+<td align="left">Devin</td>
+<td align="left">Manager</td>
+<td align="left">$64K</td>
+<td align="left">Front Desk</td>
+<td align="left">BurgerFlipping</td>
+<td align="left">23</td>
+</tr>
+</tbody>
+</table>
+<p>Your function should have the following signature:</p>
+<pre class="nocheck" data-language="haskell"><code>process :: String -&gt; OrgChart</code></pre>
+<hr />
+<p></p>
+<h1 id="exercise---music">Exercise - Music</h1>
+<p>Once you have a model that reaches a sufficient level of complexity you will find that your data-types become recursive.</p>
+<!-- http://i824.photobucket.com/albums/zz163/Boysie8/Telecaster%20build/f-hole.jpg -->
+<div class="center">
+<img src="resources/images/f-hole.jpg" />
+</div>
+
+<p>Here is a small musical target-language:</p>
+<pre data-language="haskell"><code>data Music
+  = A_ -- Underscore Represents a Flat
+  | A
+  | A&#39; -- Prime represents a Sharp
+       -- ... B, C, D, E, F, G ...
+  | Sequence [Music]
+  | Sharp Music
+  | Longer Integer Music
+  | Higher Integer Music</code></pre>
+<p>Certainly not comprehensive enough to write Beethoven's 5th Symphony, but good enough for Baa Baa Black-Sheep.</p>
+<pre data-language="haskell"><code>intro  = Sequence [ C, C, G, G ]
+run    = Sequence [ A, B, C, A ]
+middle = Sequence [ F, F, E, E ]
+run2   = Sequence [ D, C, D, E ]
+baaBaa = Sequence [ Longer 2  intro
+                  , Higher 12 run
+                  , Longer 4  G
+                  , Longer 2  middle
+                  , run2
+                  , Longer 4  C ]</code></pre>
+<p>In order to listen to this music, create a file with the following code:</p>
+<pre data-language="haskell"><code>import Midi
+import qualified Data.ByteString as BS
+
+main = BS.writeFile &quot;baaBaa.mid&quot; (make_music 4 4 (Longer 4 baaBaa))</code></pre>
+<p>Your task is to write a melody using this language. Try to write and compose functions, rather than declaring one big data-structure.</p>
+<hr />
+<p></p>
+<h1 id="exercise---symbolic-differentiation">Exercise - Symbolic Differentiation</h1>
+<p>Your Highschool math teacher has decided to introduce differentiation of single-variable polynomials...</p>
+<p>This is in super easy once you grasped the concept:</p>
+<p>Polynomial term differentiation:</p>
+<div class="center"> 
+<br /><span class="math">$ a . x^n . \frac{d}{dx} = n.a.x^{n-1} $</span><br />
+</div>
+
+<p>Linearity of differentiation:</p>
+<div class="center"> 
+<br /><span class="math">$ (a + b) \frac{d}{dx} = a \frac{d}{dx} + b \frac{d}{dx} $</span><br />
+</div>
+
+<p>But you don't wish to perform the undoubtedly large number of rote-examples required after your moment of epiphany.</p>
+<p>In this exercise you should develop a data-type to represent a single-variable polynomial expression.</p>
+<p>After you feel confident that you can represent any such expression, write a function using the two rules listed to provide the following function:</p>
+<pre class="nocheck" data-language="haskell"><code>differentiate :: Polynomial -&gt; Polynomial
+differentiate = ...</code></pre>
+<hr />
+<p></p>
+<h1 id="appendix">Appendix</h1>
+<ul>
+<li><a href="http://stackoverflow.com/questions/17870864/where-is-huttons-razor-first-defined">Hutton's Razor</a></li>
+<li><a href="http://research.microsoft.com/en-us/um/people/simonpj/papers/pj-lester-book/">Implementing Functional Languages: A Tutorial</a></li>
 </ul>
 			<hr>
 			<p class="center footer"> Produced with <a href="http://johnmacfarlane.net/pandoc/">Pandoc</a> </p>

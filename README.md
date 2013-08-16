@@ -15,6 +15,14 @@ Melbourne Haskell Workshop 2013
 	document.write("<h3 class='center'><a href='workshop.pdf'>(PDF)</a></h3>")
 </script>
 
+~~~ {.note .collapse}
+Press...
+
+"c" - To hide unimportant sections
+"x" - To show only the most important content
+"o" - To expand the content out again
+~~~
+
 ----
 
 A 6-hour workshop intended to introduce and provide resources for working with Haskell.
