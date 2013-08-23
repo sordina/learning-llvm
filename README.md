@@ -21,10 +21,8 @@ Melbourne Haskell Workshop 2013
 
 \startmode[html]
 ~~~{.note .notitle}
-Press...
-
-"x" - To show only the most important content
-"o" - To expand the content out again
+Press "x" to show only the most important content
+Press "o" to expand the content out again
 ~~~
 \stopmode
 
@@ -52,6 +50,7 @@ Outcomes include...
 
 \startmode[html]
 <div class="important note">
+
 If you are attending the workshop, make sure that you RSVP via
 [Meetup](http://www.meetup.com/Melbourne-Functional-User-Group-MFUG/events/132307572/).
 Please also attempt to have the required items
@@ -59,5 +58,6 @@ from the ['Resources'](#resources) section available for your use during the wor
 
 If you would like to volunteer, please subscribe to the [mhw2013](http://www.reddit.com/r/mhw2013/)
 sub-reddit and list yourself on the wiki.
+
 </div>
 \stopmode
