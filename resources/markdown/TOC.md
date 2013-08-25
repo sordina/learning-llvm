@@ -14,6 +14,7 @@ Introduction        |[Introduction](#introduction)                   Motivation,
 Setup               |[Setup](#setup)                                 Setting up your Haskell environment
 Intro-Exercise      |[Opening Exercises](#opening-exercises)         Introductory Exercises
 ADTs                |[ADTs](#adts-algebraic-data-types)              Modelling with data in Haskell
+Laziness            |[Laziness](#laziness)                           Evaluation when required
                     |[Typeclasses](#typeclasses)                     Code-Reuse and Laws
 Music-Exercise      |[Wildcard](#wildcard)                           Music
                     |[Monads](#monads)                               DSLs, IO, Do-Notation

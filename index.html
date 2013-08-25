@@ -7,7 +7,7 @@
 		<link href="resources/css/fonts.css" rel="stylesheet" type="text/css">
 		<link href="resources/css/solarized-light.css" rel="stylesheet" type="text/css">
 	</head>
-	<body class="small">
+	<body class="">
 		<div id="content">
 
 <h1 id="melbourne-haskell-workshop-2013">Melbourne Haskell Workshop 2013</h1>
@@ -87,34 +87,38 @@ Press &quot;o&quot; to expand the content out again</code></pre>
 <td align="left">Modelling with data in Haskell</td>
 </tr>
 <tr class="even">
+<td align="left"><a href="#laziness">Laziness</a></td>
+<td align="left">Evaluation when required</td>
+</tr>
+<tr class="odd">
 <td align="left"><a href="#typeclasses">Typeclasses</a></td>
 <td align="left">Code-Reuse and Laws</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left"><a href="#wildcard">Wildcard</a></td>
 <td align="left">Music</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left"><a href="#monads">Monads</a></td>
 <td align="left">DSLs, IO, Do-Notation</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left"><a href="#exercise---testing">Testing</a></td>
 <td align="left">Testing with QuickCheck</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left"><a href="#exercise---org-chart">Org-Chart</a></td>
 <td align="left">Org-Chart Exercise</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left"><a href="#exercise---symbolic-differentiation">Algebra</a></td>
 <td align="left">Symbolic Mathematics</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left"><a href="#ecosystem">Ecosystem</a></td>
 <td align="left">Resources and Community</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left"><a href="#appendix">Appendix</a></td>
 <td align="left">Appendix</td>
 </tr>
@@ -563,6 +567,19 @@ What would the ADT for a LISP-like language look like?</code></pre>
 </div>
 </li>
 </ul>
+<hr />
+<h1 id="laziness">Laziness</h1>
+<p>Haskell's evaluation strategies ~ Exploring the magic.</p>
+<p>Often when looking at exaples of Haskell functions you will come across examples of laziness in action. The cannonical example used to demonstrate the lazy recursive approach used in Haskell the definition of the list of Fibbonacci numbers -</p>
+<pre data-language="haskell" data-filter="./resources/scripts/check.sh"><code>fibs = 1 : 1 : zipWith (+) fibs (tail fibs)
+</code></pre>
+<p>This is a good one!</p>
+<p>Most programmers won't have any problem with the usual recursive definition of <code>fibs</code>, so what makes this one special? Let's see if we can implement this function in a more familiar language -</p>
+<pre data-language="javascript"><code>
+function fibs() {
+	
+}
+</code></pre>
 <hr />
 <h1 id="exercise---music">Exercise - Music</h1>
 <p>Once you have a model that reaches a sufficient level of complexity you will find that your data-types become recursive.</p>

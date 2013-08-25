@@ -4,9 +4,12 @@ on run argv
 	set str to (item 1 of argv)
 
 	tell application "Google Chrome"
-		set u to get URL of active tab of window 1
-		if (u contains str) then
-			reload active tab of window 1
-		end if
+		repeat with x from 1 to (count windows)
+			set u to get URL   of active tab of window x
+			set t to get title of active tab of window x
+			if (u contains str and t does not start with "Developer Tools -") then
+				reload active tab of window x
+			end if
+		end repeat
 	end tell
 end run
