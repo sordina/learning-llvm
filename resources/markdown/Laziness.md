@@ -14,11 +14,31 @@ the definition of the list of Fibbonacci numbers -
 fibs = 1 : 1 : zipWith (+) fibs (tail fibs)
 ~~~
 
-This is a good one!
+This solution has a reputation for being somewhat mind-bending for
+beginners, however, the question remains - What is going on here?
+
+```real
+In order to show the start of an infinite list, use the `take` function -
+
+For example:
+
+[Prelude] > let fibs = 1 : 1 : zipWith (+) fibs (tail fibs)
+[Prelude] > take 10 fibs
+[1,1,2,3,5,8,13,21,34,55]
+```
+
+Here is a Fibonacci solution in Javascript:
+
+~~~{ data-language=javascript }
+function fib(n) {
+	if(n < 2) return 1
+	return fib(n-1) + fib(n-2)
+}
+~~~
 
 Most programmers won't have any problem with the usual recursive definition
-of `fibs`, so what makes this one special? Let's see if we can implement this
-function in a more familiar language -
+of `fibs`, so what makes the Haskell one special? Let's see if we can implement
+the Haskell version in Javascript:
 
 ~~~{ data-language=javascript }
 // The Fibonacci Sequence in all its glory~
@@ -45,3 +65,20 @@ function runList(list, n) { while(n-- > 0) {
 The main difference between a normal recursive definition and this one
 is that the recursion happens at the value level, as opposed to the
 function-call location.
+
+```instruction
+ 
+
+Implement an infinite list of ascending numbers using lazy,
+value-based recursion.
+```
+
+~~~{ data-language=haskell data-filter=resources/scripts/check.sh .answer}
+ascending = 1 : zipWith (+) ascending ascending
+~~~
+
+```open
+An open-ended question:
+
+Can all numberic-lists be defined by using value-based recursion?
+```

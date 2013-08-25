@@ -573,8 +573,20 @@ What would the ADT for a LISP-like language look like?</code></pre>
 <p>Often when looking at exaples of Haskell functions you will come across examples of laziness in action. The cannonical example used to demonstrate the lazy recursive approach used in Haskell the definition of the list of Fibbonacci numbers -</p>
 <pre data-language="haskell" data-filter="./resources/scripts/check.sh"><code>fibs = 1 : 1 : zipWith (+) fibs (tail fibs)
 </code></pre>
-<p>This is a good one!</p>
-<p>Most programmers won't have any problem with the usual recursive definition of <code>fibs</code>, so what makes this one special? Let's see if we can implement this function in a more familiar language -</p>
+<p>This solution has a reputation for being somewhat mind-bending for beginners, however, the question remains - What is going on here?</p>
+<pre class="real"><code>In order to show the start of an infinite list, use the `take` function -
+
+For example:
+
+[Prelude] &gt; let fibs = 1 : 1 : zipWith (+) fibs (tail fibs)
+[Prelude] &gt; take 10 fibs
+[1,1,2,3,5,8,13,21,34,55]</code></pre>
+<p>Here is a Fibonacci solution in Javascript:</p>
+<pre data-language="javascript"><code>function fib(n) {
+	if(n &lt; 2) return 1
+	return fib(n-1) + fib(n-2)
+}</code></pre>
+<p>Most programmers won't have any problem with the usual recursive definition of <code>fibs</code>, so what makes the Haskell one special? Let's see if we can implement the Haskell version in Javascript:</p>
 <pre data-language="javascript"><code>// The Fibonacci Sequence in all its glory~
 //
 function fibs() { return [1, cons(1, zipWith(add, fibs, tail( fibs )))] }
@@ -595,6 +607,15 @@ function zipWith(f, x, y) { return function() {
 function runList(list, n) { while(n-- &gt; 0) {
                             console.log(head(list)); list = tail(list)}}</code></pre>
 <p>The main difference between a normal recursive definition and this one is that the recursion happens at the value level, as opposed to the function-call location.</p>
+<pre class="instruction"><code> 
+
+Implement an infinite list of ascending numbers using lazy,
+value-based recursion.</code></pre>
+<pre class="answer" data-language="haskell" data-filter="resources/scripts/check.sh"><code>ascending = 1 : zipWith (+) ascending ascending
+</code></pre>
+<pre class="open"><code>An open-ended question:
+
+Can all numberic-lists be defined by using value-based recursion?</code></pre>
 <hr />
 <h1 id="exercise---music">Exercise - Music</h1>
 <p>Once you have a model that reaches a sufficient level of complexity you will find that your data-types become recursive.</p>
