@@ -575,11 +575,26 @@ What would the ADT for a LISP-like language look like?</code></pre>
 </code></pre>
 <p>This is a good one!</p>
 <p>Most programmers won't have any problem with the usual recursive definition of <code>fibs</code>, so what makes this one special? Let's see if we can implement this function in a more familiar language -</p>
-<pre data-language="javascript"><code>
-function fibs() {
-	
-}
-</code></pre>
+<pre data-language="javascript"><code>// The Fibonacci Sequence in all its glory~
+//
+function fibs() { return [1, cons(1, zipWith(add, fibs, tail( fibs )))] }
+
+exports.main = function() { runList(fibs, 13) }
+
+// Helpers
+//
+function cons(h,t)        { return function() { return [h,t] }}
+function head(list)       { return list()[0] }
+function add(x,y)         { return x + y }
+function tail(list)       { return function() { return list()[1]() }}
+
+function zipWith(f, x, y) { return function() {
+                            return [ f(head(x), head(y)),
+                                     zipWith(f, tail(x), tail(y))] } }
+
+function runList(list, n) { while(n-- &gt; 0) {
+                            console.log(head(list)); list = tail(list)}}</code></pre>
+<p>The main difference between a normal recursive definition and this one is that the recursion happens at the value level, as opposed to the function-call location.</p>
 <hr />
 <h1 id="exercise---music">Exercise - Music</h1>
 <p>Once you have a model that reaches a sufficient level of complexity you will find that your data-types become recursive.</p>
