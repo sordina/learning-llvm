@@ -15,7 +15,7 @@ body {
 
 .todo { color: red; font-weight: bold; background: black;}
 
-table {
+#content table {
   background: #efefef;
 	width: 100%;
 }

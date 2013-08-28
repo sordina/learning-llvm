@@ -1,0 +1,36 @@
+
+
+#floating-toc {
+	display: none;
+	position: fixed;
+	margin: 0;
+	top: 0;
+	left: 0;
+	width: 100%;
+	text-align: center;
+	border-bottom: 1px solid black;
+	background: white;
+}
+
+#floating-toc table {
+	padding: 4px 30px;
+	margin: 0;
+	border: 0;
+}
+
+#floating-toc table * {
+	font-size: 11px;
+	display: inline;
+}
+
+#floating-toc td:nth-child(2) {
+	display: none;
+}
+
+body.floating-toc #floating-toc {
+	display: block;
+}
+
+body.floating-toc .chapter:first-child {
+	padding-top: 50px;
+}

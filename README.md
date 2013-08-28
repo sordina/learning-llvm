@@ -21,8 +21,8 @@ Melbourne Haskell Workshop 2013
 
 \startmode[html]
 ~~~{.note .notitle}
-Press "x" to show only the most important content
-Press "o" to expand the content out again
+Press "o" to toggle only showing the most important content
+Press "t" to toggle showing the table of contents
 ~~~
 \stopmode
 

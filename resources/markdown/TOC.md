@@ -2,7 +2,7 @@
 
 # Table of Contents
 
-<div class="important">
+<div id="toc" class="important">
 
 <!-- Note: This is a special file that determines the order of the chapters                  -->
 <!--       The lefthand column refers to the filename of the chapter in 'resources/markdown' -->
