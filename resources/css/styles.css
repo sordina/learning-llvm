@@ -109,8 +109,7 @@ p code {
 body.small .collapse                 { display: none;  }
 body.small .content > *              { display: none;  }
 body.small .content > h1             { display: block; }
-body.small .content > hr             { display: block; }
-body.small .content > hr:first-child { display: none; }
+body.small .content > hr             { display: none; }
 body.small .content > .important     { display: block; }
 body.small .content > .instruction   { display: block; }
 body.small .content > .open          { display: block; }
@@ -129,7 +128,7 @@ body.small .content > .collapse      { display: none;  }
 
 .chapter                 { overflow: hidden; padding-bottom: 30px; }
 .chapter hr:first-child  { display: none; }
-#content hr              { display: none; }
+#content > hr            { display: none; }
 
 
 /* Google Charts */

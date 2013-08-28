@@ -653,9 +653,21 @@ What would the ADT for a LISP-like language look like?</code></pre>
 </code></pre>
 <pre data-language="haskell" data-filter="resources/scripts/check.sh"><code>data RoseTree a = Node a [RoseTree a]
 </code></pre>
+<pre data-language="haskell" data-filter="resources/scripts/check.sh"><code>type Forrest a = [Tree a]
+data Tree a = Branch a (Forrest a)
+
+countF :: Forrest a -&gt; Int
+countF = sum . map countT
+
+countT :: Tree a -&gt; Int
+countT (Branch _ f) = 1 + countF f
+</code></pre>
 <pre class="instruction"><code>Prune</code></pre>
 <pre class="instruction"><code>Graft</code></pre>
 <pre class="instruction"><code>Weed</code></pre>
+<pre class="instruction"><code>Recreation
+
+Ignore recursion with the power of parameters</code></pre>
 </div>
 </div>
 
@@ -668,11 +680,15 @@ What would the ADT for a LISP-like language look like?</code></pre>
 
 <hr />
 <h1 id="laziness">Laziness</h1>
-<p>Haskell's evaluation strategies ~ Exploring the magic.</p>
-<p>Often when looking at exaples of Haskell functions you will come across examples of laziness in action. The cannonical example used to demonstrate the lazy recursive approach used in Haskell the definition of the list of Fibbonacci numbers -</p>
+<div class="center">
+
+<p><em>Haskell's evaluation strategies ~ Exploring the magic.</em></p>
+</div>
+
+<p>Often when looking at exaples of Haskell functions you will come across examples of laziness in action. The cannonical example used to demonstrate the lazy recursive approach of Haskell is the definition of the list of Fibbonacci numbers -</p>
 <pre data-language="haskell" data-filter="./resources/scripts/check.sh"><code>fibs = 1 : 1 : zipWith (+) fibs (tail fibs)
 </code></pre>
-<p>This solution has a reputation for being somewhat mind-bending for beginners, however, the question remains - What is going on here?</p>
+<p>This solution has a reputation for being somewhat mind-bending for beginners... What is going on here?</p>
 <pre class="real"><code>In order to show the start of an infinite list, use the `take` function -
 
 For example:
@@ -703,7 +719,7 @@ function zipWith(f, x, y) { return function() {
                             return [ f(head(x), head(y)),
                                      zipWith(f, tail(x), tail(y))] } }
 
-function runList(list, n) { while(n-- &gt; 0) {
+function runList(list, n) { while(n --&gt; 0) {
                             console.log(head(list)); list = tail(list)}}</code></pre>
 <p>The main difference between a normal recursive definition and this one is that the recursion happens at the value level, as opposed to the function-call location.</p>
 <pre class="instruction"><code> 
@@ -772,6 +788,88 @@ main = BS.writeFile &quot;baaBaa.mid&quot; (make_music 4 4 (Longer 4 baaBaa))</c
 
 <hr />
 <h1 id="testing">Testing</h1>
+<p>Haskell's type-system allows you to eliminate many kinds of errors that are usually combated using testing in more dynamic languages.</p>
+<p>However, just because the type system can prevent some classes of error, doesn't mean that it can catch them all.</p>
+<div class="center"> 
+<img src="resources/images/pokemotto.png" alt="Pokemon" />
+</div>
+
+<p>There are a couple of really useful approaches to testing used commonly by Haskell programmers:</p>
+<ul>
+<li><a href="http://hackage.haskell.org/package/QuickCheck">QuickCheck</a></li>
+<li><a href="http://hackage.haskell.org/package/HUnit">HUnit</a></li>
+</ul>
+<p>QuickCheck focuses primarily on testing pure code, while HUnit provides means to test code that lives in the IO monad.</p>
+<p>In the world of unit-testing, generating data can be a pain. Coming up with concise examples that test edge-cases and don't bother repeating useless properties is a real art-form that can take longer than writing the code to solve the problem at hand.</p>
+<p>In many languages, frameworks and libraries have sprung up to aid with this problem by providing ways to generate various forms of valid and invalid test-data on demand.</p>
+<p>An example of this form of library in Ruby is <a href="https://github.com/thoughtbot/factory_girl">Factory Girl</a>. You specify the structure and properties of the data you want generated, and using the helpers provided by the framework you will be able to generate many unit tests to ensure that your application's code behaves as expected!</p>
+<p>But hang-on... Why would we go about telling a Haskell library what the structure of our data looks like when in a great-deal of cases - Haskell already knows?</p>
+<p>This is where the <code>Arbitrary</code> type-class from QuickCheck steps up to bat for us!</p>
+<hr />
+<p>Let's say that we have a function <code>hyphenate</code> that takes a sentence and turns the spaces into hyphens - There should be no trailing or leading hyphens unless they were already there to begin with, and there should be no instance of multiple hyphens in a row in our output - For example:</p>
+<pre><code>&quot;hello world&quot;      =&gt; &quot;hello-world&quot;
+&quot;say     whaaaaa?&quot; =&gt; &quot;say-whaaaat?&quot;</code></pre>
+<p>We get pretty excited and code up an enterprise solution ~</p>
+<pre data-language="haskell" data-filter="./resources/scripts/check.sh"><code>hyphenate :: String -&gt; String
+hyphenate s = map (replace &#39; &#39; &#39;-&#39;) s
+
+replace :: Char -&gt; Char -&gt; Char -&gt; Char
+replace x y c | c == x    = y
+              | otherwise = c
+</code></pre>
+<p>Great!</p>
+<p>Those examples we looked at earlier kind of look like some test-data. Let's write some unit-tests.</p>
+<pre class="nocheck" data-language="haskell"><code>test1 :: Bool
+test1 = hyphenate &quot;hello world&quot; == &quot;hello-world&quot;
+
+test2 :: Bool
+test2 = hyphenate &quot;say     whaaaaa?&quot; == &quot;say-whaaaat?&quot;</code></pre>
+<p><em>Awwwwwww yis.</em></p>
+<p>... Except test2 fails spectacularly... Hmm...</p>
+<p>So we fix our test-data, we fix our function (hopefully?) and code up a few more tests, only to find we missed another edge-case when our client comes back with some trailing hyphens and mad as a raging bull... There has to be a better way!</p>
+<p>Enter QuickCheck -</p>
+<p>Rather than writing tests for individual applications, we write properties that cover the various specifications of the desired behavior:</p>
+<pre class="nocheck" data-language="haskell"><code>import Data.List
+
+prop_no_spaces :: String -&gt; Bool
+prop_no_spaces s = not (elem &#39; &#39; (hyphenate s))
+
+prop_no_leading :: String -&gt; Bool
+prop_no_leading s = case hyphenate s of (x:xs) -&gt; x /= &#39;-&#39;
+                                        _      -&gt; True
+
+prop_no_trailing :: String -&gt; Bool
+prop_no_trailing s = prop_no_leading (reverse s)
+
+prop_no_multiple :: String -&gt; Bool
+prop_no_multiple s = not (elem &quot;--&quot; (concatMap tails (inits s)))</code></pre>
+<p>That's all well and good, but how does that help us?</p>
+<p>Check this out!</p>
+<pre><code>lyndon@endpin ~ quickCheck +names hyphen-solution-and-tests.hs
+GHCi, version 7.6.2: http://www.haskell.org/ghc/  :? for help
+[Prelude] λ [1 of 1] Compiling Main             ( hy.hs, interpreted )
+Ok, modules loaded: Main.
+prop_no_spaces: +++ OK, passed 100 tests.
+[*Main] &gt; prop_no_leading: *** Failed! Falsifiable (after 44 tests and 7 shrinks):
+&quot; &quot;
+[*Main] &gt; prop_no_trailing: +++ OK, passed 100 tests.
+[*Main] &gt; prop_no_multiple: +++ OK, passed 100 tests.
+[*Main] &gt; Leaving GHCi.</code></pre>
+<p>ZOMG - So much free test data!</p>
+<p>This found an edge-case for us without too much trouble, and what's more, narrowed it down to the minimal failing example!</p>
+<pre class="real"><code>If you want to be able to take advantage of QuickCheck in the
+fashion performed in the example you will need to install
+QuickCheck and quickcheck-script:
+
+&gt; cabal install quickcheck quickcheck-script</code></pre>
+<p>TODO</p>
+<pre class="instruction"><code>Write properties for the constraints required in the Rose-Tree
+exercise from The Garden.</code></pre>
+<div class="important">
+
+<p><a href="#the-garden">Link to The Garden Chapter</a></p>
+</div>
+
 </div>
 </div>
 
@@ -901,6 +999,8 @@ differentiate = ...</code></pre>
 <ul>
 <li><a href="http://stackoverflow.com/questions/17870864/where-is-huttons-razor-first-defined">Hutton's Razor</a></li>
 <li><a href="http://research.microsoft.com/en-us/um/people/simonpj/papers/pj-lester-book/">Implementing Functional Languages: A Tutorial</a></li>
+<li><a href="http://en.wikipedia.org/wiki/QuickCheck">QuickCheck Wikipedia Page</a></li>
+<li><a href="http://hackage.haskell.org/package/QuickCheck">QuickCheck on Hackage</a></li>
 </ul>
 </div>
 </div>

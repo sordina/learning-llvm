@@ -3,19 +3,23 @@
 
 # Laziness
 
-Haskell's evaluation strategies ~ Exploring the magic.
+<div class="center">
+
+_Haskell's evaluation strategies ~ Exploring the magic._
+
+</div>
 
 Often when looking at exaples of Haskell functions you will come across
 examples of laziness in action.
-The cannonical example used to demonstrate the lazy recursive approach used in Haskell
-the definition of the list of Fibbonacci numbers -
+The cannonical example used to demonstrate the lazy recursive approach of Haskell
+is the definition of the list of Fibbonacci numbers -
 
 ~~~{ data-language=haskell data-filter=./resources/scripts/check.sh }
 fibs = 1 : 1 : zipWith (+) fibs (tail fibs)
 ~~~
 
 This solution has a reputation for being somewhat mind-bending for
-beginners, however, the question remains - What is going on here?
+beginners... What is going on here?
 
 ```real
 In order to show the start of an infinite list, use the `take` function -
@@ -58,7 +62,7 @@ function zipWith(f, x, y) { return function() {
                             return [ f(head(x), head(y)),
                                      zipWith(f, tail(x), tail(y))] } }
 
-function runList(list, n) { while(n-- > 0) {
+function runList(list, n) { while(n --> 0) {
                             console.log(head(list)); list = tail(list)}}
 ~~~
 
