@@ -10,6 +10,11 @@
 	<body class="">
 		<div id="content">
 
+<div class='chapter'>
+<div class='content'>
+
+
+
 <h1 id="melbourne-haskell-workshop-2013">Melbourne Haskell Workshop 2013</h1>
 <h1 id="draft-copy">DRAFT COPY</h1>
 <ul>
@@ -55,6 +60,16 @@ Press &quot;o&quot; to expand the content out again</code></pre>
 <p>If you are attending the workshop, make sure that you RSVP via <a href="http://www.meetup.com/Melbourne-Functional-User-Group-MFUG/events/132307572/">Meetup</a>. Please also attempt to have the required items from the <a href="#resources">'Resources'</a> section available for your use during the workshop.</p>
 <p>If you would like to volunteer, please subscribe to the <a href="http://www.reddit.com/r/mhw2013/">mhw2013</a> sub-reddit and list yourself on the wiki.</p>
 </div>
+
+
+</div>
+</div>
+
+
+
+
+<div class='chapter'>
+<div class='content'>
 
 <hr />
 <h1 id="table-of-contents">Table of Contents</h1>
@@ -126,6 +141,16 @@ Press &quot;o&quot; to expand the content out again</code></pre>
 </table>
 </div>
 
+</div>
+</div>
+
+
+
+
+<div class='chapter'>
+<div class='content'>
+
+
 <hr />
 <h1 id="required-resources">Required Resources</h1>
 <p>Before you begin you will require the following...</p>
@@ -160,6 +185,16 @@ Press &quot;o&quot; to expand the content out again</code></pre>
 <p>Learn You a Haskell (For Great Good) is a wonderful introductory text on Haskell.</p>
 <h2 id="real-world-haskell"><a href="http://book.realworldhaskell.org/">Real World Haskell</a></h2>
 <p>Real World Haskell aims to focus on solving real problems with Haskell. Several chapters of the book are somewhat dated in terms of the libraries used, but it still serves as a useful example of getting real work done with Haskell.</p>
+</div>
+</div>
+
+
+
+
+<div class='chapter'>
+<div class='content'>
+
+
 <hr />
 <h1 id="introduction">Introduction</h1>
 <div class="important">
@@ -222,6 +257,16 @@ Press &quot;o&quot; to expand the content out again</code></pre>
 <p>For us, the organisers, running this workshop will be a great opportunity to see the Melbourne Haskell community in action. We're looking forward to working with you all, and expect that above all else we will have a lot of...</p>
 <h2 id="fun"><em>Fun!</em></h2>
 </div>
+
+</div>
+</div>
+
+
+
+
+<div class='chapter'>
+<div class='content'>
+
 
 <hr />
 <h1 id="setup">Setup</h1>
@@ -336,6 +381,16 @@ Given that GHC is largely written in Haskell, how was GHC first compiled?</code>
 <pre class="open"><code>An open-ended question:
 
 What are some of the current issues with the Haskell ecosystem?</code></pre>
+</div>
+</div>
+
+
+
+
+<div class='chapter'>
+<div class='content'>
+
+
 <hr />
 <h1 id="opening-exercises">Opening Exercises</h1>
 <div class="important">
@@ -462,6 +517,16 @@ myElem e (x:xs) = if e == x then True
 
 What is a good balance between safety and expressiveness in a
 programming-language?</code></pre>
+</div>
+</div>
+
+
+
+
+<div class='chapter'>
+<div class='content'>
+
+
 <hr />
 <h1 id="adts-algebraic-data-types">ADTs (Algebraic Data Types)</h1>
 <div class="center">
@@ -567,6 +632,16 @@ What would the ADT for a LISP-like language look like?</code></pre>
 </div>
 </li>
 </ul>
+</div>
+</div>
+
+
+
+
+<div class='chapter'>
+<div class='content'>
+
+
 <hr />
 <h1 id="laziness">Laziness</h1>
 <p>Haskell's evaluation strategies ~ Exploring the magic.</p>
@@ -616,6 +691,16 @@ value-based recursion.</code></pre>
 <pre class="open"><code>An open-ended question:
 
 Can all numberic-lists be defined by using value-based recursion?</code></pre>
+</div>
+</div>
+
+
+
+
+<div class='chapter'>
+<div class='content'>
+
+
 <hr />
 <h1 id="exercise---music">Exercise - Music</h1>
 <p>Once you have a model that reaches a sufficient level of complexity you will find that your data-types become recursive.</p>
@@ -651,8 +736,28 @@ import qualified Data.ByteString as BS
 
 main = BS.writeFile &quot;baaBaa.mid&quot; (make_music 4 4 (Longer 4 baaBaa))</code></pre>
 <p>Your task is to write a melody using this language. Try to write and compose functions, rather than declaring one big data-structure.</p>
+</div>
+</div>
+
+
+
+
+<div class='chapter'>
+<div class='content'>
+
+
 <hr />
 <h1 id="exercise---testing">Exercise - Testing</h1>
+</div>
+</div>
+
+
+
+
+<div class='chapter'>
+<div class='content'>
+
+
 <hr />
 <h1 id="exercise---org-chart">Exercise - Org Chart</h1>
 <p>You are an employee of International Banking Machines.</p>
@@ -728,6 +833,16 @@ main = BS.writeFile &quot;baaBaa.mid&quot; (make_music 4 4 (Longer 4 baaBaa))</c
 </table>
 <p>Your function should have the following signature:</p>
 <pre class="nocheck" data-language="haskell"><code>process :: String -&gt; OrgChart</code></pre>
+</div>
+</div>
+
+
+
+
+<div class='chapter'>
+<div class='content'>
+
+
 <hr />
 <h1 id="exercise---symbolic-differentiation">Exercise - Symbolic Differentiation</h1>
 <p>Your Highschool math teacher has decided to introduce differentiation of single-variable polynomials...</p>
@@ -747,12 +862,28 @@ main = BS.writeFile &quot;baaBaa.mid&quot; (make_music 4 4 (Longer 4 baaBaa))</c
 <p>After you feel confident that you can represent any such expression, write a function using the two rules listed to provide the following function:</p>
 <pre class="nocheck" data-language="haskell"><code>differentiate :: Polynomial -&gt; Polynomial
 differentiate = ...</code></pre>
+</div>
+</div>
+
+
+
+
+<div class='chapter'>
+<div class='content'>
+
+
 <hr />
 <h1 id="appendix">Appendix</h1>
 <ul>
 <li><a href="http://stackoverflow.com/questions/17870864/where-is-huttons-razor-first-defined">Hutton's Razor</a></li>
 <li><a href="http://research.microsoft.com/en-us/um/people/simonpj/papers/pj-lester-book/">Implementing Functional Languages: A Tutorial</a></li>
 </ul>
+</div>
+</div>
+
+
+
+
 			<hr>
 			<p class="center footer"> Produced with <a href="http://johnmacfarlane.net/pandoc/">Pandoc</a> </p>
 		</div>

@@ -1,4 +1,4 @@
-#content {
+.content {
 	max-width: 640px;
 	margin: auto;
 }
@@ -9,7 +9,8 @@ hr {margin: 3em;}
 
 body {
 	background: url(../images/footer2.png) center bottom no-repeat;
-	padding-bottom: 900px;
+	padding: 0 0 900px 0;
+	margin: 0;
 }
 
 .todo { color: red; font-weight: bold; background: black;}
@@ -88,7 +89,7 @@ p code {
 	content: "Note:";
 }
 
-#content .notitle:before {
+.content .notitle:before {
 	display: none;
 }
 
@@ -104,12 +105,27 @@ p code {
 }
 
 /* Collapsing Rules */
-body.small .collapse               { display: none;  }
-body.small #content > *            { display: none;  }
-body.small #content > h1           { display: block; }
-body.small #content > hr           { display: block; }
-body.small #content > .important   { display: block; }
-body.small #content > .instruction { display: block; }
-body.small #content > .open        { display: block; }
-body.small #content > .reveal      { display: block; }
-body.small #content > .collapse    { display: none;  }
+body.small .collapse                 { display: none;  }
+body.small .content > *              { display: none;  }
+body.small .content > h1             { display: block; }
+body.small .content > hr             { display: block; }
+body.small .content > hr:first-child { display: none; }
+body.small .content > .important     { display: block; }
+body.small .content > .instruction   { display: block; }
+body.small .content > .open          { display: block; }
+body.small .content > .reveal        { display: block; }
+body.small .content > .collapse      { display: none;  }
+
+
+
+
+/* Chapters */
+
+.chapter:nth-child(4n)   { background:#fae; }
+.chapter:nth-child(4n+1) { background:#dfa; }
+.chapter:nth-child(4n+2) { background:#adf; }
+.chapter:nth-child(4n+3) { background:#afd; }
+
+.chapter                 { overflow: hidden; }
+.chapter hr:first-child  { display: none; }
+#content hr              { display: none; }

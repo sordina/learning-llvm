@@ -8,10 +8,10 @@ CHAPTERS  := README.md dependencies/TOC.md \
 all: dependencies html pdf todo
 
 html:
-	@ sed 's/.*|//' resources/markdown/TOC.md > dependencies/TOC.md
-	@ cat  resources/html/head.html                                       > index.html
-	@ sed 's/^\\startmode.*//;s/^\\stopmode.*//' $(CHAPTERS) | pandoctor >> index.html
-	@ cat  resources/html/footer.html                                    >> index.html
+	@ sed 's/.*|//' resources/markdown/TOC.md                    > dependencies/TOC.md
+	@ cat  resources/html/head.html                              > index.html
+	@ resources/scripts/wrapchapters.sh $(CHAPTERS) | pandoctor >> index.html
+	@ cat  resources/html/footer.html                           >> index.html
 
 pdf:
 	@ sed 's/^----$$/\\pagebreak/' $(CHAPTERS) | pandoc -V geometry:margin=1.5in -o workshop.pdf
