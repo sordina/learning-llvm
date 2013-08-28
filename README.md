@@ -37,7 +37,7 @@ A 6-hour workshop intended to introduce and provide resources for working with H
 </div>
 
 <!-- http://upload.wikimedia.org/wikipedia/commons/0/0c/Potter's_workshop_VA.jpg -->
-<div class="center"> ![Workshop](resources/images/workshop.png) </div>
+<div class="center nopad"> ![Workshop](resources/images/workshop.png) </div>
 
 This workshop is based around a central concept of domain modeling with Haskell.
 

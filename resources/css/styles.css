@@ -17,6 +17,7 @@ body {
 
 table {
   background: #efefef;
+	width: 100%;
 }
 
 pre {
@@ -133,8 +134,12 @@ body.small .content > .collapse      { display: none;  }
 
 /* Google Charts */
 
-img.google {
+img {
 	background: white;
 	padding: 20px;
 	border: 1px solid black;
+}
+
+.nopad img {
+	padding: 0px;
 }

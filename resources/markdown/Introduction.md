@@ -1,145 +1,239 @@
 
 ----
 
-Introduction
-============
+# Introduction
 
 <div class="important">
 
-Welcome to the Melbourne Haskell Workshop 2013.
-
-This intent of this workshop is to provide a working introduction to Haskell
-for programmers in Melbourne who have not yet used the language in anger.
-
-The workshop is split into chapters - each lasting an hour. Chapters will start
-with a few trivial introductory exercises to get your fingers warmed up,
-then the meat - an exercise that should be able to be solved using the material
-introduced up to that point (with help and hints available if needed).
-
-Each chapter will conclude with an open-question. This question should provide
-inspiration for further consideration of how harder problems could
-be solved using Haskell, and for more advanced attendees, can be attacked
-instead of twiddling your thumbs after finishing the main exercise.
+The following exercises are intended to be used to warm up your fingers, rather than
+your brain. These should be run through quickly to get you used to using your
+development environment.
 
 </div>
 
-## Why run a free haskell workshop?
+## Variables
 
-There are a few kinds of benefits that we anticipate will result as an
-outcome of the workshop:
+In Haskell you can define a variable with the `=` sign.
 
-* Benefits to Individuals
-* Benefits to the Community
-* Benefits to the Volunteers
-* Benefits to the Organisers
-* Benefits to Industry
-* Benefits to Relationships
+Variables can be defined at the top-level (no-indentation):
 
-### Benefits to Individuals
+~~~{data-language=haskell data-filter=./resources/scripts/check.sh}
+myVariable = 2
+~~~
 
-* New Tools
-* Experience writing Haskell
-* An Introduction to the Wider Community
+Variable names should start with a lowercase letter and contain no spaces, or special characters, besides underscores, numbers, and `'`.
 
-What do we hope that an individual attendee will gain by coming to the workshop?
+```instruction
+Define your own variable.
+```
 
-Since this workshop is targeted towards beginners, we want an attendee
-to come away from the workshop with new tools at their disposal. Yes,
-a new language to reimplement existing knowledge with various platform
-benefits, but more importantly, a new tool for dissecting problems.
+## Type Signatures
 
-Learning a new problem-solving approach will almost certainly
-be the most challenging part of the workshop, but through
-the consistent delivery of exercises that benefit from domain
-modelling, we hope that the attendee will walk away with the
-confidence to attack new problems from the "Haskell Mindset".
+You can annotate a definition with a valid type-signature:
 
-Although there won't be time to work on any large-scale problems,
-we hope that the approaches we demonstrate will be able to
-be applied with confidence to problems of any size.
+~~~{data-language=haskell data-filter=./resources/scripts/check.sh}
+myVariable2 :: Int
+myVariable2 = 1
+~~~
 
-Aside from the technical benefits, the workshop should provide a great
-opportunity for attendees to meet many other members of the
-Melbourne Haskell using community.
+```instruction
+Give your variable a type-signature.
+```
 
-### Benefits to the Community
+## String Literals
 
-* Haskell as a Tool for Communication
-* Local Network Effects
-* Consolidation
+String literals look familiar:
 
-Often, Haskell (especially the type-system) can be an extremely effective means
-of communication of certain kinds of behaviors, requirements, and problems.
-If this workshop can help advance Haskell as a common language for
-inter-personal discussion of technical topics, then the barriers of communication
-will be lowered and the community as a whole should become more productive.
+~~~{data-language=haskell data-filter=./resources/scripts/check.sh}
+myString :: String
+myString = "hello world"
+~~~
 
-Often, it isn't until a particular community reaches a critical mass
-that it comes into its own. Currently the Melbourne Haskell community
-is reasonably disparate and unconnected (especially outside of MFUG).
-If the various groups of people using Haskell can be consolidated,
-then we would consider starting a regular Melbourne Haskell meetup.
-Just having the ability to ask questions in person can go a long
-way to advancing confidence in a particular topic, therefore,
-as the number of Haskell users increases locally, so to will
-the overall skill of individuals and the community as a whole.
+```instruction
+Define a variable containing a string.
+```
 
-### Benefits to the Volunteers
+## Tuples
 
-* Experience
-* Networking
+Tuples look like this:
 
-We hope that for the volunteers, providing administrative
-and in-person assistance will be a rewarding experience.
-We are very open to people of any skill level helping out
-and this could be a great opportunity for newcomers to the
-community to get their fingers dirty by providing assistance
-at the workshop.
+~~~{data-language=haskell data-filter=./resources/scripts/check.sh}
+myTuplePair :: (Int, String)
+myTuplePair = (1,"hello")
 
-The workshop should also be a good networking opportunity for
-volunteers, as a stratified group of Haskellers of this size has not yet
-convened in Melbourne.
+myTupleTrio :: (Int, String, Int)
+myTupleTrio = (1,"hello",3)
+~~~
 
-### Benefits to Industry
+They can be used to group multiple, differently-typed (heterogeneous) values.
 
-It has been said that once you are comfortable programming Haskell, you
-become spoiled, and won't want to go back to your previous languages.
-Rather than quit your day-job, if Haskell's presence can be advanced in
-industry, then the Joy of programming haskell will become a possibility
-in your day-to-day work-life. A longer-term goal to be sure.
+```instruction
+Define a variable containing a tuple.
+```
 
-This benefit may be the most tenuous outcome of the workshop, but as
-the mindshare of Haskell grows, the chances of it being
-used for projects within industry increases.
+## Functions
 
-* An understanding of the language's strengths
-	and weaknesses emerges empowers decision makers to weigh up if the language is
-	a suitable candidate to solve the technical problems at hand.
-* Confidence is gained that there are enough people using the language
-  that hiring a programmer will not be a problem if this is required.
+Functions are a core part of Haskell. Function definitions look like this:
 
-The technical benefits to industry will have the most impact
-where a rigorous solution to a problem is necessary. In the financial
-sector, Haskell is beginning to become more popular as the cost
-of bugs can be very high. Technical benefits, however, are a moot point
-if Haskell does not see adoption.
 
-If this workshop can give project-leaders in industry, making programming-language choices,
-the confidence to consider Haskell as a real candidate, then it will have
-gone a long way towards making Melbourne a more attractive place
-to be for people who wish to use Haskell in day-to-day work.
+~~~{data-language=haskell .nocheck} 
+myFunction :: ... -> ...
+myFunction x y ... = ...
+~~~
 
-### Benefits to the Organisers
+If a function `f` takes something of type `a` and returns something of type `b` we write the type signature as:
 
-Last-but-not-least -
+~~~{data-language=haskell .nocheck}
+f :: a -> b
+~~~
 
-<div class="important">
+For example:
 
-For us, the organisers, running this workshop will
-be a great opportunity to see the Melbourne Haskell community in
-action. We're looking forward to working with you all, and expect that
-above all else we will have a lot of...
+~~~{data-language=haskell data-filter=./resources/scripts/check.sh}
+myAdd :: Int -> Int -> Int
+myAdd x y = x + y
+~~~
 
-## _Fun!_
+`myAdd` takes two numbers and returns the result of the addition of those two numbers.
 
-</div>
+
+```instruction
+Define a function `myMultiply` that multiplies 3 numbers.
+```
+
+```instruction
+Give your function a type-signature
+```
+
+~~~{data-language=haskell .answer data-filter=./resources/scripts/check.sh}
+myMultiply :: Int -> Int -> Int -> Int
+myMultiply x y z = x * y * z
+~~~
+
+## Lists
+
+List are a commonly used data-structure in Haskell. Everything in a list has the same type (they are homogeneous).
+
+Lists are built using the infix data-constructor `(:)` (pronounced "cons"). They also have a compact notation using `[...]`.
+
+List literals look like:
+
+~~~{data-language=haskell data-filter=./resources/scripts/check.sh}
+list1 :: [Int]
+list2 :: [Int]
+list3 :: [String]
+
+list1 = [1,2,3]
+list2 = 1 : 2 : []
+list3 = "hello" : "world" : []
+~~~
+
+```instruction
+Define a variable containing a list.
+```
+
+```instruction
+Give your variable a type-signature.
+```
+
+You can deconstruct a list by pattern matching the head and tail like so:
+
+~~~{data-language=haskell .nocheck}
+f (x:xs) = ...
+~~~
+
+```instruction
+Define a function to get the first element of a list.
+```
+
+Note: In `Prelude` this function is called `head`.
+
+~~~{.answer data-language=haskell data-filter=./resources/scripts/check.sh}
+myHead (x:xs) = x -- This is a partial function, Beware!
+~~~
+
+```instruction
+Define a variable containing the first element of your list.
+```
+
+~~~{.answer data-language=haskell .nocheck} 
+myFirstElement = myHead myList
+~~~
+
+### Define Length
+
+```instruction
+Define a function that takes a list and returns the length.
+```
+
+~~~{data-language=haskell data-filter=./resources/scripts/check.sh}
+-- In Haskell type-signature syntax, this is written as:
+myLength :: [a] -> Int
+myLength = undefined
+~~~
+
+Your solution should have the form of:
+
+~~~{data-language=haskell .nocheck}
+myLength []     = ...
+myLength (x:xs) = ...
+~~~
+
+Things to consider:
+
+* What is the length of an empty list? (the base case)
+* What is the length of xs?
+
+~~~{.answer data-language=haskell data-filter=./resources/scripts/check.sh}
+mylength []     = 0
+mylength (x:xs) = 1 + mylength xs
+~~~
+
+### Define `myMap`
+
+```instruction
+
+  
+Define a function that takes a function from a to b "a -> b",
+and a list of as "[a]", and returns a list of bs "[b]".
+```
+
+Things to consider:
+
+* What is the type-signature of myMap?
+* What is the base-case of myMap?
+
+~~~{.answer data-language=haskell data-filter=./resources/scripts/check.sh}
+myMap :: (a -> b) -> [a] -> [b]
+myMap f [] = []
+myMap f (x:xs) = f x : myMap f xs
+~~~
+
+## Fun List Functions
+
+For your reading pleasure, here are some definintions of common functions:
+
+~~~{data-language=haskell data-filter=./resources/scripts/check.sh}
+myFilter f []     = []
+myFilter f (x:xs) = if f x then x : myFilter f xs
+                           else     myFilter f xs
+
+myFold f z []     = z
+myFold f z (x:xs) = f x (myFold f z xs)
+
+myReverse []     = []
+myReverse (x:xs) = myReverse xs ++ [x]
+
+myElem e []     = False
+myElem e (x:xs) = if e == x then True
+                            else myElem e xs
+~~~
+
+See if you can determine the type-signatures for these functions.
+
+```open
+An open-ended question:
+
+What is a good balance between safety and expressiveness in a
+programming-language?
+```

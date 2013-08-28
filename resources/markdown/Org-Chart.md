@@ -1,8 +1,7 @@
 
 ----
 
-Exercise - Org Chart
-====================
+# Org Chart
 
 You are an employee of International Banking Machines.
 
@@ -13,7 +12,7 @@ Before you are able to perform your calculations, you will have to decide how yo
 will model your data. Construct a Haskell data-type to represent the various types
 of employees and departments shown in the following diagram:
 
-<div class="center">![Org Chart](resources/images/dot/01.png)</div>
+<div class="center nopad">![Org Chart](resources/images/dot/01.png)</div>
 
 \startmode[html]
 ~~~{.hidden data-language="dot" data-output="resources/images/dot/01.png" data-filter="./resources/scripts/graph.sh"}

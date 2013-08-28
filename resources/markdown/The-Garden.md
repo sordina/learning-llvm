@@ -11,7 +11,3 @@ data BinaryTree a = Empty | Node a (BinaryTree a) (BinaryTree a)
 data RoseTree a = Node a [RoseTree a]
 ~~~~
 
-
-
-
-

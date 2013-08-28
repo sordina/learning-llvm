@@ -1,8 +1,8 @@
 
 ----
 
-Exercise - Music
-================
+Music
+=====
 
 Once you have a model that reaches a sufficient level of complexity you will find
 that your data-types become recursive.
