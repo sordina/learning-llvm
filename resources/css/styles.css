@@ -121,11 +121,20 @@ body.small .content > .collapse      { display: none;  }
 
 /* Chapters */
 
-.chapter:nth-child(4n)   { background:#fae; }
-.chapter:nth-child(4n+1) { background:#dfa; }
-.chapter:nth-child(4n+2) { background:#adf; }
-.chapter:nth-child(4n+3) { background:#afd; }
+.chapter:nth-child(4n+1) { background:#eef; }
+.chapter:nth-child(4n+2) { background:#fbe; }
+.chapter:nth-child(4n+3) { background:#efb; }
+.chapter:nth-child(4n+4) { background:#bfe; }
 
-.chapter                 { overflow: hidden; }
+.chapter                 { overflow: hidden; padding-bottom: 30px; }
 .chapter hr:first-child  { display: none; }
 #content hr              { display: none; }
+
+
+/* Google Charts */
+
+img.google {
+	background: white;
+	padding: 20px;
+	border: 1px solid black;
+}
