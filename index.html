@@ -102,38 +102,42 @@ Press &quot;o&quot; to expand the content out again</code></pre>
 <td align="left">Modelling with data in Haskell</td>
 </tr>
 <tr class="even">
+<td align="left"><a href="#the-garden">The Garden</a></td>
+<td align="left">Trees, Roses and Picnics</td>
+</tr>
+<tr class="odd">
 <td align="left"><a href="#laziness">Laziness</a></td>
 <td align="left">Evaluation when required</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left"><a href="#typeclasses">Typeclasses</a></td>
 <td align="left">Code-Reuse and Laws</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left"><a href="#wildcard">Wildcard</a></td>
 <td align="left">Music</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left"><a href="#monads">Monads</a></td>
 <td align="left">DSLs, IO, Do-Notation</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left"><a href="#exercise---testing">Testing</a></td>
 <td align="left">Testing with QuickCheck</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left"><a href="#exercise---org-chart">Org-Chart</a></td>
 <td align="left">Org-Chart Exercise</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left"><a href="#exercise---symbolic-differentiation">Algebra</a></td>
 <td align="left">Symbolic Mathematics</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left"><a href="#ecosystem">Ecosystem</a></td>
 <td align="left">Resources and Community</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left"><a href="#appendix">Appendix</a></td>
 <td align="left">Appendix</td>
 </tr>
@@ -632,6 +636,22 @@ What would the ADT for a LISP-like language look like?</code></pre>
 </div>
 </li>
 </ul>
+</div>
+</div>
+
+
+
+
+<div class='chapter'>
+<div class='content'>
+
+
+<hr />
+<h1 id="the-garden">The Garden</h1>
+<pre data-language="haskell" data-filter="resources/scripts/check.sh"><code>data BinaryTree a = Empty | Node a (BinaryTree a) (BinaryTree a)
+</code></pre>
+<pre data-language="haskell" data-filter="resources/scripts/check.sh"><code>data RoseTree a = Node a [RoseTree a]
+</code></pre>
 </div>
 </div>
 

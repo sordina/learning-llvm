@@ -14,6 +14,7 @@ Introduction        |[Introduction](#introduction)                   Motivation,
 Setup               |[Setup](#setup)                                 Setting up your Haskell environment
 Intro-Exercise      |[Opening Exercises](#opening-exercises)         Introductory Exercises
 ADTs                |[ADTs](#adts-algebraic-data-types)              Modelling with data in Haskell
+The-Garden          |[The Garden](#the-garden)                       Trees, Roses and Picnics
 Laziness            |[Laziness](#laziness)                           Evaluation when required
                     |[Typeclasses](#typeclasses)                     Code-Reuse and Laws
 Music-Exercise      |[Wildcard](#wildcard)                           Music

@@ -19,8 +19,6 @@ fi
 
 echo "Processing Example $PANDOCTOR_COUNT" 1>&2
 
-echo $checksum > /tmp/haskell_workshop_md5_$PANDOCTOR_COUNT
-
 grep '^main =' /tmp/haskell_workshop_check.hs
 status=$?
 if [ $status -ne 0 ]
@@ -43,4 +41,8 @@ then
 	err
 	cat /tmp/ghc_results_$PANDOCTOR_COUNT
 	cat /tmp/ghc_results_$PANDOCTOR_COUNT 1>&2
+
+	exit 0
 fi
+
+echo $checksum > /tmp/haskell_workshop_md5_$PANDOCTOR_COUNT
