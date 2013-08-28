@@ -1,5 +1,14 @@
 
+(function() {
 
+document.body.className += " " + localStorage.getItem('floating-toc');
+document.body.className += " " + localStorage.getItem('small');
+
+function foo(v) {
+	var cn  = document.body.className
+	if(cn.match(v)) { document.body.className  = cn.replace(v,''); localStorage.setItem(v, "") }
+	else            { document.body.className += " " + v         ; localStorage.setItem(v, v ) }
+}
 
 document.onkeypress = function(e) {
 
@@ -7,15 +16,8 @@ document.onkeypress = function(e) {
 	var charCode = (typeof e.which == "number") ? e.which : e.keyCode;
 	if (charCode) {
 		var key = String.fromCharCode(charCode)
-		var cn  = document.body.className
-		if(key === "t") {
-			if(cn.match(/floating-toc/)) { document.body.className = cn.replace(/floating-toc/,'') }
-			else                         { document.body.className += " floating-toc"; }
-		}
-		else if(key === "o") {
-			if(cn.match(/small/))        { document.body.className = cn.replace(/small/,'') }
-			else                         { document.body.className += " small" }
-		}
+		     if(key === "t") { foo("floating-toc") }
+		else if(key === "o") { foo("small")        }
 	}
 }
 
@@ -25,3 +27,6 @@ toc.className = "floating-toc"
 toc.id        = "floating-toc"
 
 document.body.appendChild(toc)
+
+})();
+
