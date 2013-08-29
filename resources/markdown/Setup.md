@@ -35,7 +35,7 @@ You can use GHCi to perform calculations other than just "1 + 1".
 
 Here is an example session:
 
-lyndon@endpin ~ ghci
+> ghci
 GHCi, version 7.6.2: http://www.haskell.org/ghc/  :? for help
 Loading package ghc-prim ... linking ... done.
 Loading package integer-gmp ... linking ... done.
@@ -80,7 +80,7 @@ main = print "hello world"
 Load the file in GHCi to see it in action:
 
 ```shell
-lyndon@endpin ~ ghci test.hs
+> ghci test.hs
 GHCi, version 7.6.2: http://www.haskell.org/ghc/  :? for help
 Loading package ghc-prim ... linking ... done.
 Loading package integer-gmp ... linking ... done.
@@ -160,11 +160,11 @@ Compile and run your own spin on Hello-World.
 ```
 
 ```answer
-lyndon@endpin ~ echo 'main = print "hello homies"' > main.hs
-lyndon@endpin ~ ghc --make main.hs
+> echo 'main = print "hello homies"' > main.hs
+> ghc --make main.hs
 [1 of 1] Compiling Main             ( main.hs, main.o )
 Linking main ...
-lyndon@endpin ~ ./main
+> ./main
 "hello homies"
 ```
 
@@ -190,9 +190,9 @@ Install the QuickCheck package using cabal.
 ```
 
 ```answer
-lyndon@endpin ~ cabal update # not required if done recently
+> cabal update # not required if done recently
 Downloading the latest package list from hackage.haskell.org
-lyndon@endpin ~ cabal install quickcheck
+> cabal install quickcheck
 ...
 ```
 

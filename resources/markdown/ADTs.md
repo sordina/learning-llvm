@@ -115,7 +115,7 @@ With all of this power at your disposal, it's time to define a list ADT yourself
 </div>
 
 ```instruction
-Define your own list ADT.
+Define your own generic list ADT.
 ```
 
 Things to consider:

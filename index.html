@@ -291,7 +291,7 @@ Press &quot;t&quot; to toggle showing the table of contents</code></pre>
 
 Here is an example session:
 
-lyndon@endpin ~ ghci
+&gt; ghci
 GHCi, version 7.6.2: http://www.haskell.org/ghc/  :? for help
 Loading package ghc-prim ... linking ... done.
 Loading package integer-gmp ... linking ... done.
@@ -320,7 +320,7 @@ Calculate the price of 42-bakers-dozens of eggs at $3 per-egg.</code></pre>
 <pre data-language="haskell" data-filter="./resources/scripts/check.sh"><code>main = print &quot;hello world&quot;
 </code></pre>
 <p>Load the file in GHCi to see it in action:</p>
-<pre class="shell"><code>lyndon@endpin ~ ghci test.hs
+<pre class="shell"><code>&gt; ghci test.hs
 GHCi, version 7.6.2: http://www.haskell.org/ghc/  :? for help
 Loading package ghc-prim ... linking ... done.
 Loading package integer-gmp ... linking ... done.
@@ -362,11 +362,11 @@ optimisation settings for GHC.</code></pre>
 <pre class="instruction"><code>Using GHC...
 
 Compile and run your own spin on Hello-World.</code></pre>
-<pre class="answer"><code>lyndon@endpin ~ echo &#39;main = print &quot;hello homies&quot;&#39; &gt; main.hs
-lyndon@endpin ~ ghc --make main.hs
+<pre class="answer"><code>&gt; echo &#39;main = print &quot;hello homies&quot;&#39; &gt; main.hs
+&gt; ghc --make main.hs
 [1 of 1] Compiling Main             ( main.hs, main.o )
 Linking main ...
-lyndon@endpin ~ ./main
+&gt; ./main
 &quot;hello homies&quot;</code></pre>
 <h2 id="cabal" class="important">Cabal</h2>
 <p>You should have access to a Cabal installation if you have installed the Haskell Platform.</p>
@@ -376,9 +376,9 @@ lyndon@endpin ~ ./main
 <pre class="text"><code>cabal-install version &lt;VERSION&gt;
 using version &lt;VERSION&gt; of the Cabal library</code></pre>
 <pre class="instruction"><code>Install the QuickCheck package using cabal.</code></pre>
-<pre class="answer"><code>lyndon@endpin ~ cabal update # not required if done recently
+<pre class="answer"><code>&gt; cabal update # not required if done recently
 Downloading the latest package list from hackage.haskell.org
-lyndon@endpin ~ cabal install quickcheck
+&gt; cabal install quickcheck
 ...</code></pre>
 <pre class="open"><code>An open-ended question:
 
@@ -615,7 +615,7 @@ Variable     := [a-z] + [a-z&#39;_]*</code></pre>
 <p>With all of this power at your disposal, it's time to define a list ADT yourself.</p>
 </div>
 
-<pre class="instruction"><code>Define your own list ADT.</code></pre>
+<pre class="instruction"><code>Define your own generic list ADT.</code></pre>
 <p>Things to consider:</p>
 <ul>
 <li>Should this ADT be parametrised?</li>
@@ -649,6 +649,7 @@ What would the ADT for a LISP-like language look like?</code></pre>
 
 <hr />
 <h1 id="the-garden">The Garden</h1>
+<p>This chapter will focus on various kinds of trees.</p>
 <pre data-language="haskell" data-filter="resources/scripts/check.sh"><code>data BinaryTree a = Empty | Node a (BinaryTree a) (BinaryTree a)
 </code></pre>
 <pre data-language="haskell" data-filter="resources/scripts/check.sh"><code>data RoseTree a = Node a [RoseTree a]
@@ -662,12 +663,41 @@ countF = sum . map countT
 countT :: Tree a -&gt; Int
 countT (Branch _ f) = 1 + countF f
 </code></pre>
-<pre class="instruction"><code>Prune</code></pre>
+<pre class="instruction"><code>You have a Garden full of RoseBushes
+
+Aphids
+
+Seccatirs</code></pre>
 <pre class="instruction"><code>Graft</code></pre>
 <pre class="instruction"><code>Weed</code></pre>
 <pre class="instruction"><code>Recreation
 
 Ignore recursion with the power of parameters</code></pre>
+<pre class="poem"><code>Our adventurer intrepid, climbing high in hopes to find...
+a single solitary flower, ends up being left behind.
+Each fork of branches he encounters leave him in a deeper bind.
+This thorny tree falls easiest with axes of another kind.</code></pre>
+<pre class="nocheck" data-language="haskell"><code>data RoseTree a = Node a [RoseTree a]
+
+quest :: RoseTree (Maybe Rose)
+quest = undefined
+
+solution = climb quest
+	where
+		climb (Node (Just rose) branches) = rose
+		climb (Node Nothing     branches) = map climb branches .... ?? !!!!
+
+-- Another kind..... If a RoseTree is a Monad (of kind &quot;* -&gt; *&quot;)
+
+instance Monad RoseTree where
+  return x = Node x []
+  Node x ts &gt;&gt;= f = Node x&#39; (ts&#39; ++ map (&gt;&gt;= f) ts)
+    where Node x&#39; ts&#39; = f x
+
+branches :: RoseTree a -&gt; [RoseTree a]
+branches f (Node a bs) = a : bs
+
+solution2 = iterate (&gt;&gt;= branches) quest</code></pre>
 </div>
 </div>
 
@@ -845,12 +875,11 @@ prop_no_multiple :: String -&gt; Bool
 prop_no_multiple s = not (elem &quot;--&quot; (concatMap tails (inits s)))</code></pre>
 <p>That's all well and good, but how does that help us?</p>
 <p>Check this out!</p>
-<pre><code>lyndon@endpin ~ quickCheck +names hyphen-solution-and-tests.hs
-GHCi, version 7.6.2: http://www.haskell.org/ghc/  :? for help
-[Prelude] λ [1 of 1] Compiling Main             ( hy.hs, interpreted )
+<pre><code>&gt; quickCheck +names hyphen-solution-and-tests.hs
+[Prelude] &gt; [1 of 1] Compiling Main ( hy.hs, interpreted )
 Ok, modules loaded: Main.
-prop_no_spaces: +++ OK, passed 100 tests.
-[*Main] &gt; prop_no_leading: *** Failed! Falsifiable (after 44 tests and 7 shrinks):
+[*Main] &gt; prop_no_spaces: +++ OK, passed 100 tests.
+[*Main] &gt; prop_no_leading: *** Failed! (after 44 tests and 7 shrinks):
 &quot; &quot;
 [*Main] &gt; prop_no_trailing: +++ OK, passed 100 tests.
 [*Main] &gt; prop_no_multiple: +++ OK, passed 100 tests.
@@ -862,8 +891,8 @@ fashion performed in the example you will need to install
 QuickCheck and quickcheck-script:
 
 &gt; cabal install quickcheck quickcheck-script</code></pre>
-<p>TODO</p>
-<pre class="instruction"><code>Write properties for the constraints required in the Rose-Tree
+<p>In order to take advantage of QuickCheck's data-generation for custom data-types - take a look at the <a href="http://hackage.haskell.org/packages/archive/QuickCheck/2.6/doc/html/Test-QuickCheck-Arbitrary.html">Arbitrary</a> type-class.</p>
+<pre class="instruction"><code>Write QuickCheck properties for the constraints required in the Rose-Tree
 exercise from The Garden.</code></pre>
 <div class="important">
 
@@ -1009,7 +1038,11 @@ differentiate = ...</code></pre>
 
 
 			<hr>
-			<p class="center footer"> Produced with <a href="http://johnmacfarlane.net/pandoc/">Pandoc</a> </p>
+			<p class="center footer"> Produced with
+				<a href="http://johnmacfarlane.net/pandoc/">Pandoc</a>
+				- Source on
+				<a href="http://github.com/sordina/haskell_workshop">GitHub</a>
+			</p>
 		</div>
 		<script type="text/javascript" src="resources/javascript/rainbow-custom.min.js"></script>
 		<script type="text/javascript" src="resources/javascript/answers.js"></script>

@@ -121,12 +121,11 @@ That's all well and good, but how does that help us?
 Check this out!
 
 ```
-lyndon@endpin ~ quickCheck +names hyphen-solution-and-tests.hs
-GHCi, version 7.6.2: http://www.haskell.org/ghc/  :? for help
-[Prelude] λ [1 of 1] Compiling Main             ( hy.hs, interpreted )
+> quickCheck +names hyphen-solution-and-tests.hs
+[Prelude] > [1 of 1] Compiling Main ( hy.hs, interpreted )
 Ok, modules loaded: Main.
-prop_no_spaces: +++ OK, passed 100 tests.
-[*Main] > prop_no_leading: *** Failed! Falsifiable (after 44 tests and 7 shrinks):
+[*Main] > prop_no_spaces: +++ OK, passed 100 tests.
+[*Main] > prop_no_leading: *** Failed! (after 44 tests and 7 shrinks):
 " "
 [*Main] > prop_no_trailing: +++ OK, passed 100 tests.
 [*Main] > prop_no_multiple: +++ OK, passed 100 tests.
@@ -146,10 +145,13 @@ QuickCheck and quickcheck-script:
 > cabal install quickcheck quickcheck-script
 ```
 
-TODO
+In order to take advantage of QuickCheck's data-generation
+for custom data-types - take a look at the 
+[Arbitrary](http://hackage.haskell.org/packages/archive/QuickCheck/2.6/doc/html/Test-QuickCheck-Arbitrary.html)
+type-class.
 
 ```instruction
-Write properties for the constraints required in the Rose-Tree
+Write QuickCheck properties for the constraints required in the Rose-Tree
 exercise from The Garden.
 ```
 
