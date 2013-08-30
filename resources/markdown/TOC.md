@@ -13,6 +13,7 @@ Resources       |[Resources](#required-resources)                Resources Avail
 Welcome         |[Welcome](#welcome)                             Motivation, Overview, and Approach
 Setup           |[Setup](#setup)                                 Setting up your Haskell environment
 Introduction    |[Introduction](#introduction)                   Introductory Exercises
+Types           |[Tyeps](#types)                                 The Haskell Type System
 ADTs            |[ADTs](#adts-algebraic-data-types)              Modelling with data in Haskell
 The-Garden      |[The Garden](#the-garden)                       Trees, Roses and Picnics
 Laziness        |[Laziness](#laziness)                           Evaluation when required
