@@ -9,10 +9,10 @@ _Haskell's evaluation strategies ~ Exploring the magic._
 
 </div>
 
-Often when looking at exaples of Haskell functions you will come across
+Often when looking at examples of Haskell functions you will come across
 examples of laziness in action.
-The cannonical example used to demonstrate the lazy recursive approach of Haskell
-is the definition of the list of Fibbonacci numbers -
+The canonical example used to demonstrate the lazy recursive approach of Haskell
+is the definition of the list of Fibonacci numbers -
 
 ~~~{ data-language=haskell data-filter=./resources/scripts/check.sh }
 fibs = 1 : 1 : zipWith (+) fibs (tail fibs)

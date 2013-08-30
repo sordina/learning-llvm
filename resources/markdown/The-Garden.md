@@ -47,7 +47,7 @@ Ignore recursion with the power of parameters
 ```
 
 ```poem
-Our adventurer intrepid, climbing high in hopes to find...
+Our adventurer intrepid, climbing high in hopes to find
 a single solitary flower, ends up being left behind.
 Each fork of branches he encounters leave him in a deeper bind.
 This thorny tree falls easiest with axes of another kind.
@@ -77,3 +77,8 @@ branches f (Node a bs) = a : bs
 solution2 = iterate (>>= branches) quest
 ~~~
 
+```open
+An open-ended question:
+
+Is there a universal data-structure?
+```

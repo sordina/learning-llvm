@@ -673,7 +673,7 @@ Seccatirs</code></pre>
 <pre class="instruction"><code>Recreation
 
 Ignore recursion with the power of parameters</code></pre>
-<pre class="poem"><code>Our adventurer intrepid, climbing high in hopes to find...
+<pre class="poem"><code>Our adventurer intrepid, climbing high in hopes to find
 a single solitary flower, ends up being left behind.
 Each fork of branches he encounters leave him in a deeper bind.
 This thorny tree falls easiest with axes of another kind.</code></pre>
@@ -698,6 +698,9 @@ branches :: RoseTree a -&gt; [RoseTree a]
 branches f (Node a bs) = a : bs
 
 solution2 = iterate (&gt;&gt;= branches) quest</code></pre>
+<pre class="open"><code>An open-ended question:
+
+Is there a universal data-structure?</code></pre>
 </div>
 </div>
 
@@ -715,7 +718,7 @@ solution2 = iterate (&gt;&gt;= branches) quest</code></pre>
 <p><em>Haskell's evaluation strategies ~ Exploring the magic.</em></p>
 </div>
 
-<p>Often when looking at exaples of Haskell functions you will come across examples of laziness in action. The cannonical example used to demonstrate the lazy recursive approach of Haskell is the definition of the list of Fibbonacci numbers -</p>
+<p>Often when looking at examples of Haskell functions you will come across examples of laziness in action. The canonical example used to demonstrate the lazy recursive approach of Haskell is the definition of the list of Fibonacci numbers -</p>
 <pre data-language="haskell" data-filter="./resources/scripts/check.sh"><code>fibs = 1 : 1 : zipWith (+) fibs (tail fibs)
 </code></pre>
 <p>This solution has a reputation for being somewhat mind-bending for beginners... What is going on here?</p>
