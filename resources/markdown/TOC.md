@@ -23,7 +23,7 @@ Music           |[Wildcard](#music)                              Music
 Testing         |[Testing](#testing)                             Testing with QuickCheck
 Org-Chart       |[Org-Chart](#org-chart)                         Org-Chart Exercise
 Algebra         |[Algebra](#symbolic-differentiation)            Symbolic Mathematics
-                |[Ecosystem](#ecosystem)                         Resources and Community
+Ecosystem       |[Ecosystem](#ecosystem)                         Resources and Community
 Appendix        |[Appendix](#appendix)                           Appendix
                 |------------------------------------------      ----------------------------------
 
