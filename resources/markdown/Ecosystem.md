@@ -6,6 +6,9 @@
 The Haskell ecosystem is large and interesting, it is held together more
 by convention than by dictation.
 
+
+The premiere online Cabal package repository is "Hackage".
+
 ```instruction
  
 

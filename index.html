@@ -1019,6 +1019,8 @@ exercise from The Garden.</code></pre>
 <h1 id="symbolic-differentiation">Symbolic Differentiation</h1>
 <p>Your Highschool math teacher has decided to introduce differentiation of single-variable polynomials...</p>
 <p>This is in super easy once you grasped the concept:</p>
+<div class="important">
+
 <p>Polynomial term differentiation:</p>
 <div class="center"> 
 <br /><img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=%20a%20.%20x%5En%20.%20%5Cfrac%7Bd%7D%7Bdx%7D%20%3D%20n.a.x%5E%7Bn-1%7D%20" alt=" a . x^n . \frac{d}{dx} = n.a.x^{n-1} " title=" a . x^n . \frac{d}{dx} = n.a.x^{n-1} " /><br />
@@ -1029,11 +1031,27 @@ exercise from The Garden.</code></pre>
 <br /><img style="vertical-align:middle" src="http://chart.apis.google.com/chart?cht=tx&amp;chl=%20%28a%20%2B%20b%29%20%5Cfrac%7Bd%7D%7Bdx%7D%20%3D%20a%20%5Cfrac%7Bd%7D%7Bdx%7D%20%2B%20b%20%5Cfrac%7Bd%7D%7Bdx%7D%20" alt=" (a + b) \frac{d}{dx} = a \frac{d}{dx} + b \frac{d}{dx} " title=" (a + b) \frac{d}{dx} = a \frac{d}{dx} + b \frac{d}{dx} " /><br />
 </div>
 
+</div>
+
 <p>But you don't wish to perform the undoubtedly large number of rote-examples required after your moment of epiphany.</p>
-<p>In this exercise you should develop a data-type to represent a single-variable polynomial expression.</p>
-<p>After you feel confident that you can represent any such expression, write a function using the two rules listed to provide the following function:</p>
 <pre class="nocheck" data-language="haskell"><code>differentiate :: Polynomial -&gt; Polynomial
 differentiate = ...</code></pre>
+<div class="important">
+
+<p>The data-type used to represent a <code>Polynomial</code> is as follows:</p>
+<pre data-language="haskell" data-filter="./resources/scripts/check.sh"><code>data Constant   = C Int             deriving (Show, Eq)
+data Power      = U Int             deriving (Show, Eq)
+data Term       = T Constant Power  deriving (Show, Eq)
+data Polynomial = P [ Term ]        deriving (Show, Eq)
+</code></pre>
+<p>The 'x' variable is implicit in the Term data-type.</p>
+</div>
+
+
+<pre class="instruction"><code>
+  
+Create a function &quot;differentiate&quot; that takes a Polynomial, and returns a new
+Polynomial that has been differentiated with respect to x.</code></pre>
 </div>
 </div>
 
@@ -1047,6 +1065,7 @@ differentiate = ...</code></pre>
 <hr />
 <h1 id="ecosystem">Ecosystem</h1>
 <p>The Haskell ecosystem is large and interesting, it is held together more by convention than by dictation.</p>
+<p>The premiere online Cabal package repository is &quot;Hackage&quot;.</p>
 <pre class="instruction"><code> 
 
 Install the hlint package from hackage.
