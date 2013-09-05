@@ -3,6 +3,8 @@
 
 # Org Chart
 
+_Imagine the following scenario:_
+
 You are an employee of International Banking Machines.
 
 The CEO has asked you to model the org-chart with a computer program in order
@@ -10,7 +12,8 @@ to perform some analysis on the effectiveness of middle-managers.
 
 Before you are able to perform your calculations, you will have to decide how you
 will model your data. Construct a Haskell data-type to represent the various types
-of employees and departments shown in the following diagram:
+of employees and departments for an organisation in the style of the following
+diagram:
 
 <div class="center nopad">![Org Chart](resources/images/dot/01.png)</div>
 
@@ -34,7 +37,6 @@ digraph IBM {
 	CFO -> SpyStuff;
 	Engineering -> Products;
 	HR -> Piñatas;
-	SpyStuff -> Piñatas;
 
 	Products -> x3 [arrowhead=odot];
 	x3 [shape=rectangle label="Employees: 11\n Manager: Dennis"];
@@ -53,6 +55,18 @@ digraph IBM {
 }
 ~~~
 \stopmode
+
+~~~{ data-language=haskell data-filter=./resources/scripts/check.sh }
+data OrgChart   = Chart Department                      deriving Show
+data Department = Dep Name [ Child ]                    deriving Show
+data Child      = Child ArrowLabel Item                 deriving Show
+data Item       = Person Person | Department Department deriving Show
+data Person     = Human Title                           deriving Show
+
+type ArrowLabel = String
+type Name       = String
+type Title      = String
+~~~
 
 Construct a function that builds up your datastructure from the following
 plain-text input format: 
@@ -78,3 +92,8 @@ Your function should have the following signature:
 ~~~{ data-language=haskell .nocheck }
 process :: String -> OrgChart
 ~~~
+
+The following functions should provide you the power required to construct your Org-Chart:
+
+* lines
+* words

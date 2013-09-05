@@ -28,7 +28,7 @@ differentiate = ...
 
 <div class="important">
 
-The data-type used to represent a `Polynomial` is as follows:
+The data-types used to represent a `Polynomial` are as follows:
 
 ~~~{ data-language=haskell data-filter=./resources/scripts/check.sh }
 data Constant   = C Int             deriving (Show, Eq)
@@ -37,7 +37,7 @@ data Term       = T Constant Power  deriving (Show, Eq)
 data Polynomial = P [ Term ]        deriving (Show, Eq)
 ~~~
 
-The 'x' variable is implicit in the Term data-type.
+The `x` variable is implicit in the Term data-type.
 
 </div>
 

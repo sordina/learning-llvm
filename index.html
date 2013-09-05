@@ -99,7 +99,7 @@ Press &quot;t&quot; to toggle showing the table of contents</code></pre>
 <td align="left">Introductory Exercises</td>
 </tr>
 <tr class="odd">
-<td align="left"><a href="#types">Tyeps</a></td>
+<td align="left"><a href="#types">Types</a></td>
 <td align="left">The Haskell Type System</td>
 </tr>
 <tr class="even">
@@ -107,42 +107,46 @@ Press &quot;t&quot; to toggle showing the table of contents</code></pre>
 <td align="left">Modelling with data in Haskell</td>
 </tr>
 <tr class="odd">
+<td align="left"><a href="#lunch-break">~ Lunch Break ~</a></td>
+<td align="left">Pizza -&gt; Nomnomnomnomnom</td>
+</tr>
+<tr class="even">
 <td align="left"><a href="#the-garden">The Garden</a></td>
 <td align="left">Trees, Roses and Picnics</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left"><a href="#laziness">Laziness</a></td>
 <td align="left">Evaluation when required</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left"><a href="#typeclasses">Typeclasses</a></td>
 <td align="left">Code-Reuse and Laws</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left"><a href="#music">Wildcard</a></td>
 <td align="left">Music</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left"><a href="#monads">Monads</a></td>
 <td align="left">DSLs, IO, Do-Notation</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left"><a href="#testing">Testing</a></td>
 <td align="left">Testing with QuickCheck</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left"><a href="#org-chart">Org-Chart</a></td>
 <td align="left">Org-Chart Exercise</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left"><a href="#symbolic-differentiation">Algebra</a></td>
 <td align="left">Symbolic Mathematics</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left"><a href="#ecosystem">Ecosystem</a></td>
 <td align="left">Resources and Community</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left"><a href="#appendix">Appendix</a></td>
 <td align="left">Appendix</td>
 </tr>
@@ -263,7 +267,7 @@ Press &quot;t&quot; to toggle showing the table of contents</code></pre>
 <p>Last-but-not-least -</p>
 <div class="important">
 
-<p>For us, the organisers, running this workshop will be a great opportunity to see the Melbourne Haskell community in action. We're looking forward to working with you all, and expect that above all else we will have a lot of...</p>
+<p>For us, the organisers, running this workshop will be a great opportunity to see the Melbourne Haskell community in action. We're looking forward to working with you all and expect that, above all else, we will have a lot of...</p>
 <h2 id="fun"><em>Fun!</em></h2>
 </div>
 
@@ -666,6 +670,27 @@ What would the ADT for a LISP-like language look like?</code></pre>
 
 
 <hr />
+<h1 id="lunch-break">Lunch Break</h1>
+<div class="center important">
+
+<p>Lunch is provided courtesy of <a href="http://www.thoughtworks.com/">ThoughtWorks</a></p>
+<div class="center"> 
+<img src="resources/images/pizza.png" alt="Pizza" />
+</div>
+
+</div>
+
+</div>
+</div>
+
+
+
+
+<div class='chapter'>
+<div class='content'>
+
+
+<hr />
 <h1 id="the-garden">The Garden</h1>
 <p>This chapter will focus on various kinds of trees.</p>
 <pre data-language="haskell" data-filter="resources/scripts/check.sh"><code>data BinaryTree a = Empty | Node a (BinaryTree a) (BinaryTree a)
@@ -796,8 +821,8 @@ Can all numberic-lists be defined by using value-based recursion?</code></pre>
 <h1 id="music">Music</h1>
 <p>Once you have a model that reaches a sufficient level of complexity you will find that your data-types become recursive.</p>
 <!-- http://i824.photobucket.com/albums/zz163/Boysie8/Telecaster%20build/f-hole.jpg -->
-<div class="center">
-<img src="resources/images/f-hole.jpg" />
+<div class="center"> 
+<img src="resources/images/f-hole.jpg" alt="Music F-Hole" />
 </div>
 
 <p>Here is a small musical target-language:</p>
@@ -827,6 +852,49 @@ import qualified Data.ByteString as BS
 
 main = BS.writeFile &quot;baaBaa.mid&quot; (make_music 4 4 (Longer 4 baaBaa))</code></pre>
 <p>Your task is to write a melody using this language. Try to write and compose functions, rather than declaring one big data-structure.</p>
+</div>
+</div>
+
+
+
+
+<div class='chapter'>
+<div class='content'>
+
+
+<hr />
+<h1 id="monads">Monads</h1>
+<p>There are two main ways to attack Monads -</p>
+<ul>
+<li>Theoretical</li>
+<li>Practical</li>
+</ul>
+<p>We'll take the practical route today.</p>
+<p><code>do</code> expressions in Haskell can take the following form:</p>
+<pre class="nocheck" data-language="haskell"><code>do
+  PATTERN &lt;- Monadic Value
+  ...
+  Monadic Value</code></pre>
+<p>You can use do expressions to perform IO in a similar style to an imperative program:</p>
+<pre data-language="haskell" data-filter="./resources/scripts/check.sh"><code>import System.IO
+
+main = do
+   ()        &lt;- print &quot;Please enter your first name:&quot;
+   firstname &lt;- getLine
+   ()        &lt;- print &quot;Please enter your last name:&quot;
+   lastname  &lt;- getLine
+   ()        &lt;- print &quot;Please enter your title:&quot;
+   title     &lt;- getLine
+   ()        &lt;- print &quot;Please enter your address:&quot;
+   address   &lt;- getLine
+   ()        &lt;- print (&quot;Hello &quot; ++ title ++ &quot; &quot; ++ lastname)
+   ()        &lt;- print &quot;Would you like to recieve a magazine subscription...&quot;
+   ()        &lt;- print (&quot;to your address &#39;&quot; ++ address ++ &quot;&#39;?&quot;)
+   flag      &lt;- readLn
+   ()        &lt;- if flag then print &quot;No worries!&quot;
+                        else print &quot;We&#39;ll keep our magazine then!&quot;
+   return ()
+</code></pre>
 </div>
 </div>
 
@@ -932,15 +1000,26 @@ exercise from The Garden.</code></pre>
 
 <hr />
 <h1 id="org-chart">Org Chart</h1>
+<p><em>Imagine the following scenario:</em></p>
 <p>You are an employee of International Banking Machines.</p>
 <p>The CEO has asked you to model the org-chart with a computer program in order to perform some analysis on the effectiveness of middle-managers.</p>
-<p>Before you are able to perform your calculations, you will have to decide how you will model your data. Construct a Haskell data-type to represent the various types of employees and departments shown in the following diagram:</p>
+<p>Before you are able to perform your calculations, you will have to decide how you will model your data. Construct a Haskell data-type to represent the various types of employees and departments for an organisation in the style of the following diagram:</p>
 <div class="center nopad">
 <img src="resources/images/dot/01.png" alt="Org Chart" />
 </div>
 
 
 <pre class="hidden" data-language="dot" data-output="resources/images/dot/01.png" data-filter="./resources/scripts/graph.sh"><code></code></pre>
+<pre data-language="haskell" data-filter="./resources/scripts/check.sh"><code>data OrgChart   = Chart Department                      deriving Show
+data Department = Dep Name [ Child ]                    deriving Show
+data Child      = Child ArrowLabel Item                 deriving Show
+data Item       = Person Person | Department Department deriving Show
+data Person     = Human Title                           deriving Show
+
+type ArrowLabel = String
+type Name       = String
+type Title      = String
+</code></pre>
 <p>Construct a function that builds up your datastructure from the following plain-text input format:</p>
 <h2 id="employees">Employees</h2>
 <table>
@@ -1005,6 +1084,11 @@ exercise from The Garden.</code></pre>
 </table>
 <p>Your function should have the following signature:</p>
 <pre class="nocheck" data-language="haskell"><code>process :: String -&gt; OrgChart</code></pre>
+<p>The following functions should provide you the power required to construct your Org-Chart:</p>
+<ul>
+<li>lines</li>
+<li>words</li>
+</ul>
 </div>
 </div>
 
@@ -1038,13 +1122,13 @@ exercise from The Garden.</code></pre>
 differentiate = ...</code></pre>
 <div class="important">
 
-<p>The data-type used to represent a <code>Polynomial</code> is as follows:</p>
+<p>The data-types used to represent a <code>Polynomial</code> are as follows:</p>
 <pre data-language="haskell" data-filter="./resources/scripts/check.sh"><code>data Constant   = C Int             deriving (Show, Eq)
 data Power      = U Int             deriving (Show, Eq)
 data Term       = T Constant Power  deriving (Show, Eq)
 data Polynomial = P [ Term ]        deriving (Show, Eq)
 </code></pre>
-<p>The 'x' variable is implicit in the Term data-type.</p>
+<p>The <code>x</code> variable is implicit in the Term data-type.</p>
 </div>
 
 
@@ -1065,12 +1149,13 @@ Polynomial that has been differentiated with respect to x.</code></pre>
 <hr />
 <h1 id="ecosystem">Ecosystem</h1>
 <p>The Haskell ecosystem is large and interesting, it is held together more by convention than by dictation.</p>
+<h2 id="cabal-1">Cabal</h2>
 <p>The premiere online Cabal package repository is &quot;Hackage&quot;.</p>
 <pre class="instruction"><code> 
 
 Install the hlint package from hackage.
 
-Use the command-line to to check for stylistic issues with one
+Use the command-line to to check for stylistic issues in one
 of your previous solutions.</code></pre>
 <pre class="answer"><code>Information about the hlint package can be found at
 
@@ -1087,7 +1172,17 @@ Although you may have to run
 
 &gt; cabal update
 
-to ensure that your list of packages is up to date.</code></pre>
+to ensure that your list of packages is up to date.
+
+Once you have the hlint tool installed you can run it like so:
+
+&gt; hlint temp/dragon.hs
+
+    temp/dragon.hs:35:17: Warning: Redundant $
+    Found:
+      flip zip (map toLower text) $ dragon_points
+    Why not:
+      flip zip (map toLower text) dragon_points</code></pre>
 </div>
 </div>
 
@@ -1106,6 +1201,7 @@ to ensure that your list of packages is up to date.</code></pre>
 <li><a href="http://en.wikipedia.org/wiki/QuickCheck">QuickCheck Wikipedia Page</a></li>
 <li><a href="http://hackage.haskell.org/package/QuickCheck">QuickCheck on Hackage</a></li>
 <li><a href="http://www.haskell.org/haskellwiki/99_questions">99 Haskell Problems</a></li>
+<li><a href="http://hackage.haskell.org/packages/hackage.html">Hackage</a></li>
 </ul>
 </div>
 </div>

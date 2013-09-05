@@ -8,7 +8,7 @@ Once you have a model that reaches a sufficient level of complexity you will fin
 that your data-types become recursive.
 
 <!-- http://i824.photobucket.com/albums/zz163/Boysie8/Telecaster%20build/f-hole.jpg -->
-<div class="center"><img src="resources/images/f-hole.jpg" /></div>
+<div class="center"> ![Music F-Hole](resources/images/f-hole.jpg) </div>
 
 Here is a small musical target-language:
 
