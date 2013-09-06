@@ -19,7 +19,7 @@ fi
 
 # echo "Processing Example $PANDOCTOR_COUNT" 1>&2
 
-grep '^main =' /tmp/haskell_workshop_check.hs
+grep '^main =' /tmp/haskell_workshop_check.hs > /dev/null
 status=$?
 if [ $status -ne 0 ]
 then

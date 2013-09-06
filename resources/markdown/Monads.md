@@ -25,6 +25,7 @@ imperative program:
 ~~~{ data-language=haskell data-filter=./resources/scripts/check.sh }
 import System.IO
 
+main :: IO ()
 main = do
    ()        <- print "Please enter your first name:"
    firstname <- getLine

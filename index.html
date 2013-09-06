@@ -878,6 +878,7 @@ main = BS.writeFile &quot;baaBaa.mid&quot; (make_music 4 4 (Longer 4 baaBaa))</c
 <p>You can use do expressions to perform IO in a similar style to an imperative program:</p>
 <pre data-language="haskell" data-filter="./resources/scripts/check.sh"><code>import System.IO
 
+main :: IO ()
 main = do
    ()        &lt;- print &quot;Please enter your first name:&quot;
    firstname &lt;- getLine
