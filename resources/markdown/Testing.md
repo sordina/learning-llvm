@@ -151,8 +151,8 @@ for custom data-types - take a look at the
 type-class.
 
 ```instruction
-Write QuickCheck properties for the constraints required in the Rose-Tree
-exercise from The Garden.
+Write QuickCheck properties for the constraints required in the
+Rose-Tree exercise from The Garden.
 ```
 
 <div class="important">

@@ -127,26 +127,30 @@ Press &quot;t&quot; to toggle showing the table of contents</code></pre>
 <td align="left">Music</td>
 </tr>
 <tr class="even">
+<td align="left"><a href="#compression">Compression</a></td>
+<td align="left">Compression</td>
+</tr>
+<tr class="odd">
 <td align="left"><a href="#monads">Monads</a></td>
 <td align="left">DSLs, IO, Do-Notation</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left"><a href="#testing">Testing</a></td>
 <td align="left">Testing with QuickCheck</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left"><a href="#org-chart">Org-Chart</a></td>
 <td align="left">Org-Chart Exercise</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left"><a href="#symbolic-differentiation">Algebra</a></td>
 <td align="left">Symbolic Mathematics</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left"><a href="#ecosystem">Ecosystem</a></td>
 <td align="left">Resources and Community</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left"><a href="#appendix">Appendix</a></td>
 <td align="left">Appendix</td>
 </tr>
@@ -863,6 +867,38 @@ main = BS.writeFile &quot;baaBaa.mid&quot; (make_music 4 4 (Longer 4 baaBaa))</c
 
 
 <hr />
+<h1 id="compression">Compression</h1>
+<p>Let's see if we can implement a &quot;zip&quot; like program in haskell!</p>
+<p>The go-to place to start looking at compression techniques is <a href="http://en.wikipedia.org/wiki/Huffman_coding">Huffman Coding</a>.</p>
+<p>The basic idea is that in a non-random string, some combinations of tokens will be more frequent than others, and as-such, common substrings can be represented with a short-hand encoding to save space.</p>
+<p>An issue arises - If we will have different length codes for various tokens concatenated into a string as a result of compression, how will we know where one coded token ends and another one begins?</p>
+<pre data-language="haskell" data-filter="./resources/scripts/check.sh"><code>type Bit = Bool
+
+compress :: String -&gt; [ Bit ]
+compress = undefined
+</code></pre>
+<div class="center">
+
+<div class="figure">
+<img src="resources/images/huffmantree.png" alt="Huffman Tree" /><p class="caption">Huffman Tree</p>
+</div>
+</div>
+
+<pre data-language="haskell" data-filter="./resources/scripts/check.sh"><code>data HuffmanTree = Foo
+</code></pre>
+<pre data-language="haskell" data-filter="./resources/scripts/check.sh"><code>data HuffmanTree = Foo
+</code></pre>
+</div>
+</div>
+
+
+
+
+<div class='chapter'>
+<div class='content'>
+
+
+<hr />
 <h1 id="monads">Monads</h1>
 <p>There are two main ways to attack Monads -</p>
 <ul>
@@ -982,8 +1018,8 @@ QuickCheck and quickcheck-script:
 
 &gt; cabal install quickcheck quickcheck-script</code></pre>
 <p>In order to take advantage of QuickCheck's data-generation for custom data-types - take a look at the <a href="http://hackage.haskell.org/packages/archive/QuickCheck/2.6/doc/html/Test-QuickCheck-Arbitrary.html">Arbitrary</a> type-class.</p>
-<pre class="instruction"><code>Write QuickCheck properties for the constraints required in the Rose-Tree
-exercise from The Garden.</code></pre>
+<pre class="instruction"><code>Write QuickCheck properties for the constraints required in the
+Rose-Tree exercise from The Garden.</code></pre>
 <div class="important">
 
 <p><a href="#the-garden">Link to The Garden Chapter</a></p>
@@ -1149,19 +1185,21 @@ Polynomial that has been differentiated with respect to x.</code></pre>
 
 <hr />
 <h1 id="ecosystem">Ecosystem</h1>
-<p>The Haskell ecosystem is large and interesting, it is held together more by convention than by dictation.</p>
+<p>The Haskell ecosystem is large and interesting, it is held together more by convention than by dictation, with the current convention being that open source packages are made available through <code>cabal</code> on Hackage.</p>
 <h2 id="cabal-1">Cabal</h2>
-<p>The premiere online Cabal package repository is &quot;Hackage&quot;.</p>
+<p>Cabal is a library package, but &quot;cabal&quot; is often used to refer to the cabal executable provided by the &quot;cabal-install&quot; package. These packages are both provided by the Haskell Platform.</p>
+<p>The premiere online Cabal package repository is <a href="http://hackage.haskell.org/">Hackage.</a></p>
+<p>Cabal provides mechanisms for download and installing packages from Hackage onto your system. It also provides a consistent way to structure, export, test, and package your own programs.</p>
 <pre class="instruction"><code> 
 
 Install the hlint package from hackage.
 
-Use the command-line to to check for stylistic issues in one
+Use the `hlint` command-line program to to check for stylistic issues in one
 of your previous solutions.</code></pre>
 <pre class="answer"><code>Information about the hlint package can be found at
 
-* hackage.haskell.org
-* www.haskell.org/hoogle
+* hackage.haskell.org/package/hlint
+* http://www.haskell.org/hoogle/?hoogle=hlint
 
 etc.
 
@@ -1177,13 +1215,16 @@ to ensure that your list of packages is up to date.
 
 Once you have the hlint tool installed you can run it like so:
 
-&gt; hlint temp/dragon.hs
+&gt; hlint dragon.hs
 
-    temp/dragon.hs:35:17: Warning: Redundant $
+    dragon.hs:35:17: Warning: Redundant $
     Found:
       flip zip (map toLower text) $ dragon_points
     Why not:
       flip zip (map toLower text) dragon_points</code></pre>
+<pre class="open"><code>An open-ended question:
+
+How would you go about publishing your own package to Hackage?</code></pre>
 </div>
 </div>
 
@@ -1203,6 +1244,7 @@ Once you have the hlint tool installed you can run it like so:
 <li><a href="http://hackage.haskell.org/package/QuickCheck">QuickCheck on Hackage</a></li>
 <li><a href="http://www.haskell.org/haskellwiki/99_questions">99 Haskell Problems</a></li>
 <li><a href="http://hackage.haskell.org/packages/hackage.html">Hackage</a></li>
+<li><a href="http://en.wikipedia.org/wiki/Bzip2">BZip</a></li>
 </ul>
 </div>
 </div>
