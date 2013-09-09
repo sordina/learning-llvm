@@ -1,0 +1,12 @@
+:load Text/Compression/Simple.hs
+putStr "prop_toBits_bijection: " >> Test.QuickCheck.quickCheck prop_toBits_bijection
+putStr "prop_step_size: " >> Test.QuickCheck.quickCheck prop_step_size
+putStr "prop_step_size2: " >> Test.QuickCheck.quickCheck prop_step_size2
+putStr "prop_buildB_size: " >> Test.QuickCheck.quickCheck prop_buildB_size
+putStr "prop_build_size: " >> Test.QuickCheck.quickCheck prop_build_size
+putStr "prop_frequency_tree_size: " >> Test.QuickCheck.quickCheck prop_frequency_tree_size
+putStr "prop_same_length: " >> Test.QuickCheck.quickCheck prop_same_length
+putStr "prop_contains_items: " >> Test.QuickCheck.quickCheck prop_contains_items
+putStr "prop_roundtrip: " >> Test.QuickCheck.quickCheck prop_roundtrip
+putStr "prop_no_prefix_starts: " >> Test.QuickCheck.quickCheck prop_no_prefix_starts
+putStr "prop_abc: " >> Test.QuickCheck.quickCheck prop_abc
