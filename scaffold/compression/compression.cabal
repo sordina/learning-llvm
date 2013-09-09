@@ -21,7 +21,17 @@ library
 executable          compression
   default-language: Haskell2010
   main-is:          compression.hs
-  build-depends:    base, containers, QuickCheck >= 2.5, bytestring, split, word8, bytestring, semigroups, split
+  build-depends:    base, containers, QuickCheck >= 2.5, bytestring, split, word8, bytestring, semigroups, split, binary
+
+executable          decompression
+  default-language: Haskell2010
+  main-is:          decompression.hs
+  build-depends:    base, containers, QuickCheck >= 2.5, bytestring, split, word8, bytestring, semigroups, split, binary
+
+executable          compression_stats
+  default-language: Haskell2010
+  main-is:          compression_stats.hs
+  build-depends:    base, containers, QuickCheck >= 2.5, bytestring, split, word8, bytestring, semigroups, split, binary
 
 Test-Suite tests
   default-language: Haskell2010

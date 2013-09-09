@@ -7,8 +7,10 @@ import Text.Compression.Simple
 
 -- External Imports
 --
-import Data.List.Split
-import qualified Data.ByteString as BS
+import System.IO
+import System.Exit
+import qualified Data.Binary                as B
+import qualified Data.ByteString.Lazy.Char8 as BSL
 
 -- Main
 --
@@ -16,12 +18,6 @@ main :: IO ()
 main = do
   input <- getContents
 
-  let
-    packedLength = fmap BS.length (snd outcome)
-    outcome      = packString input
-
-  print $ "Initial length of input:    " ++ show (Just $ length input)
-  print $ "Compressed length of input: " ++ show packedLength
-  print "Frequency Table:"
-
-  mapM_ print $ chunksOf 4 $ fst outcome
+  case packString input of
+    (a, Just b) -> BSL.putStrLn $ B.encode (length input, a, b)
+    _           -> hPutStrLn stderr "Error encoding file..." >> exitFailure

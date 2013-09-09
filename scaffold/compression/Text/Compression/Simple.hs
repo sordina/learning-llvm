@@ -207,16 +207,15 @@ prop_frequency_tree_size :: [(Int, Char)] -> Property
 prop_frequency_tree_size ls = not (null ls)
                           ==> Just (length ls) == fmap treeSize (fromFrequencies ls)
 
-prop_same_length :: [(Int,Char)] -> Property
-prop_same_length ls = not (null ls) && all (< 1000) (map fst ls)
-                    ==> Just (length ls)
-                     == fmap length (frequenciesToCoding ls)
+prop_same_length :: Q.NonEmptyList (Q.Positive Int, Char) -> Bool
+prop_same_length (map (first Q.getPositive) . Q.getNonEmpty -> ls)
+  = Just (length ls) == fmap length (frequenciesToCoding ls)
 
-prop_contains_items :: [(Int,Char)] -> Property
-prop_contains_items ls =   not (null ls)
-                        && all (>=0) (map fst ls)
-                        ==> Just (sort (map snd ls))
-                         == fmap (sort . map fst) (frequenciesToCoding ls)
+prop_contains_items :: Q.NonEmptyList (Q.Positive Int, Char) -> Bool
+prop_contains_items (map (first Q.getPositive) . Q.getNonEmpty -> ls)
+  = Just (sort (map snd ls))
+ == fmap (sort . map fst) (frequenciesToCoding ls)
+
 
 prop_roundtrip :: String -> Property
 prop_roundtrip s = length s > 1 ==> do
