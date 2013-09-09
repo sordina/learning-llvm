@@ -27,7 +27,7 @@ module Text.Compression.Simple
 , invert                      --  :: [(a, b)] -> [(b, a)]
 , none                        --  :: [Bool] -> Bool
 , getTable                    --  :: String -> FrequencyTable Char
-, test
+, tests
 )
 
 where
@@ -236,19 +236,19 @@ prop_no_prefix_starts (map Q.getPositive . Q.getNonEmpty -> ints)
 prop_abc :: Bool
 prop_abc = Just True == fmap (noPrefixStarts . map snd) (frequenciesToCoding $ getTable "abc")
 
-test :: [(String, IO ())]
-test = [ qc "prop_toBits_bijection   " prop_toBits_bijection
-       , qc "prop_step_size          " prop_step_size
-       , qc "prop_step_size2         " prop_step_size2
-       , qc "prop_buildB_size        " prop_buildB_size
-       , qc "prop_build_size         " prop_build_size
-       , qc "prop_frequency_tree_size" prop_frequency_tree_size
-       , qc "prop_same_length        " prop_same_length
-       , qc "prop_contains_items     " prop_contains_items
-       , qc "prop_roundtrip          " prop_roundtrip
-       , qc "prop_no_prefix_starts   " prop_no_prefix_starts
-       , qc "prop_abc                " prop_abc
-       ]
-       where
-       qc :: Testable prop => t -> prop -> (t, IO ())
-       qc x y = (x, quickCheck y)
+tests :: [(String, IO Result)]
+tests = [ qc "prop_toBits_bijection   " prop_toBits_bijection
+        , qc "prop_step_size          " prop_step_size
+        , qc "prop_step_size2         " prop_step_size2
+        , qc "prop_buildB_size        " prop_buildB_size
+        , qc "prop_build_size         " prop_build_size
+        , qc "prop_frequency_tree_size" prop_frequency_tree_size
+        , qc "prop_same_length        " prop_same_length
+        , qc "prop_contains_items     " prop_contains_items
+        , qc "prop_roundtrip          " prop_roundtrip
+        , qc "prop_no_prefix_starts   " prop_no_prefix_starts
+        , qc "prop_abc                " prop_abc
+        ]
+        where
+        qc :: Testable prop => t -> prop -> (t, IO Result)
+        qc x y = (x, quickCheckResult y)
