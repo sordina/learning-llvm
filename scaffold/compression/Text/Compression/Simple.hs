@@ -128,7 +128,7 @@ fromFrequencies :: [(Int, v)] -> Maybe (OccuranceTree v)
 fromFrequencies = build . map (first Sum)
 
 treeToBits :: OccuranceTree v -> Lookup v BitString
-treeToBits t = map (second reverse) result
+treeToBits t = result -- map (second reverse) result -- hint
   where
   result = if isLeaf t then coding [True] t -- Be productive for singleton trees
                        else coding []     t

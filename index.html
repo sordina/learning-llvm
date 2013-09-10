@@ -868,15 +868,7 @@ main = BS.writeFile &quot;baaBaa.mid&quot; (make_music 4 4 (Longer 4 baaBaa))</c
 
 <hr />
 <h1 id="compression">Compression</h1>
-<p>Let's see if we can implement a &quot;zip&quot; like program in haskell!</p>
-<p>The go-to place to start looking at compression techniques is <a href="http://en.wikipedia.org/wiki/Huffman_coding">Huffman Coding</a>.</p>
-<p>The basic idea is that in a non-random string, some combinations of tokens will be more frequent than others, and as-such, common substrings can be represented with a short-hand encoding to save space.</p>
-<p>An issue arises - If we will have different length codes for various tokens concatenated into a string as a result of compression, how will we know where one coded token ends and another one begins?</p>
-<pre data-language="haskell" data-filter="./resources/scripts/check.sh"><code>type Bit = Bool
-
-compress :: String -&gt; [ Bit ]
-compress = undefined
-</code></pre>
+<p>In the scaffold folder <code>compression</code> there is a Cabal project that implements a compression strategy based on <a href="http://en.wikipedia.org/wiki/Huffman_coding">Huffman Coding</a>.</p>
 <div class="center">
 
 <div class="figure">
@@ -884,10 +876,22 @@ compress = undefined
 </div>
 </div>
 
-<pre data-language="haskell" data-filter="./resources/scripts/check.sh"><code>data HuffmanTree = Foo
+<p>The basic idea is that in a non-random string, some combinations of tokens will be more frequent than others, and as-such, common substrings can be represented with a short-hand encoding to save space.</p>
+<p>The project contains two executables: <code>compression</code> and <code>decompression</code>. These accept data on STDIN and output data on STDOUT.</p>
+<p>Unfortunately, the compression algorithm contains a bug.</p>
+<pre class="instruction"><code>In the compression scaffolding project, locate and fix the bug
+that causes the test-suite to fail.
+
+You can run the tests by calling &quot;cabal test&quot; from within
+the project folder.</code></pre>
+<pre data-language="haskell" data-filter="./resources/scripts/check.sh"><code>type Bit = Bool
+
+compress :: String -&gt; [ Bit ]
+compress = undefined
 </code></pre>
-<pre data-language="haskell" data-filter="./resources/scripts/check.sh"><code>data HuffmanTree = Foo
-</code></pre>
+<pre class="open"><code>An open question:
+
+How would you implement a more efficient compression algorithm in Haskell?</code></pre>
 </div>
 </div>
 
