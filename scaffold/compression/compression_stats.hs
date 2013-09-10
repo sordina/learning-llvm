@@ -37,7 +37,7 @@ info i a b = do
   print "Length of encoded dict packed"
   print $ BSL.length $ B.encode cs
 
-  print "Length of encoded freqs Word32" -- 64K Should be enough for anyone!
+  print "Length of encoded freqs Word32"
   print $ BSL.length $ B.encode fs
 
   print "Length of encoded tripple:"
