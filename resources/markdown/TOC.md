@@ -8,8 +8,11 @@
 <!--       The lefthand column refers to the filename of the chapter in 'resources/markdown' -->
 <!--       This column is removed before the markdown is processed for the table of contents -->
 
-                |------------------------------------------      ----------------------------------
-Intro           |[Introduction](#introduction)                   Why?
-                |------------------------------------------      ----------------------------------
+                |------------------------------      ----------------------------------
+Intro           |[Introduction](#introduction)       Why?
+FromC           |[From C](#from-c)                   Learning from Artifacts
+Exploring       |[Exploring the IR](#eir)            Looking at the Intermediate Representation
+Appendix        |[Appendix](#appendix)               Appendix
+                |------------------------------      ----------------------------------
 
 </div>

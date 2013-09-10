@@ -41,6 +41,11 @@ h1, h1 *, h2, h2 * { font-family: bebasneue; }
 .footer, .footer *, pre, pre *, code, code *, table, table * {
   font-family: 'Monaco', courier, monospace;
   font-size: 14px;
+  overflow: auto;
 }
 
 a { color: #33d; }
+
+pre.leave {
+	text-decoration: line-through;
+}

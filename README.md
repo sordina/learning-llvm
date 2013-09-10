@@ -3,7 +3,11 @@
 Learning LLVM
 =============
 
+<div class="center">
+
 _work in progress_
+
+</div>
 
 <div class="important">
 

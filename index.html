@@ -17,7 +17,11 @@
 
 
 <h1 id="learning-llvm">Learning LLVM</h1>
+<div class="center">
+
 <p><em>work in progress</em></p>
+</div>
+
 <div class="important">
 
 
@@ -48,6 +52,18 @@ Press &quot;t&quot; to toggle showing the table of contents</code></pre>
 <td align="left"><a href="#introduction">Introduction</a></td>
 <td align="left">Why?</td>
 </tr>
+<tr class="even">
+<td align="left"><a href="#from-c">From C</a></td>
+<td align="left">Learning from Artifacts</td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="#eir">Exploring the IR</a></td>
+<td align="left">Looking at the Intermediate Representation</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="#appendix">Appendix</a></td>
+<td align="left">Appendix</td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -64,6 +80,157 @@ Press &quot;t&quot; to toggle showing the table of contents</code></pre>
 
 <hr />
 <p>FOO</p>
+</div>
+</div>
+
+
+
+
+<div class='chapter'>
+<div class='content'>
+
+
+<hr />
+<h1 id="from-c">From C</h1>
+<p>After googling &quot;Hello World in LLVM&quot; I was presented with several results, but they had one thing in common - They all proposed that the best way to learn how hello-world works in LLVM is by compiling a C version of hello-world with llvm-gcc and then looking at the output:</p>
+<p><code>hello_llvm.c</code></p>
+<pre class="sourceCode c"><code class="sourceCode c"><span class="ot">#include &lt;stdio.h&gt;</span>
+<span class="dt">int</span> main( )
+{ 
+  printf(<span class="st">&quot;Hello World!</span><span class="ch">\n</span><span class="st">&quot;</span>);
+}</code></pre>
+<pre class="shell"><code>&gt; llvm-gcc % -S -emit-llvm</code></pre>
+<p><code>hello_llvm.s</code></p>
+<pre class="llvm"><code>; ModuleID = &#39;hello_llvm.c&#39;
+target datalayout = &quot;e-p:64:64:64-i1:8:8-i8:8:8-i16:16:16-i32:32:32-i64:64:64-f32:32:32-f64:64:64-v64:64:64-v128:128:128-a0:0:64-s0:64:64-f80:128:128-n8:16:32:64&quot;
+target triple = &quot;x86_64-apple-darwin11.4&quot;
+
+@.str = private constant [13 x i8] c&quot;Hello World!\00&quot;, align 1 ; &lt;[13 x i8]*&gt; [#uses=1]
+
+define i32 @main() nounwind ssp {
+entry:
+  %retval = alloca i32                            ; &lt;i32*&gt; [#uses=1]
+  %&quot;alloca point&quot; = bitcast i32 0 to i32          ; &lt;i32&gt; [#uses=0]
+  %0 = call i32 @puts(i8* getelementptr inbounds ([13 x i8]* @.str, i64 0, i64 0)) nounwind ; &lt;i32&gt; [#uses=0]
+  br label %return
+
+return:                                           ; preds = %entry
+  %retval1 = load i32* %retval                    ; &lt;i32&gt; [#uses=1]
+  ret i32 %retval1
+}
+
+declare i32 @puts(i8*)</code></pre>
+<pre class="shell"><code>&gt; lli hello_llvm.s</code></pre>
+<pre class="text"><code>Hello World</code></pre>
+<p>It works!!! But... The code is pretty cluttered.</p>
+</div>
+</div>
+
+
+
+
+<div class='chapter'>
+<div class='content'>
+
+
+<hr />
+<h1 id="eir">Exploring the Intermediate Representation</h1>
+<p>When presented with a mess like this, the first thing I always try to do is see what I can remove...</p>
+<p>I figure the first three lines can get the hell outta here!!</p>
+<pre class="llvm leave"><code>; ModuleID = &#39;hello_llvm.c&#39;
+target datalayout = &quot;e-p:64:64:64-i1:8:8-i8:8:8-i16:16:16-i32:32:32-i64:64:64-f32:32:32-f64:64:64-v64:64:64-v128:128:128-a0:0:64-s0:64:64-f80:128:128-n8:16:32:64&quot;
+target triple = &quot;x86_64-apple-darwin11.4&quot;</code></pre>
+<p>Everything compiles and runs, but just to be sure I look up what those lines were doing anyway:</p>
+<ul>
+<li><a href="http://llvm.org/docs/LangRef.html"><code>;</code></a> is a comment - everything following on the same line is ignored</li>
+<li><a href="http://llvm.org/docs/LangRef.html"><code>target datalayout</code></a> sets the format of various bits of data</li>
+<li><a href="http://llvm.org/docs/CommandGuide/llc.html"><code>target triple</code></a> specifies the operationg environment that the program is targeting</li>
+</ul>
+<p>The targets seem to have reasonable defaults and aren't required so away they go. With them gone let's have a look at what remains...</p>
+<p>The constant declaration of &quot;Hello World&quot; looks like a good place to start:</p>
+<pre class="llvm"><code>@.str = private constant [13 x i8] c&quot;Hello World!\00&quot;, align 1 ; &lt;[13 x i8]*&gt; [#uses=1]</code></pre>
+<p>Let's modify it to say goodbye and see what happenes...</p>
+<pre class="llvm"><code>@.str = private constant [13 x i8] c&quot;Goodbye World!\00&quot;, align 1 ; &lt;[13 x i8]*&gt; [#uses=1]</code></pre>
+<h2 id="error" class="error">Error!</h2>
+<pre class="text"><code>lli: hello_llvm.s:2:36: error: constant expression type mismatch
+@.str = private constant [13 x i8] c&quot;Goodbye World!\00&quot;, align 1 ; &lt;[13 x i8]*&gt; [#uses=1]
+                                   ^</code></pre>
+<p>It looks like the length declared has to match the string length otherwise boom. So we modify the declaration</p>
+<pre class="llvm"><code>@.str = private constant [15 x i8] c&quot;Goodbye World!\00&quot;, align 1 ; &lt;[13 x i8]*&gt; [#uses=1]</code></pre>
+<h2 id="error-1" class="error">Error!</h2>
+<pre class="text"><code>lli: hello_llvm.s:8:62: error: &#39;@.str&#39; defined with type &#39;[15 x i8]*&#39;
+  %0 = call i32 @puts(i8* getelementptr inbounds ([13 x i8]* @.str, i64 0, i64 0)) nounwind ; &lt;i32&gt; [#uses=0]
+                                                               ^</code></pre>
+<p>So... references are typed too?</p>
+<p>Let's update that.</p>
+<pre class="llvm"><code>  %0 = call i32 @puts(i8* getelementptr inbounds ([15 x i8]* @.str, i64 0, i64 0)) nounwind ; &lt;i32&gt; [#uses=0]</code></pre>
+<p>And...</p>
+<pre class="text"><code>Goodbye World!</code></pre>
+<p>Woot!</p>
+<h2 id="lets-have-another-look-at-our-program">Let's have another look at our program</h2>
+<pre class="llvm"><code>@.str = private constant [15 x i8] c&quot;Goodbye World!\00&quot;, align 1 ; &lt;[13 x i8]*&gt; [#uses=1]
+
+define i32 @main() nounwind ssp {
+entry:
+  %retval = alloca i32                            ; &lt;i32*&gt; [#uses=1]
+  %&quot;alloca point&quot; = bitcast i32 0 to i32          ; &lt;i32&gt; [#uses=0]
+  %0 = call i32 @puts(i8* getelementptr inbounds ([15 x i8]* @.str, i64 0, i64 0)) nounwind ; &lt;i32&gt; [#uses=0]
+  br label %return
+
+return:                                           ; preds = %entry
+  %retval1 = load i32* %retval                    ; &lt;i32&gt; [#uses=1]
+  ret i32 %retval1
+}
+
+declare i32 @puts(i8*)</code></pre>
+<p>According to <a href="http://www.ibm.com/developerworks/library/os-createcompilerllvm1/">IBM</a> the essential components of an LLVM IR program are...</p>
+<ul>
+<li>Comments</li>
+<li>Global identifiers</li>
+<li>Local identifiers</li>
+<li>A strong type system</li>
+<li>Vectors or Arrays</li>
+<li>Global string constants</li>
+<li>Functions</li>
+<li>Return statements</li>
+<li>Function calls</li>
+</ul>
+<p>Let's see if we can change the name of our @.str constant to @greeting:</p>
+<pre class="llvm"><code>@greeting = private constant [15 x i8] c&quot;Goodbye World!\00&quot;, align 1 ; &lt;[13 x i8]*&gt; [#uses=1]
+
+define i32 @main() nounwind ssp {
+entry:
+  %retval = alloca i32                            ; &lt;i32*&gt; [#uses=1]
+  %&quot;alloca point&quot; = bitcast i32 0 to i32          ; &lt;i32&gt; [#uses=0]
+  %0 = call i32 @puts(i8* getelementptr inbounds ([15 x i8]* @greeting, i64 0, i64 0)) nounwind ; &lt;i32&gt; [#uses=0]
+  br label %return
+
+return:                                           ; preds = %entry
+  %retval1 = load i32* %retval                    ; &lt;i32&gt; [#uses=1]
+  ret i32 %retval1
+}
+
+declare i32 @puts(i8*)</code></pre>
+<p>And running...</p>
+<pre class="text"><code>Goodbye World!</code></pre>
+<p>Yay!</p>
+</div>
+</div>
+
+
+
+
+<div class='chapter'>
+<div class='content'>
+
+
+<hr />
+<h1 id="appendix">Appendix</h1>
+<ul>
+<li><a href="http://www.ibm.com/developerworks/library/os-createcompilerllvm1/">http://www.ibm.com/developerworks/library/os-createcompilerllvm1/</a></li>
+<li><a href="http://www.yellosoft.us/hello-llvm">http://www.yellosoft.us/hello-llvm</a></li>
+<li><a href="http://llvm.org/docs/WritingAnLLVMPass.html">http://llvm.org/docs/WritingAnLLVMPass.html</a></li>
+</ul>
 </div>
 </div>
 
