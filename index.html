@@ -1115,7 +1115,10 @@ type Title      = String
 </div>
 
 <p>The basic idea is that in a non-random string, some combinations of tokens will be more frequent than others, and as-such, common substrings can be represented with a short-hand encoding to save space.</p>
-<p>The project contains two executables: <code>compression</code> and <code>decompression</code>. These accept data on STDIN and output data on STDOUT.</p>
+<p>The project contains two executables: <code>compression</code> and <code>decompression</code>. These accept data on STDIN and output data on STDOUT. <code>compression</code> accepts text on STDIN and outputs binary data. Decompression does the reverse.</p>
+<pre class="real"><code>The Haskell package &quot;binary&quot; exposes the module &quot;Data.Binary&quot; that
+allows for very easy binary serialisation and parsing, with
+most existing types already containing a marshelling implementation.</code></pre>
 <p>If you install these executables by using <code>cabal install</code>, then you will be able to use them in the following manner:</p>
 <pre class="shell"><code>&gt; # Compress
 &gt; compression &lt; lyrics.txt &gt; lyrics.txt.compressed

@@ -18,7 +18,14 @@ substrings can be represented with a short-hand encoding to
 save space.
 
 The project contains two executables: `compression` and `decompression`.
-These accept data on STDIN and output data on STDOUT.
+These accept data on STDIN and output data on STDOUT. `compression` accepts
+text on STDIN and outputs binary data. Decompression does the reverse.
+
+```real
+The Haskell package "binary" exposes the module "Data.Binary" that
+allows for very easy binary serialisation and parsing, with
+most existing types already containing a marshelling implementation.
+```
 
 If you install these executables by using `cabal install`, then
 you will be able to use them in the following manner:
