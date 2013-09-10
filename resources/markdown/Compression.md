@@ -40,6 +40,16 @@ You can run the tests by calling "cabal test" from within
 the project folder.
 ```
 
+<div class="answer">
+
+Line 131 should be:
+
+~~~{ data-language=haskell .nocheck }
+treeToBits t = map (second reverse) result
+~~~
+
+</div>
+
 Although the algorithm itself is very basic, and the use of
 strings instead of binary-data is not a common way to perform
 compression, the structure  itself is typical of a real-world

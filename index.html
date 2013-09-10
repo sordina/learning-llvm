@@ -1127,6 +1127,12 @@ that causes the test-suite to fail.
 
 You can run the tests by calling &quot;cabal test&quot; from within
 the project folder.</code></pre>
+<div class="answer">
+
+<p>Line 131 should be:</p>
+<pre class="nocheck" data-language="haskell"><code>treeToBits t = map (second reverse) result</code></pre>
+</div>
+
 <p>Although the algorithm itself is very basic, and the use of strings instead of binary-data is not a common way to perform compression, the structure itself is typical of a real-world Haskell project. The project structures itself around the Cabal toolkit, and uses several libraries. It exposes a library, several executables, and a test-suite.</p>
 <pre class="open"><code>An open question:
 
