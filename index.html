@@ -214,6 +214,16 @@ declare i32 @puts(i8*)</code></pre>
 <p>And running...</p>
 <pre class="text"><code>Goodbye World!</code></pre>
 <p>Yay!</p>
+<h2 id="super-small">Super Small:</h2>
+<pre class="llvm"><code>@greeting = constant [10 x i8] c&quot;SUP World!&quot;
+
+define i32 @main() {
+  entry:
+    call i32 @puts(i8* getelementptr ([10 x i8]* @greeting, i64 0, i64 0))
+    ret i32 0
+}
+
+declare i32 @puts(i8*)</code></pre>
 </div>
 </div>
 

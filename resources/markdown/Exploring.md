@@ -137,3 +137,17 @@ Goodbye World!
 ```
 
 Yay!
+
+## Super Small:
+
+```llvm
+@greeting = constant [10 x i8] c"SUP World!"
+
+define i32 @main() {
+  entry:
+    call i32 @puts(i8* getelementptr ([10 x i8]* @greeting, i64 0, i64 0))
+    ret i32 0
+}
+
+declare i32 @puts(i8*)
+```
