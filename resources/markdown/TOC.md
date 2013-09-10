@@ -20,10 +20,10 @@ The-Garden      |[The Garden](#the-garden)                       Trees, Roses an
 Laziness        |[Laziness](#laziness)                           Evaluation when required
                 |[Typeclasses](#typeclasses)                     Code-Reuse and Laws
 Music           |[Wildcard](#music)                              Music
-Compression     |[Compression](#compression)                     Compression
 Monads          |[Monads](#monads)                               DSLs, IO, Do-Notation
 Testing         |[Testing](#testing)                             Testing with QuickCheck
 Org-Chart       |[Org-Chart](#org-chart)                         Org-Chart Exercise
+Compression     |[Compression](#compression)                     Compression
 Algebra         |[Algebra](#symbolic-differentiation)            Symbolic Mathematics
 Ecosystem       |[Ecosystem](#ecosystem)                         Resources and Community
 Appendix        |[Appendix](#appendix)                           Appendix

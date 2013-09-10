@@ -20,6 +20,16 @@ save space.
 The project contains two executables: `compression` and `decompression`.
 These accept data on STDIN and output data on STDOUT.
 
+If you install these executables by using `cabal install`, then
+you will be able to use them in the following manner:
+
+```shell
+> # Compress
+> compression < lyrics.txt > lyrics.txt.compressed
+> # Decompress
+> decompression < lyrics.txt.compressed
+```
+
 Unfortunately, the compression algorithm contains a bug.
 
 ```instruction
@@ -30,14 +40,12 @@ You can run the tests by calling "cabal test" from within
 the project folder.
 ```
 
-
-
-~~~{ data-language=haskell data-filter=./resources/scripts/check.sh }
-type Bit = Bool
-
-compress :: String -> [ Bit ]
-compress = undefined
-~~~
+Although the algorithm itself is very basic, and the use of
+strings instead of binary-data is not a common way to perform
+compression, the structure  itself is typical of a real-world
+Haskell project. The project structures itself around the Cabal toolkit,
+and uses several libraries. It exposes a library, several
+executables, and a test-suite.
 
 ```open
 An open question:

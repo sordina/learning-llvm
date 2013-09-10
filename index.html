@@ -127,20 +127,20 @@ Press &quot;t&quot; to toggle showing the table of contents</code></pre>
 <td align="left">Music</td>
 </tr>
 <tr class="even">
-<td align="left"><a href="#compression">Compression</a></td>
-<td align="left">Compression</td>
-</tr>
-<tr class="odd">
 <td align="left"><a href="#monads">Monads</a></td>
 <td align="left">DSLs, IO, Do-Notation</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left"><a href="#testing">Testing</a></td>
 <td align="left">Testing with QuickCheck</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left"><a href="#org-chart">Org-Chart</a></td>
 <td align="left">Org-Chart Exercise</td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="#compression">Compression</a></td>
+<td align="left">Compression</td>
 </tr>
 <tr class="even">
 <td align="left"><a href="#symbolic-differentiation">Algebra</a></td>
@@ -867,42 +867,6 @@ main = BS.writeFile &quot;baaBaa.mid&quot; (make_music 4 4 (Longer 4 baaBaa))</c
 
 
 <hr />
-<h1 id="compression">Compression</h1>
-<p>In the scaffold folder <code>compression</code> there is a Cabal project that implements a compression strategy based on <a href="http://en.wikipedia.org/wiki/Huffman_coding">Huffman Coding</a>.</p>
-<div class="center">
-
-<div class="figure">
-<img src="resources/images/huffmantree.png" alt="Huffman Tree" /><p class="caption">Huffman Tree</p>
-</div>
-</div>
-
-<p>The basic idea is that in a non-random string, some combinations of tokens will be more frequent than others, and as-such, common substrings can be represented with a short-hand encoding to save space.</p>
-<p>The project contains two executables: <code>compression</code> and <code>decompression</code>. These accept data on STDIN and output data on STDOUT.</p>
-<p>Unfortunately, the compression algorithm contains a bug.</p>
-<pre class="instruction"><code>In the compression scaffolding project, locate and fix the bug
-that causes the test-suite to fail.
-
-You can run the tests by calling &quot;cabal test&quot; from within
-the project folder.</code></pre>
-<pre data-language="haskell" data-filter="./resources/scripts/check.sh"><code>type Bit = Bool
-
-compress :: String -&gt; [ Bit ]
-compress = undefined
-</code></pre>
-<pre class="open"><code>An open question:
-
-How would you implement a more efficient compression algorithm in Haskell?</code></pre>
-</div>
-</div>
-
-
-
-
-<div class='chapter'>
-<div class='content'>
-
-
-<hr />
 <h1 id="monads">Monads</h1>
 <p>There are two main ways to attack Monads -</p>
 <ul>
@@ -1130,6 +1094,43 @@ type Title      = String
 <li>lines</li>
 <li>words</li>
 </ul>
+</div>
+</div>
+
+
+
+
+<div class='chapter'>
+<div class='content'>
+
+
+<hr />
+<h1 id="compression">Compression</h1>
+<p>In the scaffold folder <code>compression</code> there is a Cabal project that implements a compression strategy based on <a href="http://en.wikipedia.org/wiki/Huffman_coding">Huffman Coding</a>.</p>
+<div class="center">
+
+<div class="figure">
+<img src="resources/images/huffmantree.png" alt="Huffman Tree" /><p class="caption">Huffman Tree</p>
+</div>
+</div>
+
+<p>The basic idea is that in a non-random string, some combinations of tokens will be more frequent than others, and as-such, common substrings can be represented with a short-hand encoding to save space.</p>
+<p>The project contains two executables: <code>compression</code> and <code>decompression</code>. These accept data on STDIN and output data on STDOUT.</p>
+<p>If you install these executables by using <code>cabal install</code>, then you will be able to use them in the following manner:</p>
+<pre class="shell"><code>&gt; # Compress
+&gt; compression &lt; lyrics.txt &gt; lyrics.txt.compressed
+&gt; # Decompress
+&gt; decompression &lt; lyrics.txt.compressed</code></pre>
+<p>Unfortunately, the compression algorithm contains a bug.</p>
+<pre class="instruction"><code>In the compression scaffolding project, locate and fix the bug
+that causes the test-suite to fail.
+
+You can run the tests by calling &quot;cabal test&quot; from within
+the project folder.</code></pre>
+<p>Although the algorithm itself is very basic, and the use of strings instead of binary-data is not a common way to perform compression, the structure itself is typical of a real-world Haskell project. The project structures itself around the Cabal toolkit, and uses several libraries. It exposes a library, several executables, and a test-suite.</p>
+<pre class="open"><code>An open question:
+
+How would you implement a more efficient compression algorithm in Haskell?</code></pre>
 </div>
 </div>
 
