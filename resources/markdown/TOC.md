@@ -9,7 +9,7 @@
 <!--       This column is removed before the markdown is processed for the table of contents -->
 
                 |------------------------------      ----------------------------------
-Intro           |[Introduction](#introduction)       Why?
+Intro           |[Introduction](#introduction)       Installing the LLVM Toolchain
 FromC           |[From C](#from-c)                   Learning from Artifacts
 Exploring       |[Exploring the IR](#eir)            Looking at the Intermediate Representation
 Appendix        |[Appendix](#appendix)               Appendix
