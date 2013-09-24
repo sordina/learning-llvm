@@ -29,6 +29,10 @@
 Press &quot;t&quot; to toggle showing the table of contents</code></pre>
 </div>
 
+<div class="center noborder"> 
+<img src="resources/images/header.png" alt="LLVM" />
+</div>
+
 </div>
 </div>
 
@@ -221,15 +225,16 @@ declare i32 @puts(i8*)</code></pre>
 <pre class="text"><code>Goodbye World!</code></pre>
 <p>Yay!</p>
 <h2 id="super-small">Super Small:</h2>
-<pre class="llvm"><code>@greeting = constant [10 x i8] c&quot;SUP World!&quot;
+<pre data-language="llvm" data-filter="./resources/scripts/lli.sh"><code>@greeting = constant [15 x i8] c&quot;Goodbye World!\00&quot;
 
-define i32 @main() {
-  entry:
-    call i32 @puts(i8* getelementptr ([10 x i8]* @greeting, i64 0, i64 0))
-    ret i32 0
+define i32 @main() nounwind ssp {
+entry:
+  %0 = call i32 @puts(i8* getelementptr inbounds ([15 x i8]* @greeting, i64 0, i64 0)) nounwind
+  ret i32 0
 }
 
-declare i32 @puts(i8*)</code></pre>
+declare i32 @puts(i8*)
+</code></pre>
 </div>
 </div>
 
@@ -253,7 +258,6 @@ declare i32 @puts(i8*)</code></pre>
 
 
 
-			<hr>
 			<p class="center footer"> Produced with
 				<a href="http://johnmacfarlane.net/pandoc/">Pandoc</a>
 			</p>

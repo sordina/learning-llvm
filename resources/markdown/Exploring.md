@@ -140,14 +140,15 @@ Yay!
 
 ## Super Small:
 
-```llvm
-@greeting = constant [10 x i8] c"SUP World!"
+~~~{ data-language=llvm data-filter=./resources/scripts/lli.sh }
+@greeting = constant [15 x i8] c"Goodbye World!\00"
 
-define i32 @main() {
-  entry:
-    call i32 @puts(i8* getelementptr ([10 x i8]* @greeting, i64 0, i64 0))
-    ret i32 0
+define i32 @main() nounwind ssp {
+entry:
+  %0 = call i32 @puts(i8* getelementptr inbounds ([15 x i8]* @greeting, i64 0, i64 0)) nounwind
+  ret i32 0
 }
 
 declare i32 @puts(i8*)
-```
+~~~
+

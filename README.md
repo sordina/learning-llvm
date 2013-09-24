@@ -19,3 +19,5 @@ Press "t" to toggle showing the table of contents
 \stopmode
 
 </div>
+
+<div class="center noborder"> ![LLVM](resources/images/header.png) </div>

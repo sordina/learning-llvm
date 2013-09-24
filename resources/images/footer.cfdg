@@ -1,0 +1,29 @@
+
+startshape init
+
+shape init {
+	foo [sat 1]
+}
+
+shape foo {
+	bar []
+	foo [x 1 s 0.25 y 0.35]
+	foo [x 1 s 0.25 y -0.35]
+	foo [x 1 s 0.25]
+}
+
+shape foo {
+	foo [x 0.3 hue 65]
+}
+
+shape bar {
+	SQUARE []
+	bar [x -0.7 s 0.2]
+	bar [y 0.7 s 0.2]
+	bar [y 0.7 x 0.7 s 0.2]
+	bar [y -0.7 s 0.2]
+}
+
+shape bar {
+	foo [b 0.1 hue 12]
+}
