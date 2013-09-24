@@ -3,21 +3,6 @@
 Learning LLVM
 =============
 
-<div class="center">
+<img src="https://raw.github.com/sordina/learning-llvm/master/resources/images/header.png" />
 
-_work in progress_
-
-</div>
-
-<div class="important">
-
-\startmode[html]
-~~~{.note .notitle}
-Press "o" to toggle only showing the most important content
-Press "t" to toggle showing the table of contents
-~~~
-\stopmode
-
-</div>
-
-<div class="center noborder"> ![LLVM](resources/images/header.png) </div>
+A small tutorial written to help me learn LLVM-IR.
