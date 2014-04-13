@@ -27,6 +27,14 @@ devel:
 	| uniqhash                                \
 	| conscript make display
 
+hello-c:
+	@ gcc resources/llvm/hello.c
+	@ ./a.out
+
+devel-c:
+	commando -p cat -q -j resources/llvm    \
+	| conscript make hello-c
+
 todo: unchecked_examples
 	@ grep -ni todo $(CHAPTERS) | cat
 

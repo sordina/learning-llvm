@@ -11,41 +11,26 @@
 	<body class="">
 		<div id="content">
 
-<div class='chapter'>
-<div class='content'>
-
-
-
-<h1 id="learning-llvm">Learning LLVM</h1>
+<div class="chapter">
+<div class="content">
+<h1>Learning LLVM</h1>
 <div class="center">
-
 <p><em>work in progress</em></p>
 </div>
-
 <div class="important">
-
-
 <pre class="note notitle"><code>Press &quot;o&quot; to toggle only showing the most important content
 Press &quot;t&quot; to toggle showing the table of contents</code></pre>
 </div>
-
-<div class="center noborder"> 
+<div class="center noborder">
 <img src="resources/images/header.png" alt="LLVM" />
 </div>
-
 </div>
 </div>
-
-
-
-
-<div class='chapter'>
-<div class='content'>
-
+<div class="chapter">
+<div class="content">
 <hr />
-<h1 id="table-of-contents">Table of Contents</h1>
+<h1>Table of Contents</h1>
 <div id="toc" class="important">
-
 <!-- Note: This is a special file that determines the order of the chapters                  -->
 <!--       The lefthand column refers to the filename of the chapter in 'resources/markdown' -->
 <!--       This column is removed before the markdown is processed for the table of contents -->
@@ -65,26 +50,23 @@ Press &quot;t&quot; to toggle showing the table of contents</code></pre>
 <td align="left">Looking at the Intermediate Representation</td>
 </tr>
 <tr class="even">
+<td align="left"><a href="#functions">Functions</a></td>
+<td align="left">Examining how C functions look in LLVM IR</td>
+</tr>
+<tr class="odd">
 <td align="left"><a href="#appendix">Appendix</a></td>
 <td align="left">Appendix</td>
 </tr>
 </tbody>
 </table>
 </div>
-
 </div>
 </div>
-
-
-
-
-<div class='chapter'>
-<div class='content'>
-
-
+<div class="chapter">
+<div class="content">
 <hr />
-<h1 id="introduction">Installing the Toolchain</h1>
-<h2 id="os-x">OS X</h2>
+<h1>Installing the Toolchain</h1>
+<h2>OS X</h2>
 <ul>
 <li>XCode</li>
 <li>Homebrew</li>
@@ -92,22 +74,16 @@ Press &quot;t&quot; to toggle showing the table of contents</code></pre>
 </ul>
 </div>
 </div>
-
-
-
-
-<div class='chapter'>
-<div class='content'>
-
-
+<div class="chapter">
+<div class="content">
 <hr />
-<h1 id="from-c">From C</h1>
+<h1>From C</h1>
 <p>After googling &quot;Hello World in LLVM&quot; I was presented with several results, but they had one thing in common - They all proposed that the best way to learn how hello-world works in LLVM is by compiling a C version of hello-world with llvm-gcc and then looking at the output:</p>
 <p><code>hello_llvm.c</code></p>
-<pre class="sourceCode c"><code class="sourceCode c"><span class="ot">#include &lt;stdio.h&gt;</span>
-<span class="dt">int</span> main( )
+<pre class="c"><code>#include &lt;stdio.h&gt;
+int main( )
 { 
-  printf(<span class="st">&quot;Hello World!</span><span class="ch">\n</span><span class="st">&quot;</span>);
+  printf(&quot;Hello World!\n&quot;);
 }</code></pre>
 <pre class="shell"><code>&gt; llvm-gcc % -S -emit-llvm</code></pre>
 <p><code>hello_llvm.s</code></p>
@@ -135,16 +111,10 @@ declare i32 @puts(i8*)</code></pre>
 <p>It works!!! But... The code is pretty cluttered.</p>
 </div>
 </div>
-
-
-
-
-<div class='chapter'>
-<div class='content'>
-
-
+<div class="chapter">
+<div class="content">
 <hr />
-<h1 id="eir">Exploring the Intermediate Representation</h1>
+<h1>Exploring the Intermediate Representation</h1>
 <p>When presented with a mess like this, the first thing I always try to do is see what I can remove...</p>
 <p>I figure the first three lines can get the hell outta here!!</p>
 <pre class="llvm leave"><code>; ModuleID = &#39;hello_llvm.c&#39;
@@ -161,13 +131,13 @@ target triple = &quot;x86_64-apple-darwin11.4&quot;</code></pre>
 <pre class="llvm"><code>@.str = private constant [13 x i8] c&quot;Hello World!\00&quot;, align 1 ; &lt;[13 x i8]*&gt; [#uses=1]</code></pre>
 <p>Let's modify it to say goodbye and see what happenes...</p>
 <pre class="llvm"><code>@.str = private constant [13 x i8] c&quot;Goodbye World!\00&quot;, align 1 ; &lt;[13 x i8]*&gt; [#uses=1]</code></pre>
-<h2 id="error" class="error">Error!</h2>
+<h2>Error!</h2>
 <pre class="text"><code>lli: hello_llvm.s:2:36: error: constant expression type mismatch
 @.str = private constant [13 x i8] c&quot;Goodbye World!\00&quot;, align 1 ; &lt;[13 x i8]*&gt; [#uses=1]
                                    ^</code></pre>
 <p>It looks like the length declared has to match the string length otherwise boom. So we modify the declaration</p>
 <pre class="llvm"><code>@.str = private constant [15 x i8] c&quot;Goodbye World!\00&quot;, align 1 ; &lt;[13 x i8]*&gt; [#uses=1]</code></pre>
-<h2 id="error-1" class="error">Error!</h2>
+<h2>Error!</h2>
 <pre class="text"><code>lli: hello_llvm.s:8:62: error: &#39;@.str&#39; defined with type &#39;[15 x i8]*&#39;
   %0 = call i32 @puts(i8* getelementptr inbounds ([13 x i8]* @.str, i64 0, i64 0)) nounwind ; &lt;i32&gt; [#uses=0]
                                                                ^</code></pre>
@@ -177,7 +147,7 @@ target triple = &quot;x86_64-apple-darwin11.4&quot;</code></pre>
 <p>And...</p>
 <pre class="text"><code>Goodbye World!</code></pre>
 <p>Woot!</p>
-<h2 id="lets-have-another-look-at-our-program">Let's have another look at our program</h2>
+<h2>Let's have another look at our program</h2>
 <pre class="llvm"><code>@.str = private constant [15 x i8] c&quot;Goodbye World!\00&quot;, align 1 ; &lt;[13 x i8]*&gt; [#uses=1]
 
 define i32 @main() nounwind ssp {
@@ -205,7 +175,7 @@ declare i32 @puts(i8*)</code></pre>
 <li>Return statements</li>
 <li>Function calls</li>
 </ul>
-<p>Let's see if we can change the name of our @.str constant to @greeting:</p>
+<p>Let's see if we can change the name of our @.str constant to <span class="citation">@greeting</span>:</p>
 <pre class="llvm"><code>@greeting = private constant [15 x i8] c&quot;Goodbye World!\00&quot;, align 1 ; &lt;[13 x i8]*&gt; [#uses=1]
 
 define i32 @main() nounwind ssp {
@@ -224,7 +194,7 @@ declare i32 @puts(i8*)</code></pre>
 <p>And running...</p>
 <pre class="text"><code>Goodbye World!</code></pre>
 <p>Yay!</p>
-<h2 id="super-small">Super Small:</h2>
+<h2>Super Small:</h2>
 <pre data-language="llvm" data-filter="./resources/scripts/lli.sh"><code>@greeting = constant [15 x i8] c&quot;Goodbye World!\00&quot;
 
 define i32 @main() nounwind ssp {
@@ -237,16 +207,170 @@ declare i32 @puts(i8*)
 </code></pre>
 </div>
 </div>
-
-
-
-
-<div class='chapter'>
-<div class='content'>
-
-
+<div class="chapter">
+<div class="content">
 <hr />
-<h1 id="appendix">Appendix</h1>
+<h1>C Function IR Representation</h1>
+<p>At the moment we are happy with our understanding of Hello World, but we would like to advance our knowledge further.</p>
+<p>In order to do this we have written a new C program containing new features:</p>
+<ul>
+<li>Integers</li>
+<li>Integer Variables</li>
+<li>(Non-Main) Function</li>
+<li>Function Calls</li>
+<li>Assignment</li>
+<li>Incrementing variables</li>
+<li>Arithmetic expressions</li>
+<li>Print formatting and parameters</li>
+</ul>
+<p>The file is located in: resources/llvm/hello.c with the contents:</p>
+<pre class="c"><code>#include &lt;stdio.h&gt;
+
+int goober(char* something)
+{
+  printf(&quot;Cheese %s&quot;,something);
+  return 6;
+}
+
+int main( )
+{
+  printf(&quot;\n\n\n&quot;);
+  int houses;
+  houses = goober(&quot;Dope\n\n&quot;);
+  printf(&quot;Hello World!\n\n&quot;);
+  printf(&quot;Hello %d World!\n\n&quot;,houses);
+  houses++;
+  houses = houses * 4;
+  printf(&quot;Fuck Knuckles!!!\n&quot;);
+
+  int cake = 490;
+
+  printf(&quot;Hello World! %d \n&quot;,houses);
+  printf(&quot;Hello Gay World!\n&quot;);
+  printf(&quot;foobar fool bar %d \n\n&quot;, cake * houses);
+  printf(&quot;fazzz\n\n&quot;);
+
+  int something_is_true = cake - houses;
+
+  if( something_is_true )
+  {
+    printf(&quot;it&#39;s true\n&quot;);
+  }
+  else
+  {
+    printf(&quot;it&#39;s false\n&quot;);
+  }
+
+  printf(&quot;Hello World!\n&quot;);
+
+  int cakehouses = cake + houses * 400;
+
+  printf(&quot;Hello World! %d\n&quot;, cakehouses * cake);
+}</code></pre>
+<p>An issue emerged when compiling and interpreting the LLVM IR - OS X Maverics version of XCode had updated <code>llvm-gcc</code> to a new version that was incompatible with our version of <code>lli</code>. This required an update with <code>brew install llvm</code>. And subsequent relinking of paths.</p>
+<p>As a side-effect, we discovered that we no longer needed <code>llvm-gcc</code> at all and could use <code>clang</code> directly with the following command:</p>
+<pre class="shell"><code>&gt; clang -S -emit-llvm FILE.c</code></pre>
+<p>The output (after some cleaning up) from the linking process was the following:</p>
+<pre class="llvm"><code>@.str   = private unnamed_addr constant [10 x i8] c&quot;Cheese %s\00&quot;                , align 1
+@.str1  = private unnamed_addr constant [ 4 x i8] c&quot;\0A\0A\0A\00&quot;                , align 1
+@.str2  = private unnamed_addr constant [ 7 x i8] c&quot;Dope\0A\0A\00&quot;               , align 1
+@.str3  = private unnamed_addr constant [15 x i8] c&quot;Hello World!\0A\0A\00&quot;       , align 1
+@.str4  = private unnamed_addr constant [18 x i8] c&quot;Hello %d World!\0A\0A\00&quot;    , align 1
+@.str5  = private unnamed_addr constant [18 x i8] c&quot;Fuck Knuckles!!!\0A\00&quot;      , align 1
+@.str6  = private unnamed_addr constant [18 x i8] c&quot;Hello World! %d \0A\00&quot;      , align 1
+@.str7  = private unnamed_addr constant [18 x i8] c&quot;Hello Gay World!\0A\00&quot;      , align 1
+@.str8  = private unnamed_addr constant [22 x i8] c&quot;foobar fool bar %d \0A\0A\00&quot;, align 1
+@.str9  = private unnamed_addr constant [ 8 x i8] c&quot;fazzz\0A\0A\00&quot;              , align 1
+@.str10 = private unnamed_addr constant [11 x i8] c&quot;it&#39;s true\0A\00&quot;             , align 1
+@.str11 = private unnamed_addr constant [12 x i8] c&quot;it&#39;s false\0A\00&quot;            , align 1
+@.str12 = private unnamed_addr constant [14 x i8] c&quot;Hello World!\0A\00&quot;          , align 1
+@.str13 = private unnamed_addr constant [17 x i8] c&quot;Hello World! %d\0A\00&quot;       , align 1
+
+; Function Attrs: nounwind ssp uwtable
+define i32 @goober(i8* %something) #0 {
+  %1 = alloca i8*, align 8
+  store i8* %something, i8** %1, align 8
+  %2 = load i8** %1, align 8
+  %3 = call i32 (i8*, ...)* @printf(i8* getelementptr inbounds ([10 x i8]* @.str, i32 0, i32 0), i8* %2)
+  ret i32 6
+}
+
+declare i32 @printf(i8*, ...) #1
+
+; Function Attrs: nounwind ssp uwtable
+define i32 @main() #0 {
+  %1 = alloca i32, align 4
+  %houses = alloca i32, align 4
+  %cake = alloca i32, align 4
+  %something_is_true = alloca i32, align 4
+  %cakehouses = alloca i32, align 4
+  store i32 0, i32* %1
+  %2 = call i32 (i8*, ...)* @printf(i8* getelementptr inbounds ([4 x i8]* @.str1, i32 0, i32 0))
+  %3 = call i32 @goober(i8* getelementptr inbounds ([7 x i8]* @.str2, i32 0, i32 0))
+  store i32 %3, i32* %houses, align 4
+  %4 = call i32 (i8*, ...)* @printf(i8* getelementptr inbounds ([15 x i8]* @.str3, i32 0, i32 0))
+  %5 = load i32* %houses, align 4
+  %6 = call i32 (i8*, ...)* @printf(i8* getelementptr inbounds ([18 x i8]* @.str4, i32 0, i32 0), i32 %5)
+  %7 = load i32* %houses, align 4
+  %8 = add nsw i32 %7, 1
+  store i32 %8, i32* %houses, align 4
+  %9 = load i32* %houses, align 4
+  %10 = mul nsw i32 %9, 4
+  store i32 %10, i32* %houses, align 4
+  %11 = call i32 (i8*, ...)* @printf(i8* getelementptr inbounds ([18 x i8]* @.str5, i32 0, i32 0))
+  store i32 490, i32* %cake, align 4
+  %12 = load i32* %houses, align 4
+  %13 = call i32 (i8*, ...)* @printf(i8* getelementptr inbounds ([18 x i8]* @.str6, i32 0, i32 0), i32 %12)
+  %14 = call i32 (i8*, ...)* @printf(i8* getelementptr inbounds ([18 x i8]* @.str7, i32 0, i32 0))
+  %15 = load i32* %cake, align 4
+  %16 = load i32* %houses, align 4
+  %17 = mul nsw i32 %15, %16
+  %18 = call i32 (i8*, ...)* @printf(i8* getelementptr inbounds ([22 x i8]* @.str8, i32 0, i32 0), i32 %17)
+  %19 = call i32 (i8*, ...)* @printf(i8* getelementptr inbounds ([8 x i8]* @.str9, i32 0, i32 0))
+  %20 = load i32* %cake, align 4
+  %21 = load i32* %houses, align 4
+  %22 = sub nsw i32 %20, %21
+  store i32 %22, i32* %something_is_true, align 4
+  %23 = load i32* %something_is_true, align 4
+  %24 = icmp ne i32 %23, 0
+  br i1 %24, label %25, label %27
+
+; &lt;label&gt;:25                                      ; preds = %0
+  %26 = call i32 (i8*, ...)* @printf(i8* getelementptr inbounds ([11 x i8]* @.str10, i32 0, i32 0))
+  br label %29
+
+; &lt;label&gt;:27                                      ; preds = %0
+  %28 = call i32 (i8*, ...)* @printf(i8* getelementptr inbounds ([12 x i8]* @.str11, i32 0, i32 0))
+  br label %29
+
+; &lt;label&gt;:29                                      ; preds = %27, %25
+  %30 = call i32 (i8*, ...)* @printf(i8* getelementptr inbounds ([14 x i8]* @.str12, i32 0, i32 0))
+  %31 = load i32* %cake, align 4
+  %32 = load i32* %houses, align 4
+  %33 = mul nsw i32 %32, 400
+  %34 = add nsw i32 %31, %33
+  store i32 %34, i32* %cakehouses, align 4
+  %35 = load i32* %cakehouses, align 4
+  %36 = load i32* %cake, align 4
+  %37 = mul nsw i32 %35, %36
+  %38 = call i32 (i8*, ...)* @printf(i8* getelementptr inbounds ([17 x i8]* @.str13, i32 0, i32 0), i32 %37)
+  %39 = load i32* %1
+  ret i32 %39
+}</code></pre>
+<p>This introduced some new pieces of syntax to us that we were not familiar with:</p>
+<ul>
+<li><code>%1 = ...</code></li>
+<li><code>#1 ...</code></li>
+<li><code>store ...</code></li>
+<li><code>; &lt;label&gt;:25</code></li>
+</ul>
+<p>Let's see if we can figure out what's going on...</p>
+</div>
+</div>
+<div class="chapter">
+<div class="content">
+<hr />
+<h1>Appendix</h1>
 <ul>
 <li><a href="http://www.ibm.com/developerworks/library/os-createcompilerllvm1/">http://www.ibm.com/developerworks/library/os-createcompilerllvm1/</a></li>
 <li><a href="http://www.yellosoft.us/hello-llvm">http://www.yellosoft.us/hello-llvm</a></li>
@@ -254,10 +378,6 @@ declare i32 @puts(i8*)
 </ul>
 </div>
 </div>
-
-
-
-
 			<p class="center footer"> Produced with
 				<a href="http://johnmacfarlane.net/pandoc/">Pandoc</a>
 				| Source on <a href="https://github.com/sordina/learning-llvm">GitHub</a>

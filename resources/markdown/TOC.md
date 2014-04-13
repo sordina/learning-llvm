@@ -12,6 +12,7 @@
 Intro           |[Introduction](#introduction)       Installing the LLVM Toolchain
 FromC           |[From C](#from-c)                   Learning from Artifacts
 Exploring       |[Exploring the IR](#eir)            Looking at the Intermediate Representation
+Functions       |[Functions](#functions)             Examining how C functions look in LLVM IR
 Appendix        |[Appendix](#appendix)               Appendix
                 |------------------------------      ----------------------------------
 
