@@ -173,3 +173,229 @@ This introduced some new pieces of syntax to us that we were not familiar with:
 
 Let's see if we can figure out what's going on...
 
+## %n
+
+These seemed at first to be indicating instruction numbers. This checked out okay because the branch instructions seemed to be referring to them which would make a kind of sense. However, certain instructions did not seem to have a corresponding `%` variable, which was confusing.
+
+Another hint was that these variables were referred to inside other instructions. The clincher was the `printf` call. With a little knowledge of `printf` it seemed that this really was being used to name the location of where the result of `printf` was being stored:
+
+~~~{ .man }
+     int printf(const char * restrict format, ...);
+
+      ...
+
+     These functions return the number of characters printed (not including
+     the trailing `\0' used to end output to strings) or a negative value if
+     an output error occurs, except for snprintf() and vsnprintf(), which
+     return the number of characters that would have been printed if the n
+     were unlimited (again, not including the final `\0').
+~~~
+
+Since I wasn't using the return code from `printf`, it shouldn't be referred to in
+subsequent instructions, and low-and-behold, it wasn't. Bingo Bango.
+
+With that mystery solved, let's move onto...
+
+## #n
+
+This marker appears just after function definitions in the following manner:
+
+~~~{ .llvm }
+define i32 @goober(i8* %something) #0 {
+                                  /
+                            This /
+~~~
+
+It doesn't appear to be referenced from anywhere else, so it is potentially some
+kind of metadata surrounding how the function is defined or used.
+
+One guess is that refers to how many arguments the function takes...
+
+Let's look at all occurrences throughout our code:
+
+~~~{ .llvm }
+define i32 @goober(i8* %something) #0
+...
+declare i32 @printf(i8*, ...) #1
+...
+define i32 @main() #0 {
+~~~
+
+This seems to hold up, however, `printf` can take multiple arguments, but has only
+one EXPLICIT argument, this makes sense as the same is true with `main`.
+
+Let's test this assumption. I will create a new C program that has main defined with
+its arguments explicitly and see if the result is as expected.
+
+~~~{ .c }
+#include <stdio.h>
+
+int main(int argc, char** argv) {
+  printf("hello world\n");
+}
+~~~
+
+Clang LLVM IR Output:
+
+~~~{ .llvm }
+define i32 @main(i32 %argc, i8** %argv) #0 {
+...
+~~~
+
+Mayhaps there is some special behavior for `main`, so lets try again
+with a normal function:
+
+~~~{ .c }
+#include <stdio.h>
+
+void custom(char** str) {
+  printf(str);
+}
+
+int main(int argc, char** argv) {
+  custom("hello world\n");
+}
+~~~
+
+(Ignoring the security warning and removing the unused lines)
+
+Clang LLVM IR Output:
+
+~~~{ .llvm }
+@.str = private unnamed_addr constant [13 x i8] c"hello world\0A\00", align 1
+
+define void @custom(i8* %str) nounwind uwtable ssp {
+  %1 = alloca i8*, align 8
+  store i8* %str, i8** %1, align 8
+  %2 = load i8** %1, align 8
+  %3 = call i32 (i8*, ...)* @printf(i8* %2)
+  ret void
+}
+
+declare i32 @printf(i8*, ...)
+
+define i32 @main(i32 %argc, i8** %argv) nounwind uwtable ssp {
+  %1 = alloca i32, align 4
+  %2 = alloca i8**, align 8
+  store i32 %argc, i32* %1, align 4
+  store i8** %argv, i8*** %2, align 8
+  call void @custom(i8* getelementptr inbounds ([13 x i8]* @.str, i32 0, i32 0))
+  ret i32 0
+}
+~~~
+
+This is very weird, no `#n` symbols at all now... Potentially because I made my function
+void??
+
+Let's try a non-void version:
+
+~~~{ .c }
+#include <stdio.h>
+
+int custom(char** str) {
+  printf(str);
+  return 69;
+}
+
+int main(int argc, char** argv) {
+  int ret = custom("hello world\n");
+}
+~~~
+
+Clang LLVM IR Output:
+
+~~~{ .llvm }
+@.str = private unnamed_addr constant [13 x i8] c"hello world\0A\00", align 1
+
+define i32 @custom(i8* %str) nounwind uwtable ssp {
+  %1 = alloca i8*, align 8
+  store i8* %str, i8** %1, align 8
+  %2 = load i8** %1, align 8
+  %3 = call i32 (i8*, ...)* @printf(i8* %2)
+  ret i32 69
+}
+
+declare i32 @printf(i8*, ...)
+
+define i32 @main(i32 %argc, i8** %argv) nounwind uwtable ssp {
+  %1 = alloca i32, align 4
+  %2 = alloca i8**, align 8
+  %ret = alloca i32, align 4
+  store i32 %argc, i32* %1, align 4
+  store i8** %argv, i8*** %2, align 8
+  %3 = call i32 @custom(i8* getelementptr inbounds ([13 x i8]* @.str, i32 0, i32 0))
+  store i32 %3, i32* %ret, align 4
+  ret i32 0
+}
+~~~
+
+
+Okay, I figured out that the issue was that `clang` doesn't generate these symbols, but `llvm-gcc` does.
+
+Just to be sure, let's now compile with `llvm-gcc`:
+
+~~~{ .c }
+#include <stdio.h>
+
+int main(int argc, char** argv) {
+  printf("hello world\n");
+}
+~~~
+
+Clang LLVM IR Output:
+
+~~~{ .llvm }
+@.str = private unnamed_addr constant [13 x i8] c"hello world\0A\00", align 1
+
+; Function Attrs: nounwind ssp uwtable
+define i32 @main(i32 %argc, i8** %argv) #0 {
+  %1 = alloca i32, align 4
+  %2 = alloca i8**, align 8
+  store i32 %argc, i32* %1, align 4
+  store i8** %argv, i8*** %2, align 8
+  %3 = call i32 (i8*, ...)* @printf(i8* getelementptr inbounds ([13 x i8]* @.str, i32 0, i32 0))
+  ret i32 0
+}
+
+declare i32 @printf(i8*, ...) #1
+
+attributes #0 = { nounwind ssp uwtable "less-precise-fpmad"="false" "no-frame-pointer-elim"="true" "no-frame-pointer-elim-non-leaf" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "stack-protector-buffer-size"="8" "unsafe-fp-math"="false" "use-soft-float"="false" }
+attributes #1 = { "less-precise-fpmad"="false" "no-frame-pointer-elim"="true" "no-frame-pointer-elim-non-leaf" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "stack-protector-buffer-size"="8" "unsafe-fp-math"="false" "use-soft-float"="false" }
+
+!llvm.ident = !{!0}
+
+!0 = metadata !{metadata !"Apple LLVM version 5.1 (clang-503.0.40) (based on LLVM 3.4svn)"}
+~~~
+
+I believe this verifies the hypothesis.
+
+Let's make sure we only use `clang` from now on...
+
+So, inspecting the output again, it looks like this has nothing to do with number of arguments. Instead I believe that it is referring to the `attributes` section at the bottom of the generated IR. Such as:
+
+~~~{ .text }
+attributes #0 = { nounwind ssp uwtable "less-precise-fpmad"="false" ...
+attributes #1 = { "less-precise-fpmad"="false" "no-frame-pointer-elim"="true" ...
+~~~
+
+## Store
+
+I believe we've resolved our initial confusion regarding the special treatment of store's return value since we now understand the purpose of `%` variables. However, now would probably be a good time to track down a full list of LLVM's built in instructions such as `store`, `load`, `br`, etc!
+
+GOOGLE FUUUUUUU
+
+[The LLVM Language Reference](http://llvm.org/docs/LangRef.html)
+
+A simple example can be found [in the manual](http://llvm.org/docs/LangRef.html#store-instruction):
+
+~~~{ .llvm }
+%ptr = alloca i32                               ; yields {i32*}:ptr
+store i32 3, i32* %ptr                          ; yields {void}
+%val = load i32* %ptr                           ; yields {i32}:val = i32 3
+~~~
+
+* 32 bits of memory is allocated for integer storage and named %ptr
+* The immediate value '3' is stored in the %ptr location
+* The value is loaded from %ptr into %val
+
+## labels

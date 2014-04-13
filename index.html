@@ -365,6 +365,157 @@ define i32 @main() #0 {
 <li><code>; &lt;label&gt;:25</code></li>
 </ul>
 <p>Let's see if we can figure out what's going on...</p>
+<h2>%n</h2>
+<p>These seemed at first to be indicating instruction numbers. This checked out okay because the branch instructions seemed to be referring to them which would make a kind of sense. However, certain instructions did not seem to have a corresponding <code>%</code> variable, which was confusing.</p>
+<p>Another hint was that these variables were referred to inside other instructions. The clincher was the <code>printf</code> call. With a little knowledge of <code>printf</code> it seemed that this really was being used to name the location of where the result of <code>printf</code> was being stored:</p>
+<pre class="man"><code>     int printf(const char * restrict format, ...);
+
+      ...
+
+     These functions return the number of characters printed (not including
+     the trailing `\0&#39; used to end output to strings) or a negative value if
+     an output error occurs, except for snprintf() and vsnprintf(), which
+     return the number of characters that would have been printed if the n
+     were unlimited (again, not including the final `\0&#39;).</code></pre>
+<p>Since I wasn't using the return code from <code>printf</code>, it shouldn't be referred to in subsequent instructions, and low-and-behold, it wasn't. Bingo Bango.</p>
+<p>With that mystery solved, let's move onto...</p>
+<h2>#n</h2>
+<p>This marker appears just after function definitions in the following manner:</p>
+<pre class="llvm"><code>define i32 @goober(i8* %something) #0 {
+                                  /
+                            This /</code></pre>
+<p>It doesn't appear to be referenced from anywhere else, so it is potentially some kind of metadata surrounding how the function is defined or used.</p>
+<p>One guess is that refers to how many arguments the function takes...</p>
+<p>Let's look at all occurrences throughout our code:</p>
+<pre class="llvm"><code>define i32 @goober(i8* %something) #0
+...
+declare i32 @printf(i8*, ...) #1
+...
+define i32 @main() #0 {</code></pre>
+<p>This seems to hold up, however, <code>printf</code> can take multiple arguments, but has only one EXPLICIT argument, this makes sense as the same is true with <code>main</code>.</p>
+<p>Let's test this assumption. I will create a new C program that has main defined with its arguments explicitly and see if the result is as expected.</p>
+<pre class="c"><code>#include &lt;stdio.h&gt;
+
+int main(int argc, char** argv) {
+  printf(&quot;hello world\n&quot;);
+}</code></pre>
+<p>Clang LLVM IR Output:</p>
+<pre class="llvm"><code>define i32 @main(i32 %argc, i8** %argv) #0 {
+...</code></pre>
+<p>Mayhaps there is some special behavior for <code>main</code>, so lets try again with a normal function:</p>
+<pre class="c"><code>#include &lt;stdio.h&gt;
+
+void custom(char** str) {
+  printf(str);
+}
+
+int main(int argc, char** argv) {
+  custom(&quot;hello world\n&quot;);
+}</code></pre>
+<p>(Ignoring the security warning and removing the unused lines)</p>
+<p>Clang LLVM IR Output:</p>
+<pre class="llvm"><code>@.str = private unnamed_addr constant [13 x i8] c&quot;hello world\0A\00&quot;, align 1
+
+define void @custom(i8* %str) nounwind uwtable ssp {
+  %1 = alloca i8*, align 8
+  store i8* %str, i8** %1, align 8
+  %2 = load i8** %1, align 8
+  %3 = call i32 (i8*, ...)* @printf(i8* %2)
+  ret void
+}
+
+declare i32 @printf(i8*, ...)
+
+define i32 @main(i32 %argc, i8** %argv) nounwind uwtable ssp {
+  %1 = alloca i32, align 4
+  %2 = alloca i8**, align 8
+  store i32 %argc, i32* %1, align 4
+  store i8** %argv, i8*** %2, align 8
+  call void @custom(i8* getelementptr inbounds ([13 x i8]* @.str, i32 0, i32 0))
+  ret i32 0
+}</code></pre>
+<p>This is very weird, no <code>#n</code> symbols at all now... Potentially because I made my function void??</p>
+<p>Let's try a non-void version:</p>
+<pre class="c"><code>#include &lt;stdio.h&gt;
+
+int custom(char** str) {
+  printf(str);
+  return 69;
+}
+
+int main(int argc, char** argv) {
+  int ret = custom(&quot;hello world\n&quot;);
+}</code></pre>
+<p>Clang LLVM IR Output:</p>
+<pre class="llvm"><code>@.str = private unnamed_addr constant [13 x i8] c&quot;hello world\0A\00&quot;, align 1
+
+define i32 @custom(i8* %str) nounwind uwtable ssp {
+  %1 = alloca i8*, align 8
+  store i8* %str, i8** %1, align 8
+  %2 = load i8** %1, align 8
+  %3 = call i32 (i8*, ...)* @printf(i8* %2)
+  ret i32 69
+}
+
+declare i32 @printf(i8*, ...)
+
+define i32 @main(i32 %argc, i8** %argv) nounwind uwtable ssp {
+  %1 = alloca i32, align 4
+  %2 = alloca i8**, align 8
+  %ret = alloca i32, align 4
+  store i32 %argc, i32* %1, align 4
+  store i8** %argv, i8*** %2, align 8
+  %3 = call i32 @custom(i8* getelementptr inbounds ([13 x i8]* @.str, i32 0, i32 0))
+  store i32 %3, i32* %ret, align 4
+  ret i32 0
+}</code></pre>
+<p>Okay, I figured out that the issue was that <code>clang</code> doesn't generate these symbols, but <code>llvm-gcc</code> does.</p>
+<p>Just to be sure, let's now compile with <code>llvm-gcc</code>:</p>
+<pre class="c"><code>#include &lt;stdio.h&gt;
+
+int main(int argc, char** argv) {
+  printf(&quot;hello world\n&quot;);
+}</code></pre>
+<p>Clang LLVM IR Output:</p>
+<pre class="llvm"><code>@.str = private unnamed_addr constant [13 x i8] c&quot;hello world\0A\00&quot;, align 1
+
+; Function Attrs: nounwind ssp uwtable
+define i32 @main(i32 %argc, i8** %argv) #0 {
+  %1 = alloca i32, align 4
+  %2 = alloca i8**, align 8
+  store i32 %argc, i32* %1, align 4
+  store i8** %argv, i8*** %2, align 8
+  %3 = call i32 (i8*, ...)* @printf(i8* getelementptr inbounds ([13 x i8]* @.str, i32 0, i32 0))
+  ret i32 0
+}
+
+declare i32 @printf(i8*, ...) #1
+
+attributes #0 = { nounwind ssp uwtable &quot;less-precise-fpmad&quot;=&quot;false&quot; &quot;no-frame-pointer-elim&quot;=&quot;true&quot; &quot;no-frame-pointer-elim-non-leaf&quot; &quot;no-infs-fp-math&quot;=&quot;false&quot; &quot;no-nans-fp-math&quot;=&quot;false&quot; &quot;stack-protector-buffer-size&quot;=&quot;8&quot; &quot;unsafe-fp-math&quot;=&quot;false&quot; &quot;use-soft-float&quot;=&quot;false&quot; }
+attributes #1 = { &quot;less-precise-fpmad&quot;=&quot;false&quot; &quot;no-frame-pointer-elim&quot;=&quot;true&quot; &quot;no-frame-pointer-elim-non-leaf&quot; &quot;no-infs-fp-math&quot;=&quot;false&quot; &quot;no-nans-fp-math&quot;=&quot;false&quot; &quot;stack-protector-buffer-size&quot;=&quot;8&quot; &quot;unsafe-fp-math&quot;=&quot;false&quot; &quot;use-soft-float&quot;=&quot;false&quot; }
+
+!llvm.ident = !{!0}
+
+!0 = metadata !{metadata !&quot;Apple LLVM version 5.1 (clang-503.0.40) (based on LLVM 3.4svn)&quot;}</code></pre>
+<p>I believe this verifies the hypothesis.</p>
+<p>Let's make sure we only use <code>clang</code> from now on...</p>
+<p>So, inspecting the output again, it looks like this has nothing to do with number of arguments. Instead I believe that it is referring to the <code>attributes</code> section at the bottom of the generated IR. Such as:</p>
+<pre class="text"><code>attributes #0 = { nounwind ssp uwtable &quot;less-precise-fpmad&quot;=&quot;false&quot; ...
+attributes #1 = { &quot;less-precise-fpmad&quot;=&quot;false&quot; &quot;no-frame-pointer-elim&quot;=&quot;true&quot; ...</code></pre>
+<h2>Store</h2>
+<p>I believe we've resolved our initial confusion regarding the special treatment of store's return value since we now understand the purpose of <code>%</code> variables. However, now would probably be a good time to track down a full list of LLVM's built in instructions such as <code>store</code>, <code>load</code>, <code>br</code>, etc!</p>
+<p>GOOGLE FUUUUUUU</p>
+<p><a href="http://llvm.org/docs/LangRef.html">The LLVM Language Reference</a></p>
+<p>A simple example can be found <a href="http://llvm.org/docs/LangRef.html#store-instruction">in the manual</a>:</p>
+<pre class="llvm"><code>%ptr = alloca i32                               ; yields {i32*}:ptr
+store i32 3, i32* %ptr                          ; yields {void}
+%val = load i32* %ptr                           ; yields {i32}:val = i32 3</code></pre>
+<ul>
+<li>32 bits of memory is allocated for integer storage and named %ptr</li>
+<li>The immediate value '3' is stored in the %ptr location</li>
+<li>The value is loaded from %ptr into %val</li>
+</ul>
+<h2>labels</h2>
 </div>
 </div>
 <div class="chapter">
