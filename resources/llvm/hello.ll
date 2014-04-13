@@ -13,8 +13,7 @@
 @.str12 = private unnamed_addr constant [14 x i8] c"Hello World!\0A\00"          , align 1
 @.str13 = private unnamed_addr constant [17 x i8] c"Hello World! %d\0A\00"       , align 1
 
-; Function Attrs: nounwind ssp uwtable
-define i32 @goober(i8* %something) #0 {
+define i32 @goober(i8* %something) nounwind uwtable ssp {
   %1 = alloca i8*, align 8
   store i8* %something, i8** %1, align 8
   %2 = load i8** %1, align 8
@@ -22,10 +21,9 @@ define i32 @goober(i8* %something) #0 {
   ret i32 6
 }
 
-declare i32 @printf(i8*, ...) #1
+declare i32 @printf(i8*, ...)
 
-; Function Attrs: nounwind ssp uwtable
-define i32 @main() #0 {
+define i32 @main() nounwind uwtable ssp {
   %1 = alloca i32, align 4
   %houses = alloca i32, align 4
   %cake = alloca i32, align 4
