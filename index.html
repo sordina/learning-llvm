@@ -504,7 +504,7 @@ attributes #1 = { &quot;less-precise-fpmad&quot;=&quot;false&quot; &quot;no-fram
 attributes #1 = { &quot;less-precise-fpmad&quot;=&quot;false&quot; &quot;no-frame-pointer-elim&quot;=&quot;true&quot; ...</code></pre>
 <h2>Store</h2>
 <p>I believe we've resolved our initial confusion regarding the special treatment of store's return value since we now understand the purpose of <code>%</code> variables. However, now would probably be a good time to track down a full list of LLVM's built in instructions such as <code>store</code>, <code>load</code>, <code>br</code>, etc!</p>
-<p>GOOGLE FUUUUUUU</p>
+<p>GOOGLE FU</p>
 <p><a href="http://llvm.org/docs/LangRef.html">The LLVM Language Reference</a></p>
 <p>A simple example can be found <a href="http://llvm.org/docs/LangRef.html#store-instruction">in the manual</a>:</p>
 <pre class="llvm"><code>%ptr = alloca i32                               ; yields {i32*}:ptr
@@ -516,6 +516,14 @@ store i32 3, i32* %ptr                          ; yields {void}
 <li>The value is loaded from %ptr into %val</li>
 </ul>
 <h2>labels</h2>
+<p>I don't know what labels are... = ) Labels are pretty confusing. I still don't understand but Lyndon is making me write some stuff...so</p>
+<p>Mayhaps, labels can be used to tell if something is true or false. We tested tested that by changing the lables that were referenced in the branch instruction. We mucked around with the label numbers to see what would happen. An error occured when we changed the label reference in the branch statement.</p>
+<pre><code>error: instruction forward referenced with type &#39;label&#39;</code></pre>
+<p>Everytime we used a %variable as a label, we got an error message.</p>
+<p>Here are some examples of times we didn't recieve an error message while changing the label reference:</p>
+<ul>
+<li></li>
+</ul>
 </div>
 </div>
 <div class="chapter">

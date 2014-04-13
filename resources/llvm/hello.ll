@@ -58,18 +58,25 @@ define i32 @main() nounwind uwtable ssp {
   store i32 %22, i32* %something_is_true, align 4
   %23 = load i32* %something_is_true, align 4
   %24 = icmp ne i32 %23, 0
-  br i1 %24, label %25, label %27
 
-; <label>:25                                      ; preds = %0
+; <label>: 24
+  br i1 %24, label %30, label %27
+
+; <label>:25
   %26 = call i32 (i8*, ...)* @printf(i8* getelementptr inbounds ([11 x i8]* @.str10, i32 0, i32 0))
+
+; <label>:26
   br label %29
 
-; <label>:27                                      ; preds = %0
+; <label>:27
   %28 = call i32 (i8*, ...)* @printf(i8* getelementptr inbounds ([12 x i8]* @.str11, i32 0, i32 0))
+
+; <label>:28
   br label %29
 
-; <label>:29                                      ; preds = %27, %25
+; <label>:29
   %30 = call i32 (i8*, ...)* @printf(i8* getelementptr inbounds ([14 x i8]* @.str12, i32 0, i32 0))
+
   %31 = load i32* %cake, align 4
   %32 = load i32* %houses, align 4
   %33 = mul nsw i32 %32, 400

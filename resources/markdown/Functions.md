@@ -382,7 +382,7 @@ attributes #1 = { "less-precise-fpmad"="false" "no-frame-pointer-elim"="true" ..
 
 I believe we've resolved our initial confusion regarding the special treatment of store's return value since we now understand the purpose of `%` variables. However, now would probably be a good time to track down a full list of LLVM's built in instructions such as `store`, `load`, `br`, etc!
 
-GOOGLE FUUUUUUU
+GOOGLE FU
 
 [The LLVM Language Reference](http://llvm.org/docs/LangRef.html)
 
@@ -399,3 +399,20 @@ store i32 3, i32* %ptr                          ; yields {void}
 * The value is loaded from %ptr into %val
 
 ## labels
+
+I don't know what labels are... = )
+Labels are pretty confusing. I still don't understand but Lyndon is making me write some stuff...so
+
+Mayhaps, labels can be used to tell if something is true or false.
+We tested tested that by changing the lables that were referenced in the branch instruction. We mucked around with the label numbers to see what would happen. An error occured when we changed the label reference in the branch statement. 
+
+~~~
+error: instruction forward referenced with type 'label'
+~~~
+
+Everytime we used a %variable as a label, we got an error message. 
+
+Here are some examples of times we didn't recieve an error message while changing the label reference:
+
+* 
+
